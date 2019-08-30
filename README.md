@@ -15,3 +15,4 @@ In order to read .desktop files, [MadMilkman.Ini](https://github.com/MarioZ/MadM
 - In the program that views .desktop files, the filename will be added to the beginning of the window's titlebar, followed by the application name.
   - Same for the launcher program.
   - Example: `Firefox.desktop - LaunchDotDesktop`
+- If a required key isn't present in the file, then sane defaults will be used instead.

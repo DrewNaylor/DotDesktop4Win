@@ -43,6 +43,10 @@ Public Class InterpretDotDesktopFile
         Dim NameValue As String = DesktopEntrySection.Keys("Name").Value
         aaformMainWindow.labelNameKey.Text = aaformMainWindow.labelNameKey.Text & NameValue
 
+        ' Get exec key's value.
+        Dim ExecValue As String = DesktopEntrySection.Keys("Exec").Value
+        aaformMainWindow.labelExecKey.Text = aaformMainWindow.labelExecKey.Text & ExecValue
+
     End Sub
 
 End Class
