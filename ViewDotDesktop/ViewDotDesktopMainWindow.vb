@@ -48,4 +48,9 @@ Public Class aaformMainWindow
             End If
         End If
     End Sub
+
+    Private Sub linklabelDesktopEntrySpec_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linklabelDesktopEntrySpec.LinkClicked
+        ' Go to the latest version of the Freedesktop.org Desktop Entry spec online.
+        Process.Start("https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html")
+    End Sub
 End Class
