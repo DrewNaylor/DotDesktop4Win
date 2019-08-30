@@ -23,8 +23,10 @@
 Imports MadMilkman.Ini
 Public Class InterpretDotDesktopFile
 
-    Friend Shared Sub ReadFile(DotDesktopFile As String)
-        Debug.Write(DotDesktopFile)
+    Friend Shared Sub ReadFile(DotDesktopFileInput As String)
+        ' Load in the file from a string.
+        Dim DotDesktopFile As New IniFile()
+        DotDesktopFile.Load(DotDesktopFileInput)
     End Sub
 
 End Class
