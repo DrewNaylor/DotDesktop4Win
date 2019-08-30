@@ -3,6 +3,8 @@ Partial Windows implementation of the Freedesktop.org Desktop Entry specificatio
 
 There's another project called [WinYourDesktop](https://github.com/dd86k/WinYourDesktop) that does more than this project will probably ever do, as this project is only a partial implementation and doesn't include everything to make itself fully compliant with the [Freedesktop.org Desktop Entry spec](https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html). Some things that would make this fully compliant don't make sense on Windows as-is, such as menu entires, icons, and actions. Locale strings probably won't be supported, either, so they'll just be regular strings instead.
 
+In order to read .desktop files, [MadMilkman.Ini](https://github.com/MarioZ/MadMilkman.Ini) is being used.
+
 ## Planned features
 - Starting an application with the `Exec` key's value, including by double-clicking the file if it's associated with the launcher program.
 - Showing how the desktop entry file is interpreted in a program just for that. This program will have a Browse dialog.
