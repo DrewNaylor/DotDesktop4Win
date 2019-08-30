@@ -30,6 +30,7 @@ Partial Class aaformMainWindow
         Me.tabpageInterpretation = New System.Windows.Forms.TabPage()
         Me.tabpageRawFile = New System.Windows.Forms.TabPage()
         Me.textboxRawFileOutput = New System.Windows.Forms.TextBox()
+        Me.openfiledialogDotDesktopFile = New System.Windows.Forms.OpenFileDialog()
         Me.tablelayoutpanelMainWindow.SuspendLayout()
         Me.tabcontrolFileOutput.SuspendLayout()
         Me.tabpageRawFile.SuspendLayout()
@@ -123,6 +124,11 @@ Partial Class aaformMainWindow
         Me.textboxRawFileOutput.Size = New System.Drawing.Size(489, 292)
         Me.textboxRawFileOutput.TabIndex = 0
         '
+        'openfiledialogDotDesktopFile
+        '
+        Me.openfiledialogDotDesktopFile.Filter = "Desktop files|*.desktop"
+        Me.openfiledialogDotDesktopFile.Title = "Browse for .desktop file..."
+        '
         'aaformMainWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -151,4 +157,5 @@ Partial Class aaformMainWindow
     Friend WithEvents tabpageInterpretation As TabPage
     Friend WithEvents tabpageRawFile As TabPage
     Friend WithEvents textboxRawFileOutput As TextBox
+    Friend WithEvents openfiledialogDotDesktopFile As OpenFileDialog
 End Class
