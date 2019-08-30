@@ -23,8 +23,12 @@
 
 Public Class aaformMainWindow
     Private Sub buttonBrowse_Click(sender As Object, e As EventArgs) Handles buttonBrowse.Click
-        If openfiledialogDotDesktopFile.ShowDialog() = DialogResult.OK Then
 
+        ' When the user opens a file from the Browse... dialog, change the text
+        ' in the textbox and titlebar, then interpret the .desktop file.
+        If openfiledialogDotDesktopFile.ShowDialog() = DialogResult.OK Then
+            textboxDotDesktopFilePath.Text = openfiledialogDotDesktopFile.FileName
+            Me.Text = openfiledialogDotDesktopFile.SafeFileName & " - " & Application.ProductName
         End If
     End Sub
 End Class
