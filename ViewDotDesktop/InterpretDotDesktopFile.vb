@@ -32,7 +32,8 @@ Public Class InterpretDotDesktopFile
         Dim DotDesktopFile As New IniFile()
         DotDesktopFile.Load(New StringReader(DotDesktopFileInput))
 
-
+        ' Define Desktop Entry section.
+        Dim DesktopEntrySection As IniSection = DotDesktopFile.Sections("Desktop Entry")
 
     End Sub
 
