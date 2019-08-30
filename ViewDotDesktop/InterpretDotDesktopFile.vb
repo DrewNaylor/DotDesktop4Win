@@ -29,7 +29,8 @@ Public Class InterpretDotDesktopFile
         ' https://github.com/MarioZ/MadMilkman.Ini/blob/master/MadMilkman.Ini.Samples/MadMilkman.Ini.Samples.VB/IniSamples.vb#L213
 
         ' Load in the file from a string.
-        Dim DotDesktopFile As New IniFile()
+        Dim DotDesktopFile As New IniFile(
+            New IniOptions() With {.CommentStarter = IniCommentStarter.Hash})
         DotDesktopFile.Load(New StringReader(DotDesktopFileInput))
 
         ' Define Desktop Entry section.
