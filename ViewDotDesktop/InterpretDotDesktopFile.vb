@@ -38,15 +38,15 @@ Public Class InterpretDotDesktopFile
 
         ' Get type key's value.
         Dim TypeValue As String = DesktopEntrySection.Keys("Type").Value
-        aaformMainWindow.labelTypeKey.Text = aaformMainWindow.labelTypeKey.Text & TypeValue
+        aaformMainWindow.labelTypeKey.Text = "Type: " & TypeValue
 
         ' Get name key's value.
         Dim NameValue As String = DesktopEntrySection.Keys("Name").Value
-        aaformMainWindow.labelNameKey.Text = aaformMainWindow.labelNameKey.Text & NameValue
+        aaformMainWindow.labelNameKey.Text = "Name: " & NameValue
 
         ' Get exec key's value.
         Dim ExecValue As String = DesktopEntrySection.Keys("Exec").Value
-        aaformMainWindow.labelExecKey.Text = aaformMainWindow.labelExecKey.Text & ExecValue
+        aaformMainWindow.labelExecKey.Text = "Exec: " & ExecValue
 
     End Sub
 
