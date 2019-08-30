@@ -35,8 +35,13 @@ Public Class InterpretDotDesktopFile
         ' Define Desktop Entry section.
         Dim DesktopEntrySection As IniSection = DotDesktopFile.Sections("Desktop Entry")
 
-        'Get type key's value.
+        ' Get type key's value.
         Dim TypeValue As String = DesktopEntrySection.Keys("Type").Value
+        aaformMainWindow.labelTypeKey.Text = aaformMainWindow.labelTypeKey.Text & TypeValue
+
+        ' Get name key's value.
+        Dim NameValue As String = DesktopEntrySection.Keys("Name").Value
+        aaformMainWindow.labelNameKey.Text = aaformMainWindow.labelNameKey.Text & NameValue
 
     End Sub
 
