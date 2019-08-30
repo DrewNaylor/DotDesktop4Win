@@ -24,13 +24,15 @@ Partial Class aaformMainWindow
     Private Sub InitializeComponent()
         Me.menubarMainWindow = New System.Windows.Forms.MenuStrip()
         Me.tablelayoutpanelMainWindow = New System.Windows.Forms.TableLayoutPanel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.textboxDotDesktopFilePath = New System.Windows.Forms.TextBox()
         Me.buttonBrowse = New System.Windows.Forms.Button()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.tabcontrolFileOutput = New System.Windows.Forms.TabControl()
+        Me.tabpageInterpretation = New System.Windows.Forms.TabPage()
+        Me.tabpageRawFile = New System.Windows.Forms.TabPage()
+        Me.textboxRawFileOutput = New System.Windows.Forms.TextBox()
         Me.tablelayoutpanelMainWindow.SuspendLayout()
-        Me.TabControl1.SuspendLayout()
+        Me.tabcontrolFileOutput.SuspendLayout()
+        Me.tabpageRawFile.SuspendLayout()
         Me.SuspendLayout()
         '
         'menubarMainWindow
@@ -46,9 +48,9 @@ Partial Class aaformMainWindow
         Me.tablelayoutpanelMainWindow.ColumnCount = 2
         Me.tablelayoutpanelMainWindow.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tablelayoutpanelMainWindow.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 97.0!))
-        Me.tablelayoutpanelMainWindow.Controls.Add(Me.TextBox1, 0, 0)
+        Me.tablelayoutpanelMainWindow.Controls.Add(Me.textboxDotDesktopFilePath, 0, 0)
         Me.tablelayoutpanelMainWindow.Controls.Add(Me.buttonBrowse, 1, 0)
-        Me.tablelayoutpanelMainWindow.Controls.Add(Me.TabControl1, 0, 1)
+        Me.tablelayoutpanelMainWindow.Controls.Add(Me.tabcontrolFileOutput, 0, 1)
         Me.tablelayoutpanelMainWindow.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tablelayoutpanelMainWindow.Location = New System.Drawing.Point(0, 24)
         Me.tablelayoutpanelMainWindow.Name = "tablelayoutpanelMainWindow"
@@ -58,14 +60,14 @@ Partial Class aaformMainWindow
         Me.tablelayoutpanelMainWindow.Size = New System.Drawing.Size(509, 359)
         Me.tablelayoutpanelMainWindow.TabIndex = 1
         '
-        'TextBox1
+        'textboxDotDesktopFilePath
         '
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Location = New System.Drawing.Point(3, 3)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(406, 20)
-        Me.TextBox1.TabIndex = 0
+        Me.textboxDotDesktopFilePath.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.textboxDotDesktopFilePath.Location = New System.Drawing.Point(3, 3)
+        Me.textboxDotDesktopFilePath.Name = "textboxDotDesktopFilePath"
+        Me.textboxDotDesktopFilePath.ReadOnly = True
+        Me.textboxDotDesktopFilePath.Size = New System.Drawing.Size(406, 20)
+        Me.textboxDotDesktopFilePath.TabIndex = 0
         '
         'buttonBrowse
         '
@@ -77,37 +79,49 @@ Partial Class aaformMainWindow
         Me.buttonBrowse.Text = "Browse..."
         Me.buttonBrowse.UseVisualStyleBackColor = True
         '
-        'TabControl1
+        'tabcontrolFileOutput
         '
-        Me.tablelayoutpanelMainWindow.SetColumnSpan(Me.TabControl1, 2)
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl1.Location = New System.Drawing.Point(3, 32)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(503, 324)
-        Me.TabControl1.TabIndex = 2
+        Me.tablelayoutpanelMainWindow.SetColumnSpan(Me.tabcontrolFileOutput, 2)
+        Me.tabcontrolFileOutput.Controls.Add(Me.tabpageInterpretation)
+        Me.tabcontrolFileOutput.Controls.Add(Me.tabpageRawFile)
+        Me.tabcontrolFileOutput.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tabcontrolFileOutput.Location = New System.Drawing.Point(3, 32)
+        Me.tabcontrolFileOutput.Name = "tabcontrolFileOutput"
+        Me.tabcontrolFileOutput.SelectedIndex = 0
+        Me.tabcontrolFileOutput.Size = New System.Drawing.Size(503, 324)
+        Me.tabcontrolFileOutput.TabIndex = 2
         '
-        'TabPage1
+        'tabpageInterpretation
         '
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(495, 298)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "TabPage1"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.tabpageInterpretation.Location = New System.Drawing.Point(4, 22)
+        Me.tabpageInterpretation.Name = "tabpageInterpretation"
+        Me.tabpageInterpretation.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabpageInterpretation.Size = New System.Drawing.Size(495, 298)
+        Me.tabpageInterpretation.TabIndex = 0
+        Me.tabpageInterpretation.Text = "File output: Interpretation"
+        Me.tabpageInterpretation.UseVisualStyleBackColor = True
         '
-        'TabPage2
+        'tabpageRawFile
         '
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(192, 74)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.tabpageRawFile.Controls.Add(Me.textboxRawFileOutput)
+        Me.tabpageRawFile.Location = New System.Drawing.Point(4, 22)
+        Me.tabpageRawFile.Name = "tabpageRawFile"
+        Me.tabpageRawFile.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabpageRawFile.Size = New System.Drawing.Size(495, 298)
+        Me.tabpageRawFile.TabIndex = 1
+        Me.tabpageRawFile.Text = "File output: Raw"
+        Me.tabpageRawFile.UseVisualStyleBackColor = True
+        '
+        'textboxRawFileOutput
+        '
+        Me.textboxRawFileOutput.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.textboxRawFileOutput.Location = New System.Drawing.Point(3, 3)
+        Me.textboxRawFileOutput.Multiline = True
+        Me.textboxRawFileOutput.Name = "textboxRawFileOutput"
+        Me.textboxRawFileOutput.ReadOnly = True
+        Me.textboxRawFileOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.textboxRawFileOutput.Size = New System.Drawing.Size(489, 292)
+        Me.textboxRawFileOutput.TabIndex = 0
         '
         'aaformMainWindow
         '
@@ -121,7 +135,9 @@ Partial Class aaformMainWindow
         Me.Text = "ViewDotDesktop"
         Me.tablelayoutpanelMainWindow.ResumeLayout(False)
         Me.tablelayoutpanelMainWindow.PerformLayout()
-        Me.TabControl1.ResumeLayout(False)
+        Me.tabcontrolFileOutput.ResumeLayout(False)
+        Me.tabpageRawFile.ResumeLayout(False)
+        Me.tabpageRawFile.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -129,9 +145,10 @@ Partial Class aaformMainWindow
 
     Friend WithEvents menubarMainWindow As MenuStrip
     Friend WithEvents tablelayoutpanelMainWindow As TableLayoutPanel
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents textboxDotDesktopFilePath As TextBox
     Friend WithEvents buttonBrowse As Button
-    Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents tabcontrolFileOutput As TabControl
+    Friend WithEvents tabpageInterpretation As TabPage
+    Friend WithEvents tabpageRawFile As TabPage
+    Friend WithEvents textboxRawFileOutput As TextBox
 End Class
