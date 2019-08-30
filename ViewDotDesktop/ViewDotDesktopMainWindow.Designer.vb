@@ -127,7 +127,7 @@ Partial Class aaformMainWindow
         'openfiledialogDotDesktopFile
         '
         Me.openfiledialogDotDesktopFile.Filter = "Desktop files|*.desktop"
-        Me.openfiledialogDotDesktopFile.Title = "Browse for .desktop file..."
+        Me.openfiledialogDotDesktopFile.Title = "Browse for .desktop file"
         '
         'aaformMainWindow
         '

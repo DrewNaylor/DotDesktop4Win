@@ -39,6 +39,10 @@ Public Class aaformMainWindow
                 ' Second, update the raw output textbox after replacing Lf with CrLf.
                 textboxRawFileOutput.Text = System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName).Replace(vbLf, vbCrLf)
 
+            Else
+                ' If it's not a valid Freedesktop.org .desktop file, tell the user.
+                MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec.",
+                                "Browse for .desktop file")
             End If
         End If
     End Sub
