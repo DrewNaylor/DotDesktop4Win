@@ -35,6 +35,9 @@ Public Class InterpretDotDesktopFile
         ' Define Desktop Entry section.
         Dim DesktopEntrySection As IniSection = DotDesktopFile.Sections("Desktop Entry")
 
+        'Get type key's value.
+        Dim TypeValue As String = DesktopEntrySection.Keys("Type").Value
+
     End Sub
 
 End Class
