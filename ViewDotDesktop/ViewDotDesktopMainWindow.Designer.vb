@@ -31,8 +31,13 @@ Partial Class aaformMainWindow
         Me.tabpageRawFile = New System.Windows.Forms.TabPage()
         Me.textboxRawFileOutput = New System.Windows.Forms.TextBox()
         Me.openfiledialogDotDesktopFile = New System.Windows.Forms.OpenFileDialog()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.tablelayoutpanelMainWindow.SuspendLayout()
         Me.tabcontrolFileOutput.SuspendLayout()
+        Me.tabpageInterpretation.SuspendLayout()
         Me.tabpageRawFile.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -94,6 +99,10 @@ Partial Class aaformMainWindow
         '
         'tabpageInterpretation
         '
+        Me.tabpageInterpretation.Controls.Add(Me.Label4)
+        Me.tabpageInterpretation.Controls.Add(Me.Label3)
+        Me.tabpageInterpretation.Controls.Add(Me.Label2)
+        Me.tabpageInterpretation.Controls.Add(Me.Label1)
         Me.tabpageInterpretation.Location = New System.Drawing.Point(4, 22)
         Me.tabpageInterpretation.Name = "tabpageInterpretation"
         Me.tabpageInterpretation.Padding = New System.Windows.Forms.Padding(3)
@@ -129,6 +138,42 @@ Partial Class aaformMainWindow
         Me.openfiledialogDotDesktopFile.Filter = "Desktop files|*.desktop"
         Me.openfiledialogDotDesktopFile.Title = "Browse for .desktop file"
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(7, 7)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(37, 13)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Type: "
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(7, 20)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(41, 13)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Name: "
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(7, 33)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(37, 13)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Exec: "
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(7, 46)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(35, 13)
+        Me.Label4.TabIndex = 3
+        Me.Label4.Text = "URL: "
+        '
         'aaformMainWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -142,6 +187,8 @@ Partial Class aaformMainWindow
         Me.tablelayoutpanelMainWindow.ResumeLayout(False)
         Me.tablelayoutpanelMainWindow.PerformLayout()
         Me.tabcontrolFileOutput.ResumeLayout(False)
+        Me.tabpageInterpretation.ResumeLayout(False)
+        Me.tabpageInterpretation.PerformLayout()
         Me.tabpageRawFile.ResumeLayout(False)
         Me.tabpageRawFile.PerformLayout()
         Me.ResumeLayout(False)
@@ -158,4 +205,8 @@ Partial Class aaformMainWindow
     Friend WithEvents tabpageRawFile As TabPage
     Friend WithEvents textboxRawFileOutput As TextBox
     Friend WithEvents openfiledialogDotDesktopFile As OpenFileDialog
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label4 As Label
 End Class
