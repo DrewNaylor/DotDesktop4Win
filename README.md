@@ -12,3 +12,6 @@ In order to read .desktop files, [MadMilkman.Ini](https://github.com/MarioZ/MadM
 - Comments with the `#` symbol will act as comments and not cause issues.
 - When opening a .desktop file with the launcher application, it'll process it and open the thing the file wants. Opening the launcher program directly will show a dialog where a .desktop file can be browsed for in addition to any configuration options, if needed.
 - If the application or whatever is to be launched cannot be found, then the user will be made aware.
+- In the program that views .desktop files, the filename will be added to the beginning of the window's titlebar, followed by the application name.
+  - Same for the launcher program.
+  - Example: `Firefox.desktop - LaunchDotDesktop`

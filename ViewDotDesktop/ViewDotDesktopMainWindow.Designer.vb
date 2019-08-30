@@ -53,7 +53,7 @@ Partial Class aaformMainWindow
         Me.tablelayoutpanelMainWindow.Location = New System.Drawing.Point(0, 24)
         Me.tablelayoutpanelMainWindow.Name = "tablelayoutpanelMainWindow"
         Me.tablelayoutpanelMainWindow.RowCount = 2
-        Me.tablelayoutpanelMainWindow.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+        Me.tablelayoutpanelMainWindow.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29.0!))
         Me.tablelayoutpanelMainWindow.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tablelayoutpanelMainWindow.Size = New System.Drawing.Size(509, 359)
         Me.tablelayoutpanelMainWindow.TabIndex = 1
@@ -72,7 +72,7 @@ Partial Class aaformMainWindow
         Me.buttonBrowse.Dock = System.Windows.Forms.DockStyle.Fill
         Me.buttonBrowse.Location = New System.Drawing.Point(415, 3)
         Me.buttonBrowse.Name = "buttonBrowse"
-        Me.buttonBrowse.Size = New System.Drawing.Size(91, 24)
+        Me.buttonBrowse.Size = New System.Drawing.Size(91, 23)
         Me.buttonBrowse.TabIndex = 1
         Me.buttonBrowse.Text = "Browse..."
         Me.buttonBrowse.UseVisualStyleBackColor = True
@@ -83,10 +83,10 @@ Partial Class aaformMainWindow
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl1.Location = New System.Drawing.Point(3, 33)
+        Me.TabControl1.Location = New System.Drawing.Point(3, 32)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(503, 323)
+        Me.TabControl1.Size = New System.Drawing.Size(503, 324)
         Me.TabControl1.TabIndex = 2
         '
         'TabPage1
@@ -94,7 +94,7 @@ Partial Class aaformMainWindow
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(495, 297)
+        Me.TabPage1.Size = New System.Drawing.Size(495, 298)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
