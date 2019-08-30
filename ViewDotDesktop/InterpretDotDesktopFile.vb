@@ -20,13 +20,20 @@
 '   limitations under the License.
 
 
+Imports System.IO
 Imports MadMilkman.Ini
 Public Class InterpretDotDesktopFile
 
     Friend Shared Sub ReadFile(DotDesktopFileInput As String)
+        ' This code here is based on the parsing example:
+        ' https://github.com/MarioZ/MadMilkman.Ini/blob/master/MadMilkman.Ini.Samples/MadMilkman.Ini.Samples.VB/IniSamples.vb#L213
+
         ' Load in the file from a string.
         Dim DotDesktopFile As New IniFile()
-        DotDesktopFile.Load(DotDesktopFileInput)
+        DotDesktopFile.Load(New StringReader(DotDesktopFileInput))
+
+
+
     End Sub
 
 End Class
