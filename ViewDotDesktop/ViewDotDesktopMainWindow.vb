@@ -44,7 +44,8 @@ Public Class aaformMainWindow
 
             Else
                 ' If it's not a valid Freedesktop.org .desktop file, tell the user.
-                MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec.",
+                MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec." &
+                                " Please note that for now, this implementation doesn't ignore comments or blank lines at the beginning properly. Work needs to be done for that.",
                                 "Browse for .desktop file")
             End If
         End If
