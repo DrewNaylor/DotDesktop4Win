@@ -20,7 +20,7 @@
 '   limitations under the License.
 
 
-Imports MadMilkman.Ini
+
 Public Class aaformMainWindow
     Private Sub buttonBrowse_Click(sender As Object, e As EventArgs) Handles buttonBrowse.Click
 
