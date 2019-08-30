@@ -24,7 +24,7 @@ Imports MadMilkman.Ini
 Public Class InterpretDotDesktopFile
 
     Friend Shared Sub ReadFile(DotDesktopFile As String)
-
+        Debug.Write(DotDesktopFile)
     End Sub
 
 End Class
