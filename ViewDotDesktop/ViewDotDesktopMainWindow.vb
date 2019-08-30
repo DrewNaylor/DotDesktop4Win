@@ -27,11 +27,19 @@ Public Class aaformMainWindow
         ' When the user opens a file from the Browse... dialog, change the text
         ' in the textbox and titlebar, then interpret the .desktop file.
         If openfiledialogDotDesktopFile.ShowDialog() = DialogResult.OK Then
-            ' First, update titlebar and file path textbox.
-            textboxDotDesktopFilePath.Text = openfiledialogDotDesktopFile.FileName
-            Me.Text = openfiledialogDotDesktopFile.SafeFileName & " - " & Application.ProductName
-            ' Second, update the raw output textbox after replacing Lf with CrLf.
-            textboxRawFileOutput.Text = System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName).Replace(vbLf, vbCrLf)
+
+            ' Before doing anything, make sure this is a valid .desktop file
+            ' and that it starts with "[Desktop Entry]".
+            If System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName).StartsWith("[Desktop Entry]") Then
+
+                ' First, update titlebar and file path textbox.
+                textboxDotDesktopFilePath.Text = openfiledialogDotDesktopFile.FileName
+                Me.Text = openfiledialogDotDesktopFile.SafeFileName & " - " & Application.ProductName
+
+                ' Second, update the raw output textbox after replacing Lf with CrLf.
+                textboxRawFileOutput.Text = System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName).Replace(vbLf, vbCrLf)
+
+            End If
         End If
     End Sub
 End Class
