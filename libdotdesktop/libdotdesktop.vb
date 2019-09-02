@@ -21,6 +21,7 @@
 
 
 
+Imports MadMilkman.Ini
 Public Class libdotdesktop
 
 End Class
