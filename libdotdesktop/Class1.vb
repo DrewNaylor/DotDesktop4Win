@@ -21,6 +21,6 @@
 
 
 
-Public Class Class1
+Public Class libdotdesktop
 
 End Class
