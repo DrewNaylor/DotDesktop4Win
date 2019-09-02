@@ -38,7 +38,7 @@
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\CommonBuild\bin\Debug\</OutputPath>
     <DocumentationFile>ViewDotDesktop.xml</DocumentationFile>
     <NoWarn>
     </NoWarn>
