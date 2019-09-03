@@ -24,4 +24,8 @@
 Imports MadMilkman.Ini
 Public Class libdotdesktop
 
+    Function getInfo(inputFile As String, keyToGet As String) As String
+
+    End Function
+
 End Class
