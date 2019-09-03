@@ -27,16 +27,19 @@ Public Class desktopEntryStuff
 
     Public Shared Function getInfo(inputFile As String, keyToGet As String) As String
 
+        ' Get the input file and put it in an INI file object.
+        Dim dotDesktopFile As New IniFile(
+            New IniOptions() With {.CommentStarter = IniCommentStarter.Hash})
+        dotDesktopFile.Load(New StringReader(inputFile))
+
+        ' Define Desktop Entry section.
+        Dim desktopEntrySection As IniSection = dotDesktopFile.Sections("Desktop Entry")
+
+
         ' Look in the inputFile and return the value for the keyToGet.
         If keyToGet = "Type" Then
 
-            ' Get the input file and put it in an INI file object.
-            Dim dotDesktopFile As New IniFile(
-            New IniOptions() With {.CommentStarter = IniCommentStarter.Hash})
-            dotDesktopFile.Load(New StringReader(inputFile))
 
-            ' Define Desktop Entry section.
-            Dim desktopEntrySection As IniSection = dotDesktopFile.Sections("Desktop Entry")
 
             Return desktopEntrySection.Keys("Type").Value
 
