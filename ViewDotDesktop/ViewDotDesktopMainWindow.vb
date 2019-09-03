@@ -44,7 +44,8 @@ Public Class aaformMainWindow
                 Me.labelTypeKey.Text = "Type: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Type")
 
                 ' Name key.
-                Me.labelNameKey.Text = "Name: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Name")
+                Me.labelNameKey.Text = "Name: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Name",
+                                                                            openfiledialogDotDesktopFile.SafeFileName.ToString)
 
                 ' Exec key.
                 Me.labelExecKey.Text = "Exec: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Exec")

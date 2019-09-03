@@ -25,7 +25,7 @@ Imports System.IO
 Imports MadMilkman.Ini
 Public Class desktopEntryStuff
 
-    Public Shared Function getInfo(inputFile As String, keyToGet As String) As String
+    Public Shared Function getInfo(inputFile As String, keyToGet As String, Optional fileName As String = "") As String
 
         ' Get the input file and put it in an INI file object for later use.
         Dim dotDesktopFile As New IniFile(
@@ -56,7 +56,14 @@ Public Class desktopEntryStuff
         ElseIf keyToGet = "Name" Then
 
             ' If we want to get the Name value, return that.
-            Return desktopEntrySection.Keys("Name").Value
+            ' First make sure it's in there.
+            If desktopEntrySection.Keys("Name") IsNot Nothing Then
+                ' If it is in there, return it as expected.
+                Return desktopEntrySection.Keys("Name").Value
+            Else
+                ' Otherwise, return the filename as the name.
+                Return fileName
+            End If
 #End Region
 
 #Region "Get Exec key."
