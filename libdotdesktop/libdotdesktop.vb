@@ -25,7 +25,10 @@ Imports MadMilkman.Ini
 Public Class libdotdesktop
 
     Function getInfo(inputFile As String, keyToGet As String) As String
+        ' Look in the inputFile and return the value for the keyToGet.
+        If keyToGet = "Type" Then
 
+        End If
     End Function
 
 End Class
