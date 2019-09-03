@@ -105,7 +105,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InterpretDotDesktopFile.vb" />
     <Compile Include="ViewDotDesktopMainWindow.vb">
       <SubType>Form</SubType>
     </Compile>

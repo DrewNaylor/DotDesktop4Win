@@ -39,9 +39,15 @@ Public Class aaformMainWindow
                 ' Second, update the raw output textbox after replacing Lf with CrLf.
                 textboxRawFileOutput.Text = System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName).Replace(vbLf, vbCrLf)
 
-                ' Now, pass along the file to the interpretation code.
-                'InterpretDotDesktopFile.ReadFile(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName))
+                ' Now, pass along the file to the interpretation code in libdotdesktop.
+                ' Type key.
                 Me.labelTypeKey.Text = "Type: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Type")
+
+                ' Name key.
+                Me.labelNameKey.Text = "Name: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Name")
+
+                ' Exec key.
+                Me.labelExecKey.Text = "Exec: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Exec")
 
             Else
                 ' If it's not a valid Freedesktop.org .desktop file, tell the user.
