@@ -70,6 +70,14 @@ Public Class desktopEntryStuff
         ElseIf keyToGet = "Exec" Then
 
             ' If we want to get the Exec value, return that.
+            ' First make sure it's in there.
+            If desktopEntrySection.Keys("Exec") IsNot Nothing Then
+                ' If it is in there, return it as expected.
+                Return desktopEntrySection.Keys("Exec").Value
+            Else
+                ' Otherwise, return a message saying the key is not available.
+                Return "(Exec key not available)"
+            End If
             Return desktopEntrySection.Keys("Exec").Value
 #End Region
 
