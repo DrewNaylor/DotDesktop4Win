@@ -47,6 +47,11 @@ Public Class desktopEntryStuff
             ' If we want to get the Name value, return that.
             Return desktopEntrySection.Keys("Name").Value
 
+        ElseIf keyToGet = "Exec" Then
+
+            ' If we want to get the Exec value, return that.
+            Return desktopEntrySection.Keys("Exec").Value
+
         End If
 #End Region
     End Function
