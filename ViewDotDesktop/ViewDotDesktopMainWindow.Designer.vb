@@ -131,9 +131,9 @@ Partial Class aaformMainWindow
         Me.labelHeaderInfoText.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.labelHeaderInfoText.Location = New System.Drawing.Point(9, 7)
         Me.labelHeaderInfoText.Name = "labelHeaderInfoText"
-        Me.labelHeaderInfoText.Size = New System.Drawing.Size(244, 16)
+        Me.labelHeaderInfoText.Size = New System.Drawing.Size(224, 16)
         Me.labelHeaderInfoText.TabIndex = 4
-        Me.labelHeaderInfoText.Text = "How DotDesktop4Win interprets this file:"
+        Me.labelHeaderInfoText.Text = "How libdotdesktop interprets this file:"
         '
         'labelUrlKey
         '

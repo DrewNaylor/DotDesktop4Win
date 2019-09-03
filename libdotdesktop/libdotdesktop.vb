@@ -34,12 +34,17 @@ Public Class desktopEntryStuff
 
         ' Define Desktop Entry section.
         Dim desktopEntrySection As IniSection = dotDesktopFile.Sections("Desktop Entry")
-
+        ' First we check that the key is there.
+        If desktopEntrySection Is Nothing Then
+            Exit Function
+        End If
 #Region "Getting and returning key values."
 
         ' Look in the inputFile and return the value for the keyToGet.
 #Region "Get Type key."
         If keyToGet = "Type" Then
+
+
 
             ' If we want to get the Type value, return that.
             ' First make sure it's in there.

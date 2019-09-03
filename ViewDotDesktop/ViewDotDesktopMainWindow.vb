@@ -29,8 +29,11 @@ Public Class aaformMainWindow
         If openfiledialogDotDesktopFile.ShowDialog() = DialogResult.OK Then
 
             ' Before doing anything, make sure this is a valid .desktop file
-            ' and that it starts with "[Desktop Entry]".
-            If System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName).StartsWith("[Desktop Entry]") Then
+            ' and that it starts with "[Desktop Entry]" if no text before the
+            ' section is allowed.
+            ' If text is allowed, just ignore it.
+            If System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName).StartsWith("[Desktop Entry]") Or
+                My.Settings.allowTextBeforeDesktopEntrySection = True And System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName).Contains("[Desktop Entry]") Then
 
                 ' First, update titlebar and file path textbox.
                 textboxDotDesktopFilePath.Text = openfiledialogDotDesktopFile.FileName
@@ -41,22 +44,30 @@ Public Class aaformMainWindow
 
                 ' Now, pass along the file to the interpretation code in libdotdesktop.
                 ' Type key.
-                Me.labelTypeKey.Text = "Type: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Type")
+                ' Catch NullReferenceExceptions, just in case there are issues in the file.
+                Try
+                    Me.labelTypeKey.Text = "Type: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Type")
 
-                ' Name key.
-                Me.labelNameKey.Text = "Name: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Name",
+                    ' Name key.
+                    Me.labelNameKey.Text = "Name: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Name",
                                                                             openfiledialogDotDesktopFile.SafeFileName.ToString)
 
-                ' Exec key.
-                Me.labelExecKey.Text = "Exec: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Exec")
+                    ' Exec key.
+                    Me.labelExecKey.Text = "Exec: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Exec")
 
-                ' URL key.
-                Me.labelUrlKey.Text = "Url: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "URL")
+                    ' URL key.
+                    Me.labelUrlKey.Text = "Url: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "URL")
+
+                Catch ex As NullReferenceException
+                    ' Show a messagebox for explanation.
+                    MessageBox.Show("The .desktop file appears to have issues, likely due to extra characters where they shouldn't be. You can check the File output: Raw tab if you want to see what it could be.")
+                End Try
 
             Else
                 ' If it's not a valid Freedesktop.org .desktop file, tell the user.
                 MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec." &
-                                " Please note that for now, this implementation doesn't ignore comments or blank lines at the beginning properly. Work needs to be done for that.",
+                                " Please note that for now, this implementation doesn't ignore comments or blank lines at the beginning properly. Work needs to be done for that." &
+                                " Set My.Settings.allowTextBeforeDesktopEntrySection to True to allow text before the Desktop Entry section.",
                                 "Browse for .desktop file")
             End If
         End If
