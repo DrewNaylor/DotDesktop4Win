@@ -20,7 +20,7 @@
 '   limitations under the License.
 
 
-
+Imports libdotdesktop
 Public Class aaformMainWindow
     Private Sub buttonBrowse_Click(sender As Object, e As EventArgs) Handles buttonBrowse.Click
 
@@ -40,7 +40,8 @@ Public Class aaformMainWindow
                 textboxRawFileOutput.Text = System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName).Replace(vbLf, vbCrLf)
 
                 ' Now, pass along the file to the interpretation code.
-                InterpretDotDesktopFile.ReadFile(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName))
+                'InterpretDotDesktopFile.ReadFile(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName))
+                Me.labelTypeKey.Text = "Type: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Type")
 
             Else
                 ' If it's not a valid Freedesktop.org .desktop file, tell the user.

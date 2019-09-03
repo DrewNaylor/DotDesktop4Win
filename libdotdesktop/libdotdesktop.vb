@@ -23,9 +23,9 @@
 
 Imports System.IO
 Imports MadMilkman.Ini
-Public Class libdotdesktop
+Public Class desktopEntryStuff
 
-    Function getInfo(inputFile As String, keyToGet As String) As String
+    Public Shared Function getInfo(inputFile As String, keyToGet As String) As String
 
         ' Look in the inputFile and return the value for the keyToGet.
         If keyToGet = "Type" Then
