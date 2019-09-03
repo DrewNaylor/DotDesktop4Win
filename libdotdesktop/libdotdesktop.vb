@@ -21,12 +21,19 @@
 
 
 
+Imports System.IO
 Imports MadMilkman.Ini
 Public Class libdotdesktop
 
     Function getInfo(inputFile As String, keyToGet As String) As String
         ' Look in the inputFile and return the value for the keyToGet.
         If keyToGet = "Type" Then
+            ' Get the input file and put it in an INI file object.
+            Dim DotDesktopFile As New IniFile(
+            New IniOptions() With {.CommentStarter = IniCommentStarter.Hash})
+            DotDesktopFile.Load(New StringReader(inputFile))
+
+
 
         End If
     End Function
