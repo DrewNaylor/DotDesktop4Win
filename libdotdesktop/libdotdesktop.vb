@@ -39,9 +39,13 @@ Public Class desktopEntryStuff
         ' Look in the inputFile and return the value for the keyToGet.
         If keyToGet = "Type" Then
 
-
-
+            ' If we want to get the Type value, return that.
             Return desktopEntrySection.Keys("Type").Value
+
+        ElseIf keyToGet = "Name" Then
+
+            ' If we want to get the Name value, return that.
+            Return desktopEntrySection.Keys("Name").Value
 
         End If
     End Function
