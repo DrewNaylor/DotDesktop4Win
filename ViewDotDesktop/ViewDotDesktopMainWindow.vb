@@ -49,6 +49,9 @@ Public Class aaformMainWindow
                 ' Exec key.
                 Me.labelExecKey.Text = "Exec: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Exec")
 
+                ' URL key.
+                Me.labelUrlKey.Text = "Url: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "URL")
+
             Else
                 ' If it's not a valid Freedesktop.org .desktop file, tell the user.
                 MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec." &

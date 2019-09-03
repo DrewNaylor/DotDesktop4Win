@@ -52,6 +52,10 @@ Public Class desktopEntryStuff
             ' If we want to get the Exec value, return that.
             Return desktopEntrySection.Keys("Exec").Value
 
+        Else
+
+            ' Otherwise, just return whatever the user specified in the key field.
+            Return "(Key not implemented)"
         End If
 #End Region
     End Function

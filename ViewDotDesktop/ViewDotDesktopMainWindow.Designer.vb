@@ -28,15 +28,15 @@ Partial Class aaformMainWindow
         Me.buttonBrowse = New System.Windows.Forms.Button()
         Me.tabcontrolFileOutput = New System.Windows.Forms.TabControl()
         Me.tabpageInterpretation = New System.Windows.Forms.TabPage()
+        Me.linklabelDesktopEntrySpec = New System.Windows.Forms.LinkLabel()
+        Me.labelHeaderInfoText = New System.Windows.Forms.Label()
+        Me.labelUrlKey = New System.Windows.Forms.Label()
+        Me.labelExecKey = New System.Windows.Forms.Label()
+        Me.labelNameKey = New System.Windows.Forms.Label()
+        Me.labelTypeKey = New System.Windows.Forms.Label()
         Me.tabpageRawFile = New System.Windows.Forms.TabPage()
         Me.textboxRawFileOutput = New System.Windows.Forms.TextBox()
         Me.openfiledialogDotDesktopFile = New System.Windows.Forms.OpenFileDialog()
-        Me.labelTypeKey = New System.Windows.Forms.Label()
-        Me.labelNameKey = New System.Windows.Forms.Label()
-        Me.labelExecKey = New System.Windows.Forms.Label()
-        Me.labelUrlKey = New System.Windows.Forms.Label()
-        Me.labelHeaderInfoText = New System.Windows.Forms.Label()
-        Me.linklabelDesktopEntrySpec = New System.Windows.Forms.LinkLabel()
         Me.tablelayoutpanelMainWindow.SuspendLayout()
         Me.tabcontrolFileOutput.SuspendLayout()
         Me.tabpageInterpretation.SuspendLayout()
@@ -115,6 +115,62 @@ Partial Class aaformMainWindow
         Me.tabpageInterpretation.Text = "File output: Interpretation"
         Me.tabpageInterpretation.UseVisualStyleBackColor = True
         '
+        'linklabelDesktopEntrySpec
+        '
+        Me.linklabelDesktopEntrySpec.AutoSize = True
+        Me.linklabelDesktopEntrySpec.Location = New System.Drawing.Point(9, 164)
+        Me.linklabelDesktopEntrySpec.Name = "linklabelDesktopEntrySpec"
+        Me.linklabelDesktopEntrySpec.Size = New System.Drawing.Size(221, 13)
+        Me.linklabelDesktopEntrySpec.TabIndex = 5
+        Me.linklabelDesktopEntrySpec.TabStop = True
+        Me.linklabelDesktopEntrySpec.Text = "Latest Freedesktop.org Desktop Entry spec..."
+        '
+        'labelHeaderInfoText
+        '
+        Me.labelHeaderInfoText.AutoSize = True
+        Me.labelHeaderInfoText.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.labelHeaderInfoText.Location = New System.Drawing.Point(9, 7)
+        Me.labelHeaderInfoText.Name = "labelHeaderInfoText"
+        Me.labelHeaderInfoText.Size = New System.Drawing.Size(244, 16)
+        Me.labelHeaderInfoText.TabIndex = 4
+        Me.labelHeaderInfoText.Text = "How DotDesktop4Win interprets this file:"
+        '
+        'labelUrlKey
+        '
+        Me.labelUrlKey.AutoSize = True
+        Me.labelUrlKey.Location = New System.Drawing.Point(6, 82)
+        Me.labelUrlKey.Name = "labelUrlKey"
+        Me.labelUrlKey.Size = New System.Drawing.Size(35, 13)
+        Me.labelUrlKey.TabIndex = 3
+        Me.labelUrlKey.Text = "URL: "
+        '
+        'labelExecKey
+        '
+        Me.labelExecKey.AutoSize = True
+        Me.labelExecKey.Location = New System.Drawing.Point(6, 69)
+        Me.labelExecKey.Name = "labelExecKey"
+        Me.labelExecKey.Size = New System.Drawing.Size(37, 13)
+        Me.labelExecKey.TabIndex = 2
+        Me.labelExecKey.Text = "Exec: "
+        '
+        'labelNameKey
+        '
+        Me.labelNameKey.AutoSize = True
+        Me.labelNameKey.Location = New System.Drawing.Point(6, 56)
+        Me.labelNameKey.Name = "labelNameKey"
+        Me.labelNameKey.Size = New System.Drawing.Size(41, 13)
+        Me.labelNameKey.TabIndex = 1
+        Me.labelNameKey.Text = "Name: "
+        '
+        'labelTypeKey
+        '
+        Me.labelTypeKey.AutoSize = True
+        Me.labelTypeKey.Location = New System.Drawing.Point(6, 43)
+        Me.labelTypeKey.Name = "labelTypeKey"
+        Me.labelTypeKey.Size = New System.Drawing.Size(37, 13)
+        Me.labelTypeKey.TabIndex = 0
+        Me.labelTypeKey.Text = "Type: "
+        '
         'tabpageRawFile
         '
         Me.tabpageRawFile.Controls.Add(Me.textboxRawFileOutput)
@@ -141,62 +197,6 @@ Partial Class aaformMainWindow
         '
         Me.openfiledialogDotDesktopFile.Filter = "Desktop files|*.desktop"
         Me.openfiledialogDotDesktopFile.Title = "Browse for .desktop file"
-        '
-        'labelTypeKey
-        '
-        Me.labelTypeKey.AutoSize = True
-        Me.labelTypeKey.Location = New System.Drawing.Point(6, 43)
-        Me.labelTypeKey.Name = "labelTypeKey"
-        Me.labelTypeKey.Size = New System.Drawing.Size(37, 13)
-        Me.labelTypeKey.TabIndex = 0
-        Me.labelTypeKey.Text = "Type: "
-        '
-        'labelNameKey
-        '
-        Me.labelNameKey.AutoSize = True
-        Me.labelNameKey.Location = New System.Drawing.Point(6, 56)
-        Me.labelNameKey.Name = "labelNameKey"
-        Me.labelNameKey.Size = New System.Drawing.Size(41, 13)
-        Me.labelNameKey.TabIndex = 1
-        Me.labelNameKey.Text = "Name: "
-        '
-        'labelExecKey
-        '
-        Me.labelExecKey.AutoSize = True
-        Me.labelExecKey.Location = New System.Drawing.Point(6, 69)
-        Me.labelExecKey.Name = "labelExecKey"
-        Me.labelExecKey.Size = New System.Drawing.Size(37, 13)
-        Me.labelExecKey.TabIndex = 2
-        Me.labelExecKey.Text = "Exec: "
-        '
-        'labelUrlKey
-        '
-        Me.labelUrlKey.AutoSize = True
-        Me.labelUrlKey.Location = New System.Drawing.Point(6, 82)
-        Me.labelUrlKey.Name = "labelUrlKey"
-        Me.labelUrlKey.Size = New System.Drawing.Size(35, 13)
-        Me.labelUrlKey.TabIndex = 3
-        Me.labelUrlKey.Text = "URL: "
-        '
-        'labelHeaderInfoText
-        '
-        Me.labelHeaderInfoText.AutoSize = True
-        Me.labelHeaderInfoText.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.labelHeaderInfoText.Location = New System.Drawing.Point(9, 7)
-        Me.labelHeaderInfoText.Name = "labelHeaderInfoText"
-        Me.labelHeaderInfoText.Size = New System.Drawing.Size(244, 16)
-        Me.labelHeaderInfoText.TabIndex = 4
-        Me.labelHeaderInfoText.Text = "How DotDesktop4Win interprets this file:"
-        '
-        'linklabelDesktopEntrySpec
-        '
-        Me.linklabelDesktopEntrySpec.AutoSize = True
-        Me.linklabelDesktopEntrySpec.Location = New System.Drawing.Point(9, 164)
-        Me.linklabelDesktopEntrySpec.Name = "linklabelDesktopEntrySpec"
-        Me.linklabelDesktopEntrySpec.Size = New System.Drawing.Size(221, 13)
-        Me.linklabelDesktopEntrySpec.TabIndex = 5
-        Me.linklabelDesktopEntrySpec.TabStop = True
-        Me.linklabelDesktopEntrySpec.Text = "Latest Freedesktop.org Desktop Entry spec..."
         '
         'aaformMainWindow
         '
