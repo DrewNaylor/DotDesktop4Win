@@ -36,26 +36,34 @@ Public Class desktopEntryStuff
         Dim desktopEntrySection As IniSection = dotDesktopFile.Sections("Desktop Entry")
 
 #Region "Getting and returning key values."
+
         ' Look in the inputFile and return the value for the keyToGet.
         If keyToGet = "Type" Then
 
             ' If we want to get the Type value, return that.
-            Return desktopEntrySection.Keys("Type").Value
+            ' First make sure it's in there.
+            If desktopEntrySection.Keys("Type") IsNot Nothing Then
+                ' If it is in there, return it as expected.
+                Return desktopEntrySection.Keys("Type").Value
+            Else
+                ' Otherwise, return "Application" as the type.
+                Return "Application"
+            End If
 
         ElseIf keyToGet = "Name" Then
 
-            ' If we want to get the Name value, return that.
-            Return desktopEntrySection.Keys("Name").Value
+                ' If we want to get the Name value, return that.
+                Return desktopEntrySection.Keys("Name").Value
 
-        ElseIf keyToGet = "Exec" Then
+            ElseIf keyToGet = "Exec" Then
 
-            ' If we want to get the Exec value, return that.
-            Return desktopEntrySection.Keys("Exec").Value
+                ' If we want to get the Exec value, return that.
+                Return desktopEntrySection.Keys("Exec").Value
 
-        Else
+            Else
 
-            ' Otherwise, just return whatever the user specified in the key field.
-            Return "(Key not implemented)"
+                ' Otherwise, just return whatever the user specified in the key field.
+                Return "(Key not implemented)"
         End If
 #End Region
     End Function
