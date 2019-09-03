@@ -61,6 +61,8 @@ Public Class aaformMainWindow
                 Catch ex As NullReferenceException
                     ' Show a messagebox for explanation.
                     MessageBox.Show("The .desktop file appears to have issues, likely due to extra characters where they shouldn't be. You can check the File output: Raw tab if you want to see what it could be.")
+                    ' Now reset labels to their defaults.
+                    ' TODO: add the code here.
                 End Try
 
             Else
