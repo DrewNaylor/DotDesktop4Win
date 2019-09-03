@@ -38,6 +38,7 @@ Public Class desktopEntryStuff
 #Region "Getting and returning key values."
 
         ' Look in the inputFile and return the value for the keyToGet.
+#Region "Get Type key."
         If keyToGet = "Type" Then
 
             ' If we want to get the Type value, return that.
@@ -49,23 +50,32 @@ Public Class desktopEntryStuff
                 ' Otherwise, return "Application" as the type.
                 Return "Application"
             End If
+#End Region
 
+#Region "Get Name key."
         ElseIf keyToGet = "Name" Then
 
-                ' If we want to get the Name value, return that.
-                Return desktopEntrySection.Keys("Name").Value
+            ' If we want to get the Name value, return that.
+            Return desktopEntrySection.Keys("Name").Value
+#End Region
 
-            ElseIf keyToGet = "Exec" Then
+#Region "Get Exec key."
+        ElseIf keyToGet = "Exec" Then
 
-                ' If we want to get the Exec value, return that.
-                Return desktopEntrySection.Keys("Exec").Value
+            ' If we want to get the Exec value, return that.
+            Return desktopEntrySection.Keys("Exec").Value
+#End Region
 
-            Else
+#Region "What to do when the key isn't an option here."
+        Else
 
-                ' Otherwise, just return whatever the user specified in the key field.
-                Return "(Key not implemented)"
+            ' Otherwise, just return whatever the user specified in the key field.
+            Return "(Key not implemented)"
+#End Region
+
         End If
 #End Region
+
     End Function
 
 End Class
