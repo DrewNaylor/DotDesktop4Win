@@ -20,11 +20,61 @@
 '   limitations under the License.
 
 
+Imports System.Windows.Forms
 Imports libdotdesktop
 Imports System.IO
 Module Module1
 
     Public Sub Main()
+
+        ' When the user opens a file from the Browse... dialog, change the text
+        ' in the textbox and titlebar, then interpret the .desktop file.
+
+
+        ' Before doing anything, make sure this is a valid .desktop file
+        ' and that it starts with "[Desktop Entry]" if no text before the
+        ' section is allowed.
+        ' If text is allowed, just ignore it.
+        If System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString).StartsWith("[Desktop Entry]") Or
+                My.Settings.allowTextBeforeDesktopEntrySection = True And System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString).Contains("[Desktop Entry]") Then
+
+            ' First, update titlebar and output the file path.
+            Console.WriteLine(My.Application.CommandLineArgs(0).ToString)
+            Console.Title = My.Application.CommandLineArgs(0).ToString & " - " & Application.ProductName
+
+            ' Second, update the raw output textbox after replacing Lf with CrLf.
+            Console.WriteLine(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString).Replace(vbLf, vbCrLf))
+
+            ' Now, pass along the file to the interpretation code in libdotdesktop.
+            ' Type key.
+            ' Catch NullReferenceExceptions, just in case there are issues in the file.
+            Try
+                'Me.labelTypeKey.Text = "Type: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Type")
+
+                '' Name key.
+                'Me.labelNameKey.Text = "Name: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Name",
+                '                                                            openfiledialogDotDesktopFile.SafeFileName.ToString)
+
+                ' Exec key.
+                Debug.WriteLine(desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec"))
+                Process.Start(desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec"))
+
+
+            Catch ex As NullReferenceException
+                ' Show a messagebox for explanation.
+                MessageBox.Show("The .desktop file appears to have issues, likely due to extra characters where they shouldn't be. You can check the File output: Raw tab if you want to see what it could be.")
+                ' Now reset labels to their defaults.
+                ' TODO: add the code here.
+            End Try
+
+        Else
+            ' If it's not a valid Freedesktop.org .desktop file, tell the user.
+            MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec." &
+                                " Please note that for now, this implementation doesn't ignore comments or blank lines at the beginning properly. Work needs to be done for that." &
+                                " Set My.Settings.allowTextBeforeDesktopEntrySection to True to allow text before the Desktop Entry section.",
+                                "Browse for .desktop file")
+        End If
+
         Debug.WriteLine(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString))
         Console.WriteLine(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString))
         Console.ReadLine()
