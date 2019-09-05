@@ -34,7 +34,7 @@ Module Module1
         ' Before doing anything, make sure this is a valid .desktop file
         ' and that it starts with "[Desktop Entry]" if no text before the
         ' section is allowed.
-        ' If text is allowed, just ignore it.
+        ' If text is allowed, just ignore it if possible.
         If System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString).StartsWith("[Desktop Entry]") Or
                 My.Settings.allowTextBeforeDesktopEntrySection = True And System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString).Contains("[Desktop Entry]") Then
 
@@ -76,8 +76,8 @@ Module Module1
                                 "Browse for .desktop file")
         End If
 
-        Debug.WriteLine(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString))
-        Console.WriteLine(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString))
+
+        ' Add in a pause where the user can hit "Enter" to continue.
         Console.ReadLine()
     End Sub
 
