@@ -40,7 +40,7 @@ Module Module1
 
             ' First, update titlebar and output the file path.
             Console.WriteLine(My.Application.CommandLineArgs(0).ToString)
-            Console.Title = My.Application.CommandLineArgs(0).ToString & " - " & Application.ProductName
+            Console.Title = System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName
 
             ' Second, update the raw output textbox after replacing Lf with CrLf.
             Console.WriteLine(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString).Replace(vbLf, vbCrLf))
