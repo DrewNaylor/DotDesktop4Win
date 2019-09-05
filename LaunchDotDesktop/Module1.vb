@@ -56,13 +56,14 @@ Module Module1
                 '                                                            openfiledialogDotDesktopFile.SafeFileName.ToString)
 
                 ' Exec key.
-                Debug.WriteLine(desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec"))
+                Debug.WriteLine("Launching " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec") &
+                                "...")
                 Process.Start(desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec"))
 
 
-            Catch ex As NullReferenceException
+            Catch ex As System.ComponentModel.Win32Exception
                 ' Show a messagebox for explanation.
-                MessageBox.Show("The .desktop file appears to have issues, likely due to extra characters where they shouldn't be. You can check the File output: Raw tab if you want to see what it could be.")
+                MessageBox.Show("The .desktop file appears to have issues, likely due to extra characters where they shouldn't be. You can check the console output if you want to see what it could be.")
                 ' Now reset labels to their defaults.
                 ' TODO: add the code here.
             End Try
