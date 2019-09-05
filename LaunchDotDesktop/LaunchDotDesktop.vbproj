@@ -137,6 +137,12 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\libdotdesktop\libdotdesktop.vbproj">
+      <Project>{446ddd07-c1ed-482f-aeb0-b0e69eeab5ef}</Project>
+      <Name>libdotdesktop</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
