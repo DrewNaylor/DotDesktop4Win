@@ -63,9 +63,10 @@ Module Module1
 
             Catch ex As System.ComponentModel.Win32Exception
                 ' Show a messagebox for explanation.
-                MessageBox.Show("The .desktop file appears to have issues, likely due to extra characters where they shouldn't be. You can check the console output if you want to see what it could be.")
-                ' Now reset labels to their defaults.
-                ' TODO: add the code here.
+                MessageBox.Show("Either there are characters where they shouldn't be, or we couldn't find the program specified in the Exec key. You can check the console output if you want to see what it could be." & vbCrLf &
+                                vbCrLf &
+                                "Exec key value: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec"), System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName)
+
             End Try
 
         Else
