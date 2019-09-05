@@ -20,11 +20,12 @@
 '   limitations under the License.
 
 
-
+Imports System.IO
 Module Module1
 
-    Sub Main()
-
+    Public Sub Main(ByVal sArgs() As String)
+        Debug.WriteLine(System.IO.File.ReadAllText(sArgs(0).ToString))
+        Console.ReadLine()
     End Sub
 
 End Module
