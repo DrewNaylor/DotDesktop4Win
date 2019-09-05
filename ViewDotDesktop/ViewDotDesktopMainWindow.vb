@@ -42,10 +42,11 @@ Public Class aaformMainWindow
                 ' Second, update the raw output textbox after replacing Lf with CrLf.
                 textboxRawFileOutput.Text = System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName).Replace(vbLf, vbCrLf)
 
-                ' Now, pass along the file to the interpretation code in libdotdesktop.
-                ' Type key.
+                ' Now, pass along the file to the interpretation code in libdotdesktop.                
                 ' Catch NullReferenceExceptions, just in case there are issues in the file.
                 Try
+
+                    ' Type key.
                     Me.labelTypeKey.Text = "Type: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Type")
 
                     ' Name key.
