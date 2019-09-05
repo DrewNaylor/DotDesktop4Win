@@ -36,6 +36,7 @@ Public Class desktopEntryStuff
         Dim desktopEntrySection As IniSection = dotDesktopFile.Sections("Desktop Entry")
         ' First we check that the key is there.
         If desktopEntrySection Is Nothing Then
+            Return "Couldn't find a Desktop Entry section or there's invalid formatting. Please check the input file."
             Exit Function
         End If
 #Region "Getting and returning key values."
