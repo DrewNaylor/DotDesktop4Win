@@ -9,10 +9,10 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("LaunchDotDesktop")>
-<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyDescription("Launch .desktop files as parsed by the DotDesktop4Win partial implementation of Freedesktop.org's Desktop Entry spec.")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("LaunchDotDesktop")>
-<Assembly: AssemblyCopyright("Copyright ©  2019")>
+<Assembly: AssemblyCopyright("Copyright © 2019 Drew Naylor. Licensed under Apache License 2.0.")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("0.1.0.0")>
+<Assembly: AssemblyFileVersion("0.1.0.0")>
