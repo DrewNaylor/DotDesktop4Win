@@ -20,11 +20,13 @@
 '   limitations under the License.
 
 
+Imports libdotdesktop
 Imports System.IO
 Module Module1
 
-    Public Sub Main(ByVal sArgs() As String)
-        Debug.WriteLine(System.IO.File.ReadAllText(sArgs(0).ToString))
+    Public Sub Main()
+        Debug.WriteLine(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString))
+        Console.WriteLine(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString))
         Console.ReadLine()
     End Sub
 

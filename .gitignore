@@ -1,5 +1,5 @@
 # Remember to get these:
-!CommonBuild/bin/Debug/libdotdesktop.dll
+
 !CommonBuild/bin/Debug/do_not_delete.txt
 
 ## Ignore Visual Studio temporary files, build results, and
@@ -244,3 +244,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+CommonBuild/bin/Debug/libdotdesktop.dll
