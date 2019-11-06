@@ -16,3 +16,11 @@ In order to read .desktop files, [MadMilkman.Ini](https://github.com/MarioZ/MadM
   - Same for the launcher program.
   - Example: `Firefox.desktop - LaunchDotDesktop`
 - If a required key isn't present in the file, then sane defaults will be used instead.
+
+## Building and Modifying
+
+You can build this project by opening the `DotDesktop4Win.sln` file in Visual Studio 2015 Community, which is the version being used for the project. Newer versions may work, but that's the version being used.
+
+If you don't want to manually build it, you can [use the build artifacts](https://ci.appveyor.com/project/DrewNaylor/dotdesktop4win/build/artifacts) instead.
+
+More detail will be added to this section eventually, but this is just here for now.
