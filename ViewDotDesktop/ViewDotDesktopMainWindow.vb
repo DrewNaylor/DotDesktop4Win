@@ -52,24 +52,24 @@ Public Class aaformMainWindow
                     ' Type key.
                     textboxInterpreterOutput.Text = "Type: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Type")
 
+                    ' Version key.
+                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Version: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Version")
+
                     ' Name key.
                     textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Name: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Name",
                                                                             openfiledialogDotDesktopFile.SafeFileName.ToString)
 
-                    ' Exec key.
-                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Exec: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Exec")
-
-                    ' URL key.
-                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Url: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "URL")
-
-                    ' Version key.
-                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Version: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Version")
-
                     ' Comment key.
                     textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Comment: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Comment")
 
+                    ' Exec key.
+                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Exec: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Exec")
+
                     ' Path key.
                     textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Path: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Path")
+
+                    ' URL key.
+                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Url: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "URL")
 
                 Catch ex As NullReferenceException
                     ' Show a messagebox for explanation.
