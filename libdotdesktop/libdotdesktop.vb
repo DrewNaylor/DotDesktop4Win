@@ -100,6 +100,34 @@ Public Class desktopEntryStuff
             End If
 #End Region
 
+#Region "Get Version key."
+        ElseIf keyToGet = "Version" Then
+
+            ' If we want to get the Path value, return that.
+            ' First make sure it's in there.
+            If desktopEntrySection.Keys("Version") IsNot Nothing Then
+                ' If it is in there, return it as expected.
+                Return desktopEntrySection.Keys("Version").Value
+            Else
+                ' Otherwise, return a message saying the key is not available.
+                Return "(Version key not available)"
+            End If
+#End Region
+
+#Region "Get Comment key."
+        ElseIf keyToGet = "Comment" Then
+
+            ' If we want to get the Path value, return that.
+            ' First make sure it's in there.
+            If desktopEntrySection.Keys("Comment") IsNot Nothing Then
+                ' If it is in there, return it as expected.
+                Return desktopEntrySection.Keys("Comment").Value
+            Else
+                ' Otherwise, return a message saying the key is not available.
+                Return "(Comment key not available)"
+            End If
+#End Region
+
 #Region "What to do when the key isn't an option here."
         Else
 
