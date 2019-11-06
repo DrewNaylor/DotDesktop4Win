@@ -86,6 +86,20 @@ Public Class desktopEntryStuff
             End If
 #End Region
 
+#Region "Get Path key."
+        ElseIf keyToGet = "Path" Then
+
+            ' If we want to get the Path value, return that.
+            ' First make sure it's in there.
+            If desktopEntrySection.Keys("Path") IsNot Nothing Then
+                ' If it is in there, return it as expected.
+                Return desktopEntrySection.Keys("Path").Value
+            Else
+                ' Otherwise, return a message saying the key is not available.
+                Return "(Path key not available)"
+            End If
+#End Region
+
 #Region "What to do when the key isn't an option here."
         Else
 
