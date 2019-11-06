@@ -37,17 +37,17 @@ Partial Class aaformMainWindow
         Me.tabpageRawFile = New System.Windows.Forms.TabPage()
         Me.textboxRawFileOutput = New System.Windows.Forms.TextBox()
         Me.openfiledialogDotDesktopFile = New System.Windows.Forms.OpenFileDialog()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
+        Me.tabpageInterpreterOutput = New System.Windows.Forms.TabPage()
+        Me.tablelayoutpanelInterpreter = New System.Windows.Forms.TableLayoutPanel()
+        Me.labelInterpreterHeader = New System.Windows.Forms.Label()
+        Me.textboxInterpreterOutput = New System.Windows.Forms.TextBox()
+        Me.linklabelFDOSpec = New System.Windows.Forms.LinkLabel()
         Me.tablelayoutpanelMainWindow.SuspendLayout()
         Me.tabcontrolFileOutput.SuspendLayout()
         Me.tabpageInterpretation.SuspendLayout()
         Me.tabpageRawFile.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        Me.TableLayoutPanel1.SuspendLayout()
+        Me.tabpageInterpreterOutput.SuspendLayout()
+        Me.tablelayoutpanelInterpreter.SuspendLayout()
         Me.SuspendLayout()
         '
         'menubarMainWindow
@@ -103,8 +103,8 @@ Partial Class aaformMainWindow
         '
         Me.tablelayoutpanelMainWindow.SetColumnSpan(Me.tabcontrolFileOutput, 2)
         Me.tabcontrolFileOutput.Controls.Add(Me.tabpageInterpretation)
+        Me.tabcontrolFileOutput.Controls.Add(Me.tabpageInterpreterOutput)
         Me.tabcontrolFileOutput.Controls.Add(Me.tabpageRawFile)
-        Me.tabcontrolFileOutput.Controls.Add(Me.TabPage1)
         Me.tabcontrolFileOutput.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabcontrolFileOutput.Location = New System.Drawing.Point(4, 40)
         Me.tabcontrolFileOutput.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
@@ -221,66 +221,66 @@ Partial Class aaformMainWindow
         Me.openfiledialogDotDesktopFile.Filter = "Desktop files|*.desktop"
         Me.openfiledialogDotDesktopFile.Title = "Browse for .desktop file"
         '
-        'TabPage1
+        'tabpageInterpreterOutput
         '
-        Me.TabPage1.Controls.Add(Me.TableLayoutPanel1)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(462, 238)
-        Me.TabPage1.TabIndex = 2
-        Me.TabPage1.Text = "TabPage1"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.tabpageInterpreterOutput.Controls.Add(Me.tablelayoutpanelInterpreter)
+        Me.tabpageInterpreterOutput.Location = New System.Drawing.Point(4, 25)
+        Me.tabpageInterpreterOutput.Name = "tabpageInterpreterOutput"
+        Me.tabpageInterpreterOutput.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabpageInterpreterOutput.Size = New System.Drawing.Size(462, 238)
+        Me.tabpageInterpreterOutput.TabIndex = 2
+        Me.tabpageInterpreterOutput.Text = "File output: Interpreter"
+        Me.tabpageInterpreterOutput.UseVisualStyleBackColor = True
         '
-        'TableLayoutPanel1
+        'tablelayoutpanelInterpreter
         '
-        Me.TableLayoutPanel1.ColumnCount = 1
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.LinkLabel1, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.TextBox1, 0, 1)
-        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(456, 232)
-        Me.TableLayoutPanel1.TabIndex = 0
+        Me.tablelayoutpanelInterpreter.ColumnCount = 1
+        Me.tablelayoutpanelInterpreter.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tablelayoutpanelInterpreter.Controls.Add(Me.linklabelFDOSpec, 0, 2)
+        Me.tablelayoutpanelInterpreter.Controls.Add(Me.labelInterpreterHeader, 0, 0)
+        Me.tablelayoutpanelInterpreter.Controls.Add(Me.textboxInterpreterOutput, 0, 1)
+        Me.tablelayoutpanelInterpreter.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tablelayoutpanelInterpreter.Location = New System.Drawing.Point(3, 3)
+        Me.tablelayoutpanelInterpreter.Name = "tablelayoutpanelInterpreter"
+        Me.tablelayoutpanelInterpreter.RowCount = 3
+        Me.tablelayoutpanelInterpreter.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tablelayoutpanelInterpreter.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tablelayoutpanelInterpreter.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tablelayoutpanelInterpreter.Size = New System.Drawing.Size(456, 232)
+        Me.tablelayoutpanelInterpreter.TabIndex = 0
         '
-        'Label1
+        'labelInterpreterHeader
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(4, 0)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(286, 20)
-        Me.Label1.TabIndex = 5
-        Me.Label1.Text = "How libdotdesktop interprets this file:"
+        Me.labelInterpreterHeader.AutoSize = True
+        Me.labelInterpreterHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.labelInterpreterHeader.Location = New System.Drawing.Point(4, 0)
+        Me.labelInterpreterHeader.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.labelInterpreterHeader.Name = "labelInterpreterHeader"
+        Me.labelInterpreterHeader.Size = New System.Drawing.Size(286, 20)
+        Me.labelInterpreterHeader.TabIndex = 5
+        Me.labelInterpreterHeader.Text = "How libdotdesktop interprets this file:"
         '
-        'TextBox1
+        'textboxInterpreterOutput
         '
-        Me.TextBox1.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Location = New System.Drawing.Point(3, 23)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(450, 186)
-        Me.TextBox1.TabIndex = 6
+        Me.textboxInterpreterOutput.BackColor = System.Drawing.SystemColors.Window
+        Me.textboxInterpreterOutput.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.textboxInterpreterOutput.Location = New System.Drawing.Point(3, 23)
+        Me.textboxInterpreterOutput.Multiline = True
+        Me.textboxInterpreterOutput.Name = "textboxInterpreterOutput"
+        Me.textboxInterpreterOutput.ReadOnly = True
+        Me.textboxInterpreterOutput.Size = New System.Drawing.Size(450, 186)
+        Me.textboxInterpreterOutput.TabIndex = 6
         '
-        'LinkLabel1
+        'linklabelFDOSpec
         '
-        Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(4, 212)
-        Me.LinkLabel1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(294, 17)
-        Me.LinkLabel1.TabIndex = 7
-        Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "Latest Freedesktop.org Desktop Entry spec..."
+        Me.linklabelFDOSpec.AutoSize = True
+        Me.linklabelFDOSpec.Location = New System.Drawing.Point(4, 212)
+        Me.linklabelFDOSpec.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.linklabelFDOSpec.Name = "linklabelFDOSpec"
+        Me.linklabelFDOSpec.Size = New System.Drawing.Size(294, 17)
+        Me.linklabelFDOSpec.TabIndex = 7
+        Me.linklabelFDOSpec.TabStop = True
+        Me.linklabelFDOSpec.Text = "Latest Freedesktop.org Desktop Entry spec..."
         '
         'aaformMainWindow
         '
@@ -300,9 +300,9 @@ Partial Class aaformMainWindow
         Me.tabpageInterpretation.PerformLayout()
         Me.tabpageRawFile.ResumeLayout(False)
         Me.tabpageRawFile.PerformLayout()
-        Me.TabPage1.ResumeLayout(False)
-        Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.TableLayoutPanel1.PerformLayout()
+        Me.tabpageInterpreterOutput.ResumeLayout(False)
+        Me.tablelayoutpanelInterpreter.ResumeLayout(False)
+        Me.tablelayoutpanelInterpreter.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -323,9 +323,9 @@ Partial Class aaformMainWindow
     Friend WithEvents labelUrlKey As Label
     Friend WithEvents labelHeaderInfoText As Label
     Friend WithEvents linklabelDesktopEntrySpec As LinkLabel
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents LinkLabel1 As LinkLabel
+    Friend WithEvents tabpageInterpreterOutput As TabPage
+    Friend WithEvents tablelayoutpanelInterpreter As TableLayoutPanel
+    Friend WithEvents labelInterpreterHeader As Label
+    Friend WithEvents textboxInterpreterOutput As TextBox
+    Friend WithEvents linklabelFDOSpec As LinkLabel
 End Class
