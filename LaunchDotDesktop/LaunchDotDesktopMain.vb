@@ -52,6 +52,10 @@ Module LaunchDotDesktop
                 ' Exec key.
                 Console.WriteLine("Launching " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec") &
                                 "...")
+
+#Region "Clean up Exec key if needed, and allow for choosing files and URLs."
+
+#End Region
                 Process.Start(desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec"))
 
 
