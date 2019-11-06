@@ -50,29 +50,28 @@ Module LaunchDotDesktop
             ' Catch NullReferenceExceptions, just in case there are issues in the file.
             Try
                 ' Exec key.
-                Console.WriteLine("Launching " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec") &
-                                "...")
+
 
 #Region "Clean up Exec key if needed, and allow for choosing files and URLs."
                 Dim cleanedExecKey As String = desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec")
                 ' %d is deprecated.
-                cleanedExecKey = cleanedExecKey.Replace(" %d ", "")
+                cleanedExecKey = cleanedExecKey.Replace(" %d", "")
                 ' %D is deprecated.
-                cleanedExecKey = cleanedExecKey.Replace(" %D ", "")
+                cleanedExecKey = cleanedExecKey.Replace(" %D", "")
                 ' %n is deprecated.
-                cleanedExecKey = cleanedExecKey.Replace(" %n ", "")
+                cleanedExecKey = cleanedExecKey.Replace(" %n", "")
                 ' %N is deprecated.
-                cleanedExecKey = cleanedExecKey.Replace(" %N ", "")
+                cleanedExecKey = cleanedExecKey.Replace(" %N", "")
                 ' %v is deprecated.
-                cleanedExecKey = cleanedExecKey.Replace(" %v ", "")
+                cleanedExecKey = cleanedExecKey.Replace(" %v", "")
                 ' %m is deprecated.
-                cleanedExecKey = cleanedExecKey.Replace(" %m ", "")
+                cleanedExecKey = cleanedExecKey.Replace(" %m", "")
 
                 ' If there's a %u in the file, open a window to ask for a URL.
                 Dim singleUrl As String = Nothing
-                If cleanedExecKey.Contains(" %u ") Then
+                If cleanedExecKey.Contains(" %u") Then
                     singleUrl = InputBox("Please type or paste a URL:", "URL input", "")
-                    cleanedExecKey.Replace(" %u ", "")
+                    cleanedExecKey = cleanedExecKey.Replace(" %u", "")
                 End If
 #End Region
 
@@ -80,10 +79,10 @@ Module LaunchDotDesktop
                 ' send that URL as an argument to the application.
                 Dim execProgram As New ProcessStartInfo
                 execProgram.FileName = cleanedExecKey
-                If singleUrl IsNot Nothing Then
-                    execProgram.Arguments = singleUrl
-                End If
-                Process.Start(cleanedExecKey)
+                execProgram.Arguments = singleUrl
+                Console.WriteLine("Launching " & cleanedExecKey &
+                                "...")
+                Process.Start(execProgram)
 
 
             Catch ex As System.ComponentModel.Win32Exception
