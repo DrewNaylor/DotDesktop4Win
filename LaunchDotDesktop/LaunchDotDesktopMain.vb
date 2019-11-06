@@ -54,9 +54,21 @@ Module LaunchDotDesktop
                                 "...")
 
 #Region "Clean up Exec key if needed, and allow for choosing files and URLs."
-
+                Dim cleanedExecKey As String = desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec")
+                ' %d is deprecated.
+                cleanedExecKey = cleanedExecKey.Replace(" %d ", "")
+                ' %D is deprecated.
+                cleanedExecKey = cleanedExecKey.Replace(" %D ", "")
+                ' %n is deprecated.
+                cleanedExecKey = cleanedExecKey.Replace(" %n ", "")
+                ' %N is deprecated.
+                cleanedExecKey = cleanedExecKey.Replace(" %N ", "")
+                ' %v is deprecated.
+                cleanedExecKey = cleanedExecKey.Replace(" %v ", "")
+                ' %m is deprecated.
+                cleanedExecKey = cleanedExecKey.Replace(" %m ", "")
 #End Region
-                Process.Start(desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec"))
+                Process.Start(cleanedExecKey)
 
 
             Catch ex As System.ComponentModel.Win32Exception
