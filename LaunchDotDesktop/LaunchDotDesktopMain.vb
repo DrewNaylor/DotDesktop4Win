@@ -69,7 +69,7 @@ Module LaunchDotDesktop
                 cleanedExecKey = cleanedExecKey.Replace(" %m ", "")
 
                 ' If there's a %u in the file, open a window to ask for a URL.
-                Dim singleUrl As String = ""
+                Dim singleUrl As String = Nothing
                 If cleanedExecKey.Contains(" %u ") Then
                     singleUrl = InputBox("Please type or paste a URL:", "URL input", "")
                     cleanedExecKey.Replace(" %u ", "")
@@ -78,7 +78,11 @@ Module LaunchDotDesktop
 
                 ' Now, see if singleUrl has anything in it, and if it does,
                 ' send that URL as an argument to the application.
-
+                Dim execProgram As New ProcessStartInfo
+                execProgram.FileName = cleanedExecKey
+                If singleUrl IsNot Nothing Then
+                    execProgram.Arguments = singleUrl
+                End If
                 Process.Start(cleanedExecKey)
 
 
