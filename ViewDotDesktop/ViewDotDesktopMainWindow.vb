@@ -50,21 +50,6 @@ Public Class aaformMainWindow
                 Try
 
                     ' Type key.
-                    Me.labelTypeKey.Text = "Type: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Type")
-
-                    ' Name key.
-                    Me.labelNameKey.Text = "Name: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Name",
-                                                                            openfiledialogDotDesktopFile.SafeFileName.ToString)
-
-                    ' Exec key.
-                    Me.labelExecKey.Text = "Exec: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Exec")
-
-                    ' URL key.
-                    Me.labelUrlKey.Text = "Url: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "URL")
-
-
-
-                    ' Type key.
                     textboxInterpreterOutput.Text = "Type: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Type")
 
                     ' Name key.
@@ -95,7 +80,7 @@ Public Class aaformMainWindow
         End If
     End Sub
 
-    Private Sub linklabelDesktopEntrySpec_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linklabelDesktopEntrySpec.LinkClicked
+    Private Sub linklabelFDOSpec_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linklabelFDOSpec.LinkClicked
         ' Go to the latest version of the Freedesktop.org Desktop Entry spec online.
         Process.Start("https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html")
     End Sub
