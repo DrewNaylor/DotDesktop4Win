@@ -72,11 +72,13 @@ Module LaunchDotDesktop
                 Dim singleUrl As String = ""
                 If cleanedExecKey.Contains(" %u ") Then
                     singleUrl = InputBox("Please type or paste a URL:", "URL input", "")
+                    cleanedExecKey.Replace(" %u ", "")
                 End If
 #End Region
 
                 ' Now, see if singleUrl has anything in it, and if it does,
                 ' send that URL as an argument to the application.
+
                 Process.Start(cleanedExecKey)
 
 
