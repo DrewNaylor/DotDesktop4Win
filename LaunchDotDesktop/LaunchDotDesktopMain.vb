@@ -23,7 +23,7 @@
 Imports System.Windows.Forms
 Imports libdotdesktop
 Imports System.IO
-Module Module1
+Module LaunchDotDesktop
 
     Public Sub Main()
 
@@ -68,7 +68,7 @@ Module Module1
             MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec." &
                                 " Please note that for now, this implementation doesn't ignore comments or blank lines at the beginning properly. Work needs to be done for that." &
                                 " Set My.Settings.allowTextBeforeDesktopEntrySection to True to allow text before the Desktop Entry section.",
-                                "Browse for .desktop file")
+                                "Launch .desktop file")
         End If
 
 
