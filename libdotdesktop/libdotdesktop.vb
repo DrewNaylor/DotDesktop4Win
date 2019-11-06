@@ -84,7 +84,6 @@ Public Class desktopEntryStuff
                 ' Otherwise, return a message saying the key is not available.
                 Return "(Exec key not available)"
             End If
-            Return desktopEntrySection.Keys("Exec").Value
 #End Region
 
 #Region "What to do when the key isn't an option here."

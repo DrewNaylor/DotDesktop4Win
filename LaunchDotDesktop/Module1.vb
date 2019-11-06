@@ -49,14 +49,8 @@ Module Module1
             ' Type key.
             ' Catch NullReferenceExceptions, just in case there are issues in the file.
             Try
-                'Me.labelTypeKey.Text = "Type: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Type")
-
-                '' Name key.
-                'Me.labelNameKey.Text = "Name: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Name",
-                '                                                            openfiledialogDotDesktopFile.SafeFileName.ToString)
-
                 ' Exec key.
-                Debug.WriteLine("Launching " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec") &
+                Console.WriteLine("Launching " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec") &
                                 "...")
                 Process.Start(desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec"))
 
