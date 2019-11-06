@@ -42,6 +42,9 @@ Public Class aaformMainWindow
                 ' Second, update the raw output textbox after replacing Lf with CrLf.
                 textboxRawFileOutput.Text = System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName).Replace(vbLf, vbCrLf)
 
+                ' Empty the interpreter output textbox.
+                textboxInterpreterOutput.Clear()
+
                 ' Now, pass along the file to the interpretation code in libdotdesktop.                
                 ' Catch NullReferenceExceptions, just in case there are issues in the file.
                 Try
@@ -58,6 +61,22 @@ Public Class aaformMainWindow
 
                     ' URL key.
                     Me.labelUrlKey.Text = "Url: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "URL")
+
+
+
+                    ' Type key.
+                    textboxInterpreterOutput.Text = "Type: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Type")
+
+                    ' Name key.
+                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Name: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Name",
+                                                                            openfiledialogDotDesktopFile.SafeFileName.ToString)
+
+                    ' Exec key.
+                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Exec: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Exec")
+
+                    ' URL key.
+                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Url: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "URL")
+
 
                 Catch ex As NullReferenceException
                     ' Show a messagebox for explanation.
