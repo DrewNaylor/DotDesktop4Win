@@ -62,6 +62,14 @@ Public Class aaformMainWindow
                     ' URL key.
                     textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Url: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "URL")
 
+                    ' Version key.
+                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Version: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Version")
+
+                    ' Comment key.
+                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Comment: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Comment")
+
+                    ' Path key.
+                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Path: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Path")
 
                 Catch ex As NullReferenceException
                     ' Show a messagebox for explanation.
