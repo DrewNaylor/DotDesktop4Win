@@ -162,6 +162,7 @@ Partial Class aaformMainWindow
         Me.textboxInterpreterOutput.Multiline = True
         Me.textboxInterpreterOutput.Name = "textboxInterpreterOutput"
         Me.textboxInterpreterOutput.ReadOnly = True
+        Me.textboxInterpreterOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.textboxInterpreterOutput.Size = New System.Drawing.Size(450, 186)
         Me.textboxInterpreterOutput.TabIndex = 6
         '
