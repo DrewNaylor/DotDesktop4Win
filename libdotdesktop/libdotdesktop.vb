@@ -81,8 +81,8 @@ Public Class desktopEntryStuff
                 ' If it is in there, return it as expected.
                 Return desktopEntrySection.Keys("Exec").Value
             Else
-                ' Otherwise, return a message saying the key is not available.
-                Return "(Exec key not available)"
+                ' Otherwise, return Nothing if the key is unavailable.
+                Return Nothing
             End If
 #End Region
 
@@ -95,8 +95,9 @@ Public Class desktopEntryStuff
                 ' If it is in there, return it as expected.
                 Return desktopEntrySection.Keys("Path").Value
             Else
-                ' Otherwise, return a message saying the key is not available.
-                Return "(Path key not available)"
+                ' Otherwise, return Nothing if the key is unavailable so
+                ' the application can hide the info.
+                Return Nothing
             End If
 #End Region
 
@@ -109,8 +110,8 @@ Public Class desktopEntryStuff
                 ' If it is in there, return it as expected.
                 Return desktopEntrySection.Keys("Version").Value
             Else
-                ' Otherwise, return a message saying the key is not available.
-                Return "(Version key not available)"
+                ' Otherwise, return Nothing if the key is unavailable.
+                Return Nothing
             End If
 #End Region
 
@@ -123,8 +124,8 @@ Public Class desktopEntryStuff
                 ' If it is in there, return it as expected.
                 Return desktopEntrySection.Keys("Comment").Value
             Else
-                ' Otherwise, return a message saying the key is not available.
-                Return "(Comment key not available)"
+                ' Otherwise, return Nothing if the key is unavailable.
+                Return Nothing
             End If
 #End Region
 

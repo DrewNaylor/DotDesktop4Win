@@ -66,7 +66,9 @@ Public Class aaformMainWindow
                     textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Exec: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Exec")
 
                     ' Path key.
-                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Path: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Path")
+                    If Not desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Path") = Nothing Then
+                        textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Path: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Path")
+                    End If
 
                     ' URL key.
                     textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Url: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "URL")
