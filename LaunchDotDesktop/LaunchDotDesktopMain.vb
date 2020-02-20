@@ -88,6 +88,20 @@ Module LaunchDotDesktop
                             urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
                             cleanedExecKey = cleanedExecKey.Replace(" %U", "")
                         End If
+
+                        ' Split Exec key's program from the arguments, if necessary.
+                        ' Check to see if it starts with double-quotes.
+                        cleanedExecKey = LTrim(cleanedExecKey)
+                        MessageBox.Show(cleanedExecKey)
+
+                        If cleanedExecKey.StartsWith(Chr(34)) Then
+                            Dim originalCleanedExecKey As String = cleanedExecKey
+                            Dim tempExecKey As String() = cleanedExecKey.Split(Chr(34))
+                            cleanedExecKey = tempExecKey(1).Trim
+                            urlList = originalCleanedExecKey.Replace(Chr(34) & cleanedExecKey & Chr(34), "")
+                            MessageBox.Show(cleanedExecKey)
+                            MessageBox.Show(urlList)
+                        End If
 #End Region
                         ' Done figuring out the desktop entry type.
                     End If
