@@ -135,7 +135,7 @@ Module LaunchDotDesktop
                         ' Done figuring out the desktop entry type.
                     End If
 
-                    ' Now, see if singleUrl has anything in it, and if it does,
+                    ' Now, see if urlList has anything in it, and if it does,
                     ' send that URL as an argument to the application.
                     Dim execProgram As New ProcessStartInfo
                     execProgram.FileName = cleanedExecKey
