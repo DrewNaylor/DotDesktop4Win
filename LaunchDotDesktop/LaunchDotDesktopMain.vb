@@ -44,36 +44,53 @@ Module LaunchDotDesktop
                 ' Catch NullReferenceExceptions, just in case there are issues in the file.
                 Try
                     ' Exec key.
-
-#Region "Clean up Exec key if needed, and allow for choosing files and URLs."
-                    Dim cleanedExecKey As String = desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Exec")
-                    ' %d is deprecated.
-                    cleanedExecKey = cleanedExecKey.Replace(" %d", "")
-                    ' %D is deprecated.
-                    cleanedExecKey = cleanedExecKey.Replace(" %D", "")
-                    ' %n is deprecated.
-                    cleanedExecKey = cleanedExecKey.Replace(" %n", "")
-                    ' %N is deprecated.
-                    cleanedExecKey = cleanedExecKey.Replace(" %N", "")
-                    ' %v is deprecated.
-                    cleanedExecKey = cleanedExecKey.Replace(" %v", "")
-                    ' %m is deprecated.
-                    cleanedExecKey = cleanedExecKey.Replace(" %m", "")
-
-                    ' Determine if the application allows for entering a URL,
-                    ' and provide a space to type it in.
+                    Dim cleanedExecKey As String
+                    ' URL list for apps that allow for URLs to be passed to them.
                     Dim urlList As String = Nothing
-                    If cleanedExecKey.Contains(" %u") Then
-                        ' If there's a %u in the file, open a window to ask for a URL.
-                        urlList = InputBox("Please type or paste a URL:", "Single URL input")
-                        cleanedExecKey = cleanedExecKey.Replace(" %u", "")
 
-                    ElseIf cleanedExecKey.Contains(" %U") Then
-                        ' If there's a %U in the file, open a window to allow for entering URLs.
-                        urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
-                        cleanedExecKey = cleanedExecKey.Replace(" %U", "")
-                    End If
+                    ' Check to see if the desktop entry is a link or an application.
+                    If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Type") = "Link" AndAlso
+                       desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "URL") IsNot Nothing Then
+                        ' If it's a link, grab the URL key if it exists.
+                        cleanedExecKey = desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "URL")
+
+                    ElseIf desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Type") = "Link" AndAlso
+                       desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "URL") Is Nothing Then
+                        ' If the URL key doesn't exist, allow for URL entry.
+                        cleanedExecKey = InputBox("Please type or paste a URL:", "URL key missing")
+                    Else
+                        ' Otherwise, assume it's an application.
+                        cleanedExecKey = desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Exec")
+#Region "Clean up Exec key if needed, and allow for choosing files and URLs."
+
+                        ' %d is deprecated.
+                        cleanedExecKey = cleanedExecKey.Replace(" %d", "")
+                        ' %D is deprecated.
+                        cleanedExecKey = cleanedExecKey.Replace(" %D", "")
+                        ' %n is deprecated.
+                        cleanedExecKey = cleanedExecKey.Replace(" %n", "")
+                        ' %N is deprecated.
+                        cleanedExecKey = cleanedExecKey.Replace(" %N", "")
+                        ' %v is deprecated.
+                        cleanedExecKey = cleanedExecKey.Replace(" %v", "")
+                        ' %m is deprecated.
+                        cleanedExecKey = cleanedExecKey.Replace(" %m", "")
+
+                        ' Determine if the application allows for entering a URL,
+                        ' and provide a space to type it in.
+                        If cleanedExecKey.Contains(" %u") Then
+                            ' If there's a %u in the file, open a window to ask for a URL.
+                            urlList = InputBox("Please type or paste a URL:", "Single URL input")
+                            cleanedExecKey = cleanedExecKey.Replace(" %u", "")
+
+                        ElseIf cleanedExecKey.Contains(" %U") Then
+                            ' If there's a %U in the file, open a window to allow for entering URLs.
+                            urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
+                            cleanedExecKey = cleanedExecKey.Replace(" %U", "")
+                        End If
 #End Region
+                        ' Done figuring out the desktop entry type.
+                    End If
 
                     ' Now, see if singleUrl has anything in it, and if it does,
                     ' send that URL as an argument to the application.
@@ -83,12 +100,20 @@ Module LaunchDotDesktop
                     Console.WriteLine("Launching " & cleanedExecKey & "...")
                     Process.Start(execProgram)
 
-
                 Catch ex As System.ComponentModel.Win32Exception
                     ' Show a messagebox for explanation.
-                    MessageBox.Show("Either there are characters where they shouldn't be, or we couldn't find the program specified in the Exec key. You can check the console output if you want to see what it could be." & vbCrLf &
-                                vbCrLf &
-                                "Exec key value: " & desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Exec"), System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName)
+                    ' If it's a Link, show the URL key.
+                    If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Type") = "Link" Then
+                        MessageBox.Show("We couldn't find the address that was listed in the URL key or passed manually. You can check the console output if you want to see what it could be." & vbCrLf &
+                            vbCrLf &
+                            "URL key value: " & desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "URL"), System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName)
+                    Else
+                        ' If it's an application, show the Exec key.
+                        MessageBox.Show("Either there are characters where they shouldn't be, or we couldn't find the program specified in the Exec key. You can check the console output if you want to see what it could be." & vbCrLf &
+                                                    vbCrLf &
+                                                    "Exec key value: " & desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Exec"), System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName)
+                    End If
+
 
                 End Try
 
