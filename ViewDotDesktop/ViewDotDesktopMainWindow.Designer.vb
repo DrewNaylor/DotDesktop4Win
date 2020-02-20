@@ -39,6 +39,7 @@ Partial Class aaformMainWindow
         Me.menuitemExitItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.menuitemHelpMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.menuitemAboutItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.menuitemOpenItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.menubarMainWindow.SuspendLayout()
         Me.tablelayoutpanelMainWindow.SuspendLayout()
         Me.tabcontrolFileOutput.SuspendLayout()
@@ -203,7 +204,7 @@ Partial Class aaformMainWindow
         '
         'menuitemFileMenu
         '
-        Me.menuitemFileMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuitemExitItem})
+        Me.menuitemFileMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuitemOpenItem, Me.menuitemExitItem})
         Me.menuitemFileMenu.Name = "menuitemFileMenu"
         Me.menuitemFileMenu.Size = New System.Drawing.Size(44, 24)
         Me.menuitemFileMenu.Text = "&File"
@@ -226,6 +227,13 @@ Partial Class aaformMainWindow
         Me.menuitemAboutItem.Name = "menuitemAboutItem"
         Me.menuitemAboutItem.Size = New System.Drawing.Size(181, 26)
         Me.menuitemAboutItem.Text = "&About"
+        '
+        'menuitemOpenItem
+        '
+        Me.menuitemOpenItem.Name = "menuitemOpenItem"
+        Me.menuitemOpenItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
+        Me.menuitemOpenItem.Size = New System.Drawing.Size(207, 26)
+        Me.menuitemOpenItem.Text = "&Open file..."
         '
         'aaformMainWindow
         '
@@ -270,4 +278,5 @@ Partial Class aaformMainWindow
     Friend WithEvents menuitemExitItem As ToolStripMenuItem
     Friend WithEvents menuitemHelpMenu As ToolStripMenuItem
     Friend WithEvents menuitemAboutItem As ToolStripMenuItem
+    Friend WithEvents menuitemOpenItem As ToolStripMenuItem
 End Class
