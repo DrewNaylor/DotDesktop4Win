@@ -28,80 +28,91 @@ Module LaunchDotDesktop
     Public Sub Main()
 
         ' Before doing anything, make sure this is a valid .desktop file
-        ' and that it starts with "[Desktop Entry]" if no text before the
-        ' section is allowed.
-        ' If text is allowed, just ignore it if possible.
-        If desktopEntryStuff.checkHeader(My.Application.CommandLineArgs(0).ToString) = "Desktop Entry" Or
+        ' with the proper Desktop Entry/KDE Desktop Entry header.
+        If My.Application.CommandLineArgs.Count = 1 Then
+            If desktopEntryStuff.checkHeader(My.Application.CommandLineArgs(0).ToString) = "Desktop Entry" Or
                 desktopEntryStuff.checkHeader(My.Application.CommandLineArgs(0).ToString) = "KDE Desktop Entry" Then
 
-            ' First, update titlebar and output the file path.
-            Console.WriteLine(My.Application.CommandLineArgs(0).ToString)
-            Console.Title = System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName
+                ' First, update titlebar and output the file path.
+                Console.WriteLine(My.Application.CommandLineArgs(0).ToString)
+                Console.Title = System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName
 
-            ' Second, update the console after replacing Lf with CrLf.
-            Console.WriteLine(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString).Replace(vbLf, vbCrLf))
+                ' Second, update the console after replacing Lf with CrLf.
+                Console.WriteLine(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString).Replace(vbLf, vbCrLf))
 
-            ' Now, pass along the file to the interpretation code in libdotdesktop.
-            ' Catch NullReferenceExceptions, just in case there are issues in the file.
-            Try
-                ' Exec key.
+                ' Now, pass along the file to the interpretation code in libdotdesktop.
+                ' Catch NullReferenceExceptions, just in case there are issues in the file.
+                Try
+                    ' Exec key.
 
 #Region "Clean up Exec key if needed, and allow for choosing files and URLs."
-                Dim cleanedExecKey As String = desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Exec")
-                ' %d is deprecated.
-                cleanedExecKey = cleanedExecKey.Replace(" %d", "")
-                ' %D is deprecated.
-                cleanedExecKey = cleanedExecKey.Replace(" %D", "")
-                ' %n is deprecated.
-                cleanedExecKey = cleanedExecKey.Replace(" %n", "")
-                ' %N is deprecated.
-                cleanedExecKey = cleanedExecKey.Replace(" %N", "")
-                ' %v is deprecated.
-                cleanedExecKey = cleanedExecKey.Replace(" %v", "")
-                ' %m is deprecated.
-                cleanedExecKey = cleanedExecKey.Replace(" %m", "")
+                    Dim cleanedExecKey As String = desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Exec")
+                    ' %d is deprecated.
+                    cleanedExecKey = cleanedExecKey.Replace(" %d", "")
+                    ' %D is deprecated.
+                    cleanedExecKey = cleanedExecKey.Replace(" %D", "")
+                    ' %n is deprecated.
+                    cleanedExecKey = cleanedExecKey.Replace(" %n", "")
+                    ' %N is deprecated.
+                    cleanedExecKey = cleanedExecKey.Replace(" %N", "")
+                    ' %v is deprecated.
+                    cleanedExecKey = cleanedExecKey.Replace(" %v", "")
+                    ' %m is deprecated.
+                    cleanedExecKey = cleanedExecKey.Replace(" %m", "")
 
-                ' Determine if the application allows for entering a URL,
-                ' and provide a space to type it in.
-                Dim urlList As String = Nothing
-                If cleanedExecKey.Contains(" %u") Then
-                    ' If there's a %u in the file, open a window to ask for a URL.
-                    urlList = InputBox("Please type or paste a URL:", "Single URL input")
-                    cleanedExecKey = cleanedExecKey.Replace(" %u", "")
+                    ' Determine if the application allows for entering a URL,
+                    ' and provide a space to type it in.
+                    Dim urlList As String = Nothing
+                    If cleanedExecKey.Contains(" %u") Then
+                        ' If there's a %u in the file, open a window to ask for a URL.
+                        urlList = InputBox("Please type or paste a URL:", "Single URL input")
+                        cleanedExecKey = cleanedExecKey.Replace(" %u", "")
 
-                ElseIf cleanedExecKey.Contains(" %U") Then
-                    ' If there's a %U in the file, open a window to allow for entering URLs.
-                    urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
-                    cleanedExecKey = cleanedExecKey.Replace(" %U", "")
-                End If
+                    ElseIf cleanedExecKey.Contains(" %U") Then
+                        ' If there's a %U in the file, open a window to allow for entering URLs.
+                        urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
+                        cleanedExecKey = cleanedExecKey.Replace(" %U", "")
+                    End If
 #End Region
 
-                ' Now, see if singleUrl has anything in it, and if it does,
-                ' send that URL as an argument to the application.
-                Dim execProgram As New ProcessStartInfo
-                execProgram.FileName = cleanedExecKey
-                execProgram.Arguments = urlList
-                Console.WriteLine("Launching " & cleanedExecKey & "...")
-                Process.Start(execProgram)
+                    ' Now, see if singleUrl has anything in it, and if it does,
+                    ' send that URL as an argument to the application.
+                    Dim execProgram As New ProcessStartInfo
+                    execProgram.FileName = cleanedExecKey
+                    execProgram.Arguments = urlList
+                    Console.WriteLine("Launching " & cleanedExecKey & "...")
+                    Process.Start(execProgram)
 
 
-            Catch ex As System.ComponentModel.Win32Exception
-                ' Show a messagebox for explanation.
-                MessageBox.Show("Either there are characters where they shouldn't be, or we couldn't find the program specified in the Exec key. You can check the console output if you want to see what it could be." & vbCrLf &
+                Catch ex As System.ComponentModel.Win32Exception
+                    ' Show a messagebox for explanation.
+                    MessageBox.Show("Either there are characters where they shouldn't be, or we couldn't find the program specified in the Exec key. You can check the console output if you want to see what it could be." & vbCrLf &
                                 vbCrLf &
                                 "Exec key value: " & desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Exec"), System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName)
 
-            End Try
+                End Try
+
+            Else
+                ' If it's not a valid Freedesktop.org .desktop file, tell the user.
+                MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec.",
+                                "Launch .desktop file")
+            End If
+
+
+            ' Add in a pause where the user can hit "Enter" to continue.
+            Console.ReadLine()
 
         Else
-            ' If it's not a valid Freedesktop.org .desktop file, tell the user.
-            MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec.",
-                                "Launch .desktop file")
+            ' If there are no command-line args, then we'll have to show a message instead.
+            ' This'll eventually be replaced with a proper window for .desktop launching and
+            ' configuration stuff.
+            ' TODO: Move the .desktop launching part to its own sub so that it can be run at any time
+            ' after starting the program.
+            MessageBox.Show("Howdy. This message is being shown to let you know that no .desktop file has been passed to LaunchDotDesktop." &
+                            " Please drag-and-drop the file onto the icon, double-click the file after setting LaunchDotDesktop as its default handler," &
+                            " or pass it as a command-line argument in CMD or PowerShell. Eventually a real window will be added to allow for browsing" &
+                            " and configuration instead of this message box.", "No file passed - LaunchDotDesktop")
         End If
-
-
-        ' Add in a pause where the user can hit "Enter" to continue.
-        Console.ReadLine()
     End Sub
 
 End Module
