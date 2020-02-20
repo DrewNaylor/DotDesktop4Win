@@ -32,7 +32,8 @@ Public Class aaformMainWindow
             ' and that it starts with "[Desktop Entry]" if no text before the
             ' section is allowed.
             ' If text is allowed, just ignore it.
-            If desktopEntryStuff.checkForValidHeader(openfiledialogDotDesktopFile.FileName) = True Then
+            If desktopEntryStuff.checkHeader(openfiledialogDotDesktopFile.FileName) = "Desktop Entry" Or
+                desktopEntryStuff.checkHeader(openfiledialogDotDesktopFile.FileName) = "KDE Desktop Entry" Then
 
                 ' First, update titlebar and file path textbox.
                 textboxDotDesktopFilePath.Text = openfiledialogDotDesktopFile.FileName
@@ -89,9 +90,7 @@ Public Class aaformMainWindow
 
             Else
                 ' If it's not a valid Freedesktop.org .desktop file, tell the user.
-                MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec." &
-                                " Please note that for now, this implementation doesn't ignore comments or blank lines at the beginning properly. Work needs to be done for that." &
-                                " Set My.Settings.allowTextBeforeDesktopEntrySection to True to allow text before the Desktop Entry section.",
+                MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec.",
                                 "Browse for .desktop file")
             End If
         End If
