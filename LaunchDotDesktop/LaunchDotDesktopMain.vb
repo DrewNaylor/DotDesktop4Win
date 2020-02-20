@@ -91,23 +91,37 @@ Module LaunchDotDesktop
 
                         ' Split Exec key's program from the arguments, if necessary.
                         ' Check to see if it starts with double-quotes.
+                        ' Get rid of whitespace on the left side.
                         cleanedExecKey = LTrim(cleanedExecKey)
-                        MessageBox.Show(cleanedExecKey)
 
+                        ' Check for Chr(34), which is the double-quote character.
                         If cleanedExecKey.StartsWith(Chr(34)) Then
+                            ' Copy the original cleaned exec key for later use in the arg variable.
                             Dim originalCleanedExecKey As String = cleanedExecKey
+                            ' Create a temp key to be used when splitting out the EXE filename.
                             Dim tempExecKey As String() = cleanedExecKey.Split(Chr(34))
+                            ' Trim the exec key out at the second double-quote.
                             cleanedExecKey = tempExecKey(1).Trim
+                            ' Assign the arg variable to the copy of the exec key and replace
+                            ' the double-quotes before and after and the new exec key with
+                            ' an empty string.
                             urlList = originalCleanedExecKey.Replace(Chr(34) & cleanedExecKey & Chr(34), "")
-                            MessageBox.Show(cleanedExecKey)
-                            MessageBox.Show(urlList)
+
                         Else
+                            ' If there's no double-quotes, assume it's something like
+                            ' firefox.exe or another string without spaces.
+                            ' We'll need to split this one at the first space character.
+
+                            ' Copy the original cleaned exec key for later use in the arg variable.
                             Dim originalCleanedExecKey As String = cleanedExecKey
+                            ' Create a temp key to be used when splitting out the EXE filename.
                             Dim tempExecKey As String() = cleanedExecKey.Split(" "c)
+                            ' Trim the exec key out at the first space.
                             cleanedExecKey = tempExecKey(0).Trim
+                            ' Assign the arg variable to the copy of the exec key and replace
+                            ' the space after and the new exec key with
+                            ' an empty string.
                             urlList = originalCleanedExecKey.Replace(cleanedExecKey & " ", "")
-                            MessageBox.Show(cleanedExecKey)
-                            MessageBox.Show(urlList)
                         End If
 #End Region
                         ' Done figuring out the desktop entry type.
