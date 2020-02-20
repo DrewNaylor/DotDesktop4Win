@@ -31,8 +31,8 @@ Module LaunchDotDesktop
         ' and that it starts with "[Desktop Entry]" if no text before the
         ' section is allowed.
         ' If text is allowed, just ignore it if possible.
-        If System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString).StartsWith("[Desktop Entry]") Or
-                My.Settings.allowTextBeforeDesktopEntrySection = True And System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString).Contains("[Desktop Entry]") Then
+        If desktopEntryStuff.checkHeader(My.Application.CommandLineArgs(0).ToString) = "Desktop Entry" Or
+                desktopEntryStuff.checkHeader(My.Application.CommandLineArgs(0).ToString) = "KDE Desktop Entry" Then
 
             ' First, update titlebar and output the file path.
             Console.WriteLine(My.Application.CommandLineArgs(0).ToString)
@@ -95,9 +95,7 @@ Module LaunchDotDesktop
 
         Else
             ' If it's not a valid Freedesktop.org .desktop file, tell the user.
-            MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec." &
-                                " Please note that for now, this implementation doesn't ignore comments or blank lines at the beginning properly. Work needs to be done for that." &
-                                " Set My.Settings.allowTextBeforeDesktopEntrySection to True to allow text before the Desktop Entry section.",
+            MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec.",
                                 "Launch .desktop file")
         End If
 
