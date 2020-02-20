@@ -105,7 +105,7 @@ Module LaunchDotDesktop
                             ' Assign the arg variable to the copy of the exec key and replace
                             ' the double-quotes before and after and the new exec key with
                             ' an empty string.
-                            urlList = originalCleanedExecKey.Replace(Chr(34) & cleanedExecKey & Chr(34), "")
+                            urlList = urlList & " " & originalCleanedExecKey.Replace(Chr(34) & cleanedExecKey & Chr(34), "")
 
                         Else
                             ' If there's no double-quotes, assume it's something like
@@ -121,11 +121,12 @@ Module LaunchDotDesktop
                             ' Assign the arg variable to the copy of the exec key and replace
                             ' the space after and the new exec key with
                             ' an empty string.
-                            urlList = originalCleanedExecKey.Replace(cleanedExecKey & " ", "")
+                            ' Be sure to keep the URL list as well.
+                            urlList = urlList & " " & originalCleanedExecKey.Replace(cleanedExecKey & " ", "")
                             ' Check to see if this ends up being the cleaned exec key.
-                            ' If so, empty it.
-                            If urlList = cleanedExecKey Then
-                                urlList = ""
+                            ' If so, replace the cleaned exec key with an empty string.
+                            If urlList.EndsWith(cleanedExecKey) Then
+                                urlList = urlList.TrimEnd(cleanedExecKey.ToCharArray)
                             End If
                         End If
 #End Region
@@ -137,7 +138,7 @@ Module LaunchDotDesktop
                     Dim execProgram As New ProcessStartInfo
                     execProgram.FileName = cleanedExecKey
                     execProgram.Arguments = urlList
-                    Console.WriteLine("Launching " & cleanedExecKey & "...")
+                    Console.WriteLine("Launching " & cleanedExecKey & " " & urlList & "...")
                     Process.Start(execProgram)
 
                 Catch ex As System.ComponentModel.Win32Exception
