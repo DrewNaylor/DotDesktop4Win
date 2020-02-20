@@ -122,6 +122,11 @@ Module LaunchDotDesktop
                             ' the space after and the new exec key with
                             ' an empty string.
                             urlList = originalCleanedExecKey.Replace(cleanedExecKey & " ", "")
+                            ' Check to see if this ends up being the cleaned exec key.
+                            ' If so, empty it.
+                            If urlList = cleanedExecKey Then
+                                urlList = ""
+                            End If
                         End If
 #End Region
                         ' Done figuring out the desktop entry type.
