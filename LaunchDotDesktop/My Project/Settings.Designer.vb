@@ -53,18 +53,6 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property allowTextBeforeDesktopEntrySection() As Boolean
-            Get
-                Return CType(Me("allowTextBeforeDesktopEntrySection"),Boolean)
-            End Get
-            Set
-                Me("allowTextBeforeDesktopEntrySection") = value
-            End Set
-        End Property
     End Class
 End Namespace
 
