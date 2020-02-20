@@ -50,28 +50,36 @@ Public Class aaformMainWindow
                 Try
 
                     ' Type key.
-                    textboxInterpreterOutput.Text = "Type: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Type")
+                    textboxInterpreterOutput.Text = "Type: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Type")
 
                     ' Version key.
-                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Version: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Version")
+                    If desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Version") IsNot Nothing Then
+                        textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Version: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Version")
+                    End If
 
                     ' Name key.
-                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Name: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Name",
+                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Name: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Name",
                                                                             openfiledialogDotDesktopFile.SafeFileName.ToString)
 
                     ' Comment key.
-                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Comment: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Comment")
+                    If desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Comment") IsNot Nothing Then
+                        textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Comment: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Comment")
+                    End If
 
                     ' Exec key.
-                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Exec: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Exec")
+                    If desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Exec") IsNot Nothing Then
+                        textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Exec: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Exec")
+                    End If
 
                     ' Path key.
-                    If Not desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Path") = Nothing Then
-                        textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Path: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "Path")
+                    If desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Path") IsNot Nothing Then
+                        textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Path: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Path")
                     End If
 
                     ' URL key.
-                    textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Url: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName), "URL")
+                    If desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "URL") IsNot Nothing Then
+                        textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Url: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "URL")
+                    End If
 
                 Catch ex As NullReferenceException
                     ' Show a messagebox for explanation.

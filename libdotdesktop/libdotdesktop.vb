@@ -30,7 +30,7 @@ Public Class desktopEntryStuff
         ' Get the input file and put it in an INI file object for later use.
         Dim dotDesktopFile As New IniFile(
             New IniOptions() With {.CommentStarter = IniCommentStarter.Hash})
-        dotDesktopFile.Load(New StringReader(inputFile))
+        dotDesktopFile.Load(New StringReader(System.IO.File.ReadAllText(inputFile)))
 
         ' Define Desktop Entry section.
         Dim desktopEntrySection As IniSection = dotDesktopFile.Sections("Desktop Entry")
@@ -39,6 +39,7 @@ Public Class desktopEntryStuff
             Return "Couldn't find a Desktop Entry section or there's invalid formatting. Please check the input file."
             Exit Function
         End If
+
 #Region "Getting and returning key values."
 
         ' Look in the inputFile and return the value for the keyToGet.
