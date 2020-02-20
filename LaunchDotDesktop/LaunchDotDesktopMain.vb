@@ -128,6 +128,8 @@ Module LaunchDotDesktop
                             If urlList.EndsWith(cleanedExecKey) Then
                                 urlList = urlList.TrimEnd(cleanedExecKey.ToCharArray)
                             End If
+                            ' Now trim whitespace.
+                            urlList = urlList.TrimEnd(" "c)
                         End If
 #End Region
                         ' Done figuring out the desktop entry type.
