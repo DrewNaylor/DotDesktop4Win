@@ -32,8 +32,7 @@ Public Class aaformMainWindow
             ' and that it starts with "[Desktop Entry]" if no text before the
             ' section is allowed.
             ' If text is allowed, just ignore it.
-            If System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName).StartsWith("[Desktop Entry]") Or
-                My.Settings.allowTextBeforeDesktopEntrySection = True And System.IO.File.ReadAllText(openfiledialogDotDesktopFile.FileName).Contains("[Desktop Entry]") Then
+            If desktopEntryStuff.checkForValidHeader(openfiledialogDotDesktopFile.FileName) = True Then
 
                 ' First, update titlebar and file path textbox.
                 textboxDotDesktopFilePath.Text = openfiledialogDotDesktopFile.FileName

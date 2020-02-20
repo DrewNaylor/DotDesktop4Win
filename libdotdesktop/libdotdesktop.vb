@@ -25,6 +25,29 @@ Imports System.IO
 Imports MadMilkman.Ini
 Public Class desktopEntryStuff
 
+    Public Shared Function checkForValidHeader(inputFile As String) As Boolean
+        ' This is used to check to see if the file we're trying to open has a valid Desktop Entry
+        ' or KDE Desktop Entry header.
+        ' Returns True if a valid header is found, and False if there's no valid header.
+
+        ' Get the input file and put it in an INI file object for later use.
+        Dim dotDesktopFile As New IniFile(
+            New IniOptions() With {.CommentStarter = IniCommentStarter.Hash})
+        dotDesktopFile.Load(New StringReader(System.IO.File.ReadAllText(inputFile)))
+
+        ' Define Desktop Entry section.
+        Dim desktopEntrySection As IniSection = dotDesktopFile.Sections("Desktop Entry")
+        Dim kdeDesktopEntrySection As IniSection = dotDesktopFile.Sections("KDE Desktop Entry")
+        ' First we check that the header is there.
+        If desktopEntrySection Is Nothing AndAlso kdeDesktopEntrySection Is Nothing Then
+            ' There's neither a desktop entry section nor a KDE desktop entry section.
+            Return False
+        Else
+            ' One of them exists, so it should work.
+            Return True
+        End If
+    End Function
+
     Public Shared Function getInfo(inputFile As String, keyToGet As String, Optional fileName As String = "") As String
 
         ' Get the input file and put it in an INI file object for later use.
