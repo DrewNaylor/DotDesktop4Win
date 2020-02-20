@@ -64,8 +64,15 @@ Module LaunchDotDesktop
                 ' If there's a %u in the file, open a window to ask for a URL.
                 Dim singleUrl As String = Nothing
                 If cleanedExecKey.Contains(" %u") Then
-                    singleUrl = InputBox("Please type or paste a URL:", "URL input", "")
+                    singleUrl = InputBox("Please type or paste a URL:", "Single URL input")
                     cleanedExecKey = cleanedExecKey.Replace(" %u", "")
+                End If
+
+                ' If there's a %U in the file, open a window to allow for entering URLs.
+                Dim multipleUrls As String = Nothing
+                If cleanedExecKey.Contains(" %U") Then
+                    multipleUrls = InputBox("Please type or paste a list of URLs separated by a comma:", "Multiple URL input")
+                    cleanedExecKey = cleanedExecKey.Replace(" %U", "")
                 End If
 #End Region
 
