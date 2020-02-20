@@ -74,8 +74,7 @@ Module LaunchDotDesktop
                 Dim execProgram As New ProcessStartInfo
                 execProgram.FileName = cleanedExecKey
                 execProgram.Arguments = singleUrl
-                Console.WriteLine("Launching " & cleanedExecKey &
-                                "...")
+                Console.WriteLine("Launching " & cleanedExecKey & "...")
                 Process.Start(execProgram)
 
 
