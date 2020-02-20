@@ -61,17 +61,17 @@ Module LaunchDotDesktop
                 ' %m is deprecated.
                 cleanedExecKey = cleanedExecKey.Replace(" %m", "")
 
-                ' If there's a %u in the file, open a window to ask for a URL.
-                Dim singleUrl As String = Nothing
+                ' Determine if the application allows for entering a URL,
+                ' and provide a space to type it in.
+                Dim urlList As String = Nothing
                 If cleanedExecKey.Contains(" %u") Then
-                    singleUrl = InputBox("Please type or paste a URL:", "Single URL input")
+                    ' If there's a %u in the file, open a window to ask for a URL.
+                    urlList = InputBox("Please type or paste a URL:", "Single URL input")
                     cleanedExecKey = cleanedExecKey.Replace(" %u", "")
-                End If
 
-                ' If there's a %U in the file, open a window to allow for entering URLs.
-                Dim multipleUrls As String = Nothing
-                If cleanedExecKey.Contains(" %U") Then
-                    multipleUrls = InputBox("Please type or paste a list of URLs separated by a comma:", "Multiple URL input")
+                ElseIf cleanedExecKey.Contains(" %U") Then
+                    ' If there's a %U in the file, open a window to allow for entering URLs.
+                    urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
                     cleanedExecKey = cleanedExecKey.Replace(" %U", "")
                 End If
 #End Region
@@ -80,7 +80,7 @@ Module LaunchDotDesktop
                 ' send that URL as an argument to the application.
                 Dim execProgram As New ProcessStartInfo
                 execProgram.FileName = cleanedExecKey
-                execProgram.Arguments = singleUrl
+                execProgram.Arguments = urlList
                 Console.WriteLine("Launching " & cleanedExecKey & "...")
                 Process.Start(execProgram)
 
