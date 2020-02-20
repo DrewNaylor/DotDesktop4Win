@@ -27,10 +27,6 @@ Module LaunchDotDesktop
 
     Public Sub Main()
 
-        ' When the user opens a file from the Browse... dialog, change the text
-        ' in the textbox and titlebar, then interpret the .desktop file.
-
-
         ' Before doing anything, make sure this is a valid .desktop file
         ' and that it starts with "[Desktop Entry]" if no text before the
         ' section is allowed.
@@ -42,18 +38,16 @@ Module LaunchDotDesktop
             Console.WriteLine(My.Application.CommandLineArgs(0).ToString)
             Console.Title = System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName
 
-            ' Second, update the raw output textbox after replacing Lf with CrLf.
+            ' Second, update the console after replacing Lf with CrLf.
             Console.WriteLine(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString).Replace(vbLf, vbCrLf))
 
             ' Now, pass along the file to the interpretation code in libdotdesktop.
-            ' Type key.
             ' Catch NullReferenceExceptions, just in case there are issues in the file.
             Try
                 ' Exec key.
 
-
 #Region "Clean up Exec key if needed, and allow for choosing files and URLs."
-                Dim cleanedExecKey As String = desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec")
+                Dim cleanedExecKey As String = desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Exec")
                 ' %d is deprecated.
                 cleanedExecKey = cleanedExecKey.Replace(" %d", "")
                 ' %D is deprecated.
@@ -89,7 +83,7 @@ Module LaunchDotDesktop
                 ' Show a messagebox for explanation.
                 MessageBox.Show("Either there are characters where they shouldn't be, or we couldn't find the program specified in the Exec key. You can check the console output if you want to see what it could be." & vbCrLf &
                                 vbCrLf &
-                                "Exec key value: " & desktopEntryStuff.getInfo(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString), "Exec"), System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName)
+                                "Exec key value: " & desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Exec"), System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName)
 
             End Try
 
