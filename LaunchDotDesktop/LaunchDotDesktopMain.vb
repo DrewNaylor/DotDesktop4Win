@@ -101,6 +101,13 @@ Module LaunchDotDesktop
                             urlList = originalCleanedExecKey.Replace(Chr(34) & cleanedExecKey & Chr(34), "")
                             MessageBox.Show(cleanedExecKey)
                             MessageBox.Show(urlList)
+                        Else
+                            Dim originalCleanedExecKey As String = cleanedExecKey
+                            Dim tempExecKey As String() = cleanedExecKey.Split(" "c)
+                            cleanedExecKey = tempExecKey(0).Trim
+                            urlList = originalCleanedExecKey.Replace(cleanedExecKey & " ", "")
+                            MessageBox.Show(cleanedExecKey)
+                            MessageBox.Show(urlList)
                         End If
 #End Region
                         ' Done figuring out the desktop entry type.
