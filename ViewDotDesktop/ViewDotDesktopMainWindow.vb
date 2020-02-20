@@ -100,4 +100,9 @@ Public Class aaformMainWindow
         ' Go to the latest version of the Freedesktop.org Desktop Entry spec online.
         Process.Start("https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html")
     End Sub
+
+    Private Sub menuitemExitItem_Click(sender As Object, e As EventArgs) Handles menuitemExitItem.Click
+        ' Exit application.
+        Application.Exit()
+    End Sub
 End Class

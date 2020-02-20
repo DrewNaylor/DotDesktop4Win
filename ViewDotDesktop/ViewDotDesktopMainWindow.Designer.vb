@@ -35,6 +35,11 @@ Partial Class aaformMainWindow
         Me.tabpageRawFile = New System.Windows.Forms.TabPage()
         Me.textboxRawFileOutput = New System.Windows.Forms.TextBox()
         Me.openfiledialogDotDesktopFile = New System.Windows.Forms.OpenFileDialog()
+        Me.menuitemFileMenu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.menuitemExitItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.menuitemHelpMenu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.menuitemAboutItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.menubarMainWindow.SuspendLayout()
         Me.tablelayoutpanelMainWindow.SuspendLayout()
         Me.tabcontrolFileOutput.SuspendLayout()
         Me.tabpageInterpreterOutput.SuspendLayout()
@@ -45,10 +50,11 @@ Partial Class aaformMainWindow
         'menubarMainWindow
         '
         Me.menubarMainWindow.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.menubarMainWindow.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuitemFileMenu, Me.menuitemHelpMenu})
         Me.menubarMainWindow.Location = New System.Drawing.Point(0, 0)
         Me.menubarMainWindow.Name = "menubarMainWindow"
         Me.menubarMainWindow.Padding = New System.Windows.Forms.Padding(8, 2, 0, 2)
-        Me.menubarMainWindow.Size = New System.Drawing.Size(478, 24)
+        Me.menubarMainWindow.Size = New System.Drawing.Size(478, 28)
         Me.menubarMainWindow.TabIndex = 0
         Me.menubarMainWindow.Text = "MenuStrip1"
         '
@@ -61,13 +67,13 @@ Partial Class aaformMainWindow
         Me.tablelayoutpanelMainWindow.Controls.Add(Me.buttonBrowse, 1, 0)
         Me.tablelayoutpanelMainWindow.Controls.Add(Me.tabcontrolFileOutput, 0, 1)
         Me.tablelayoutpanelMainWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tablelayoutpanelMainWindow.Location = New System.Drawing.Point(0, 24)
+        Me.tablelayoutpanelMainWindow.Location = New System.Drawing.Point(0, 28)
         Me.tablelayoutpanelMainWindow.Margin = New System.Windows.Forms.Padding(4)
         Me.tablelayoutpanelMainWindow.Name = "tablelayoutpanelMainWindow"
         Me.tablelayoutpanelMainWindow.RowCount = 2
         Me.tablelayoutpanelMainWindow.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36.0!))
         Me.tablelayoutpanelMainWindow.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tablelayoutpanelMainWindow.Size = New System.Drawing.Size(478, 311)
+        Me.tablelayoutpanelMainWindow.Size = New System.Drawing.Size(478, 307)
         Me.tablelayoutpanelMainWindow.TabIndex = 1
         '
         'textboxDotDesktopFilePath
@@ -101,7 +107,7 @@ Partial Class aaformMainWindow
         Me.tabcontrolFileOutput.Margin = New System.Windows.Forms.Padding(4)
         Me.tabcontrolFileOutput.Name = "tabcontrolFileOutput"
         Me.tabcontrolFileOutput.SelectedIndex = 0
-        Me.tabcontrolFileOutput.Size = New System.Drawing.Size(470, 267)
+        Me.tabcontrolFileOutput.Size = New System.Drawing.Size(470, 263)
         Me.tabcontrolFileOutput.TabIndex = 2
         '
         'tabpageInterpreterOutput
@@ -110,7 +116,7 @@ Partial Class aaformMainWindow
         Me.tabpageInterpreterOutput.Location = New System.Drawing.Point(4, 25)
         Me.tabpageInterpreterOutput.Name = "tabpageInterpreterOutput"
         Me.tabpageInterpreterOutput.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabpageInterpreterOutput.Size = New System.Drawing.Size(462, 238)
+        Me.tabpageInterpreterOutput.Size = New System.Drawing.Size(462, 234)
         Me.tabpageInterpreterOutput.TabIndex = 2
         Me.tabpageInterpreterOutput.Text = "File output: Interpreter"
         Me.tabpageInterpreterOutput.UseVisualStyleBackColor = True
@@ -129,13 +135,13 @@ Partial Class aaformMainWindow
         Me.tablelayoutpanelInterpreter.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tablelayoutpanelInterpreter.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tablelayoutpanelInterpreter.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tablelayoutpanelInterpreter.Size = New System.Drawing.Size(456, 232)
+        Me.tablelayoutpanelInterpreter.Size = New System.Drawing.Size(456, 228)
         Me.tablelayoutpanelInterpreter.TabIndex = 0
         '
         'linklabelFDOSpec
         '
         Me.linklabelFDOSpec.AutoSize = True
-        Me.linklabelFDOSpec.Location = New System.Drawing.Point(4, 212)
+        Me.linklabelFDOSpec.Location = New System.Drawing.Point(4, 208)
         Me.linklabelFDOSpec.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.linklabelFDOSpec.Name = "linklabelFDOSpec"
         Me.linklabelFDOSpec.Size = New System.Drawing.Size(294, 17)
@@ -163,7 +169,7 @@ Partial Class aaformMainWindow
         Me.textboxInterpreterOutput.Name = "textboxInterpreterOutput"
         Me.textboxInterpreterOutput.ReadOnly = True
         Me.textboxInterpreterOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.textboxInterpreterOutput.Size = New System.Drawing.Size(450, 186)
+        Me.textboxInterpreterOutput.Size = New System.Drawing.Size(450, 182)
         Me.textboxInterpreterOutput.TabIndex = 6
         '
         'tabpageRawFile
@@ -195,6 +201,32 @@ Partial Class aaformMainWindow
         Me.openfiledialogDotDesktopFile.Filter = "Desktop files|*.desktop"
         Me.openfiledialogDotDesktopFile.Title = "Browse for .desktop file"
         '
+        'menuitemFileMenu
+        '
+        Me.menuitemFileMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuitemExitItem})
+        Me.menuitemFileMenu.Name = "menuitemFileMenu"
+        Me.menuitemFileMenu.Size = New System.Drawing.Size(44, 24)
+        Me.menuitemFileMenu.Text = "&File"
+        '
+        'menuitemExitItem
+        '
+        Me.menuitemExitItem.Name = "menuitemExitItem"
+        Me.menuitemExitItem.Size = New System.Drawing.Size(181, 26)
+        Me.menuitemExitItem.Text = "E&xit"
+        '
+        'menuitemHelpMenu
+        '
+        Me.menuitemHelpMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuitemAboutItem})
+        Me.menuitemHelpMenu.Name = "menuitemHelpMenu"
+        Me.menuitemHelpMenu.Size = New System.Drawing.Size(53, 24)
+        Me.menuitemHelpMenu.Text = "&Help"
+        '
+        'menuitemAboutItem
+        '
+        Me.menuitemAboutItem.Name = "menuitemAboutItem"
+        Me.menuitemAboutItem.Size = New System.Drawing.Size(181, 26)
+        Me.menuitemAboutItem.Text = "&About"
+        '
         'aaformMainWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
@@ -206,6 +238,8 @@ Partial Class aaformMainWindow
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "aaformMainWindow"
         Me.Text = "ViewDotDesktop"
+        Me.menubarMainWindow.ResumeLayout(False)
+        Me.menubarMainWindow.PerformLayout()
         Me.tablelayoutpanelMainWindow.ResumeLayout(False)
         Me.tablelayoutpanelMainWindow.PerformLayout()
         Me.tabcontrolFileOutput.ResumeLayout(False)
@@ -232,4 +266,8 @@ Partial Class aaformMainWindow
     Friend WithEvents labelInterpreterHeader As Label
     Friend WithEvents textboxInterpreterOutput As TextBox
     Friend WithEvents linklabelFDOSpec As LinkLabel
+    Friend WithEvents menuitemFileMenu As ToolStripMenuItem
+    Friend WithEvents menuitemExitItem As ToolStripMenuItem
+    Friend WithEvents menuitemHelpMenu As ToolStripMenuItem
+    Friend WithEvents menuitemAboutItem As ToolStripMenuItem
 End Class
