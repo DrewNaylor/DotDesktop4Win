@@ -77,8 +77,16 @@ Public Class aaformMainWindow
                     End If
 
                     ' URL key.
-                    If desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "URL") IsNot Nothing Then
-                        textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Url: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "URL")
+                    ' If the desktop entry is of "Link" type, this is required, so check to see if it's there.
+                    If desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "URL") IsNot Nothing AndAlso
+                        desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Type") = "Link" Then
+                        ' If the URL key exists, get it.
+                        textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "URL: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "URL")
+
+                    ElseIf desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "URL") Is Nothing AndAlso
+                        desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Type") = "Link" Then
+                        ' Return a message that the URL key is missing.
+                        textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "URL: (Required URL key for Link desktop entries is missing)"
                     End If
 
                 Catch ex As NullReferenceException
