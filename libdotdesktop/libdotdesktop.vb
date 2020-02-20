@@ -125,7 +125,7 @@ Public Class desktopEntryStuff
 #Region "Get Version key."
         ElseIf keyToGet = "Version" Then
 
-            ' If we want to get the Path value, return that.
+            ' If we want to get the Version value, return that.
             ' First make sure it's in there.
             If desktopEntrySection.Keys("Version") IsNot Nothing Then
                 ' If it is in there, return it as expected.
@@ -139,11 +139,25 @@ Public Class desktopEntryStuff
 #Region "Get Comment key."
         ElseIf keyToGet = "Comment" Then
 
-            ' If we want to get the Path value, return that.
+            ' If we want to get the Comment value, return that.
             ' First make sure it's in there.
             If desktopEntrySection.Keys("Comment") IsNot Nothing Then
                 ' If it is in there, return it as expected.
                 Return desktopEntrySection.Keys("Comment").Value
+            Else
+                ' Otherwise, return Nothing if the key is unavailable.
+                Return Nothing
+            End If
+#End Region
+
+#Region "Get URL key."
+        ElseIf keyToGet = "URL" Then
+
+            ' If we want to get the URL value, return that.
+            ' First make sure it's in there.
+            If desktopEntrySection.Keys("URL") IsNot Nothing Then
+                ' If it is in there, return it as expected.
+                Return desktopEntrySection.Keys("URL").Value
             Else
                 ' Otherwise, return Nothing if the key is unavailable.
                 Return Nothing
