@@ -68,8 +68,6 @@ Public Class desktopEntryStuff
 #Region "Get Type key."
         If keyToGet = "Type" Then
 
-
-
             ' If we want to get the Type value, return that.
             ' First make sure it's in there.
             If desktopEntrySection.Keys("Type") IsNot Nothing Then
