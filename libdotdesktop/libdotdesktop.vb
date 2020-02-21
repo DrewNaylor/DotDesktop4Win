@@ -93,6 +93,20 @@ Public Class desktopEntryStuff
             End If
 #End Region
 
+#Region "Get GenericName key."
+        ElseIf keyToGet = "GenericName" Then
+
+            ' If we want to get the Name value, return that.
+            ' First make sure it's in there.
+            If desktopEntrySection.Keys("GenericName") IsNot Nothing Then
+                ' If it is in there, return it as expected.
+                Return desktopEntrySection.Keys("GenericName").Value
+            Else
+                ' Otherwise, return the filename as the name.
+                Return Nothing
+            End If
+#End Region
+
 #Region "Get Exec key."
         ElseIf keyToGet = "Exec" Then
 
@@ -146,6 +160,20 @@ Public Class desktopEntryStuff
                 Return desktopEntrySection.Keys("Comment").Value
             Else
                 ' Otherwise, return Nothing if the key is unavailable.
+                Return Nothing
+            End If
+#End Region
+
+#Region "Get Categories key."
+        ElseIf keyToGet = "Categories" Then
+
+            ' If we want to get the Name value, return that.
+            ' First make sure it's in there.
+            If desktopEntrySection.Keys("Categories") IsNot Nothing Then
+                ' If it is in there, return it as expected.
+                Return desktopEntrySection.Keys("Categories").Value
+            Else
+                ' Otherwise, return the filename as the name.
                 Return Nothing
             End If
 #End Region
