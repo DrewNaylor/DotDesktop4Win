@@ -111,10 +111,9 @@ Module LaunchDotDesktop
                             MessageBox.Show("cleaned exec key before trimming with quotes: " & cleanedExecKey)
                             cleanedExecKey = tempExecKey(1).Trim
                             MessageBox.Show("cleaned exec key after trimming at second quote: " & cleanedExecKey)
-                            ' Assign the arg variable to the copy of the exec key and replace
-                            ' the double-quotes before and after and the new exec key with
-                            ' an empty string.
-                            'urlList = urlList & " " & originalCleanedExecKey.Replace(Chr(34) & cleanedExecKey & Chr(34), "")
+                            ' Assign the arg variable to the copy of the exec key and trim
+                            ' the double-quotes before and after and the new exec key 
+                            ' from the beginning of the URL list/arg variable.
                             MessageBox.Show("urlList before trimming out cleaned exec key: " & urlList)
                             urlList = originalCleanedExecKey.TrimStart(CType(Chr(34) & cleanedExecKey.ToCharArray & Chr(34), Char()))
                             MessageBox.Show("urlList after trimming out cleaned exec key: " & urlList)
@@ -131,18 +130,8 @@ Module LaunchDotDesktop
                             MessageBox.Show("cleaned exec key before trimming without quotes: " & cleanedExecKey)
                             cleanedExecKey = tempExecKey(0).Trim
                             MessageBox.Show("cleaned exec key after trimming without quotes: " & cleanedExecKey)
-                            ' Assign the arg variable to the copy of the exec key and replace
-                            ' the space after and the new exec key with
-                            ' an empty string.
-                            ' Be sure to keep the URL list as well.
-                            'urlList = urlList & " " & originalCleanedExecKey.Replace(cleanedExecKey & " ", "")
-                            '' Check to see if this ends up being the cleaned exec key.
-                            '' If so, replace the cleaned exec key with an empty string.
-                            'If urlList.EndsWith(cleanedExecKey) Then
-                            '    urlList = urlList.TrimEnd(cleanedExecKey.ToCharArray)
-                            'End If
-                            '' Now trim whitespace.
-                            'urlList = urlList.TrimEnd(" "c)
+                            ' Assign the arg variable to the copy of the exec key and trim
+                            ' out the exec key and the space after it.
                             MessageBox.Show("urlList before trimming out cleaned exec key: " & urlList)
                             urlList = originalCleanedExecKey.TrimStart(cleanedExecKey.ToCharArray)
                             MessageBox.Show("urlList after trimming out cleaned exec key: " & urlList)
