@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Launch .desktop files as parsed by the DotDesktop4Win partial implementation of Freedesktop.org's Desktop Entry spec.")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("LaunchDotDesktop")>
-<Assembly: AssemblyCopyright("Copyright © 2019 Drew Naylor. Licensed under Apache License 2.0.")>
+<Assembly: AssemblyCopyright("Copyright © 2019-2020 Drew Naylor. Licensed under Apache License 2.0.")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>

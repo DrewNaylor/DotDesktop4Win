@@ -1,6 +1,6 @@
 ﻿' LaunchDotDesktop - Launch .desktop files as parsed by the DotDesktop4Win
 ' partial implementation of Freedesktop.org's Desktop Entry spec.
-' Copyright 2019 Drew Naylor
+' Copyright 2019-2020 Drew Naylor
 ' (Note that the copyright years include the years left out by the hyphen.)
 '
 ' This file is a part of the DotDesktop4Win project.

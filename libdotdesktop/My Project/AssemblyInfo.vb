@@ -13,7 +13,7 @@ Imports System.Runtime.InteropServices
  partial implementation of Freedesktop.org's Desktop Entry spec.")>
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("libdotdesktop")>
-<Assembly: AssemblyCopyright("Copyright © 2019 Drew Naylor. Licensed under Apache License 2.0.")>
+<Assembly: AssemblyCopyright("Copyright © 2019-2020 Drew Naylor. Licensed under Apache License 2.0.")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
