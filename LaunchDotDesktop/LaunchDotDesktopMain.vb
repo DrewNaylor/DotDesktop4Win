@@ -144,12 +144,17 @@ Module LaunchDotDesktop
                     ' send that URL as an argument to the application.
                     Dim execProgram As New ProcessStartInfo
                     execProgram.FileName = cleanedExecKey
-                    execProgram.Arguments = urlList
-                    'Console.WriteLine("Launching " & cleanedExecKey & " " & urlList & "...")
-                    Console.WriteLine("Launching " & execProgram.FileName & execProgram.Arguments & "...")
-                    Process.Start(execProgram)
+                    execProgram.Arguments = urlList.Trim
+                    ' Don't add space if there are no args.
+                    If execProgram.Arguments.Length > 0 Then
+                        Console.WriteLine("Launching " & execProgram.FileName & " " & execProgram.Arguments & "...")
+                    Else
+                    Console.WriteLine("Launching " & execProgram.FileName & "...")
+                    End If
 
-                Catch ex As System.ComponentModel.Win32Exception
+            Process.Start(execProgram)
+
+            Catch ex As System.ComponentModel.Win32Exception
                     ' Show a messagebox for explanation.
                     ' If it's a Link, show the URL key.
                     If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Type") = "Link" Then
