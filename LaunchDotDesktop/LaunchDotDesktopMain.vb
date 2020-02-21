@@ -58,6 +58,11 @@ Module LaunchDotDesktop
                        desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "URL") Is Nothing Then
                         ' If the URL key doesn't exist, allow for URL entry.
                         cleanedExecKey = InputBox("Please type or paste a URL:", "URL key missing")
+
+                    ElseIf desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Type") = "Directory" Then
+                        ' Directories aren't supported in this program.
+                        MessageBox.Show("Directory entries aren't supported by LaunchDotDesktop.", "Unsupported entry type")
+                        Exit Try
                     Else
                         ' Otherwise, assume it's an application.
                         cleanedExecKey = desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Exec")
