@@ -164,6 +164,20 @@ Public Class desktopEntryStuff
             End If
 #End Region
 
+#Region "Get Terminal key."
+        ElseIf keyToGet = "Terminal" Then
+
+            ' If we want to get the URL value, return that.
+            ' First make sure it's in there.
+            If desktopEntrySection.Keys("Terminal") IsNot Nothing Then
+                ' If it is in there, return it as expected.
+                Return desktopEntrySection.Keys("Terminal").Value
+            Else
+                ' Otherwise, return Nothing if the key is unavailable.
+                Return Nothing
+            End If
+#End Region
+
 #Region "What to do when the key isn't an option here."
         Else
 
