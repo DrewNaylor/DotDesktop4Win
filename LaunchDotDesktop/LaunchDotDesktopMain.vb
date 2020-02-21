@@ -81,16 +81,14 @@ Module LaunchDotDesktop
                         If cleanedExecKey.Contains(" %u") Then
                             ' If there's a %u in the file, open a window to ask for a URL.
                             urlList = InputBox("Please type or paste a URL:", "Single URL input")
+                            ' Expand %u to what the user entered.
                             cleanedExecKey = cleanedExecKey.Replace(" %u", " " & urlList)
-                            MessageBox.Show("urlList after expanding %u: " & urlList)
-                            MessageBox.Show("cleaned exec key after expanding %u: " & cleanedExecKey)
 
                         ElseIf cleanedExecKey.Contains(" %U") Then
                             ' If there's a %U in the file, open a window to allow for entering URLs.
                             urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
+                            ' Expand %U to what the user entered.
                             cleanedExecKey = cleanedExecKey.Replace(" %U", " " & urlList)
-                            MessageBox.Show("urlList after expanding %U: " & urlList)
-                            MessageBox.Show("cleaned exec key after expanding %U: " & cleanedExecKey)
                         End If
 
                         ' Split Exec key's program from the arguments, if necessary.
@@ -102,21 +100,14 @@ Module LaunchDotDesktop
                         If cleanedExecKey.StartsWith(Chr(34)) Then
                             ' Copy the original cleaned exec key for later use in the arg variable.
                             Dim originalCleanedExecKey As String = cleanedExecKey
-                            MessageBox.Show("urlList before trimming cleaned exec key: " & urlList)
-                            MessageBox.Show("original cleaned exec key: " & cleanedExecKey)
-                            MessageBox.Show("actual original cleaned exec key: " & originalCleanedExecKey)
                             ' Create a temp key to be used when splitting out the EXE filename.
                             Dim tempExecKey As String() = cleanedExecKey.Split(Chr(34))
                             ' Trim the exec key out at the second double-quote.
-                            MessageBox.Show("cleaned exec key before trimming with quotes: " & cleanedExecKey)
                             cleanedExecKey = tempExecKey(1).Trim
-                            MessageBox.Show("cleaned exec key after trimming at second quote: " & cleanedExecKey)
                             ' Assign the arg variable to the copy of the exec key and trim
                             ' the double-quotes before and after and the new exec key 
                             ' from the beginning of the URL list/arg variable.
-                            MessageBox.Show("urlList before trimming out cleaned exec key: " & urlList)
                             urlList = originalCleanedExecKey.TrimStart(CType(Chr(34) & cleanedExecKey.ToCharArray & Chr(34), Char()))
-                            MessageBox.Show("urlList after trimming out cleaned exec key: " & urlList)
                         Else
                             ' If there's no double-quotes, assume it's something like
                             ' firefox.exe or another string without spaces.
@@ -127,14 +118,10 @@ Module LaunchDotDesktop
                             ' Create a temp key to be used when splitting out the EXE filename.
                             Dim tempExecKey As String() = cleanedExecKey.Split(" "c)
                             ' Trim the exec key out at the first space.
-                            MessageBox.Show("cleaned exec key before trimming without quotes: " & cleanedExecKey)
                             cleanedExecKey = tempExecKey(0).Trim
-                            MessageBox.Show("cleaned exec key after trimming without quotes: " & cleanedExecKey)
                             ' Assign the arg variable to the copy of the exec key and trim
-                            ' out the exec key and the space after it.
-                            MessageBox.Show("urlList before trimming out cleaned exec key: " & urlList)
+                            ' out the exec key.
                             urlList = originalCleanedExecKey.TrimStart(cleanedExecKey.ToCharArray)
-                            MessageBox.Show("urlList after trimming out cleaned exec key: " & urlList)
                         End If
 #End Region
                         ' Done figuring out the desktop entry type.
@@ -149,7 +136,7 @@ Module LaunchDotDesktop
                     If execProgram.Arguments.Length > 0 Then
                         Console.WriteLine("Launching " & execProgram.FileName & " " & execProgram.Arguments & "...")
                     Else
-                    Console.WriteLine("Launching " & execProgram.FileName & "...")
+                        Console.WriteLine("Launching " & execProgram.FileName & "...")
                     End If
 
             Process.Start(execProgram)
