@@ -46,7 +46,7 @@ Module LaunchDotDesktop
                     ' Exec key.
                     Dim cleanedExecKey As String
                     ' URL list for apps that allow for URLs to be passed to them.
-                    Dim urlList As String = Nothing
+                    Dim urlList As String = ""
 
                     ' Check to see if the desktop entry is a link or an application.
                     If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Type") = "Link" AndAlso
