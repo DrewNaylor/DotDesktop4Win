@@ -104,16 +104,20 @@ Module LaunchDotDesktop
                             Dim originalCleanedExecKey As String = cleanedExecKey
                             MessageBox.Show("urlList before trimming cleaned exec key: " & urlList)
                             MessageBox.Show("original cleaned exec key: " & cleanedExecKey)
+                            MessageBox.Show("actual original cleaned exec key: " & originalCleanedExecKey)
                             ' Create a temp key to be used when splitting out the EXE filename.
                             Dim tempExecKey As String() = cleanedExecKey.Split(Chr(34))
                             ' Trim the exec key out at the second double-quote.
+                            MessageBox.Show("cleaned exec key before trimming with quotes: " & cleanedExecKey)
                             cleanedExecKey = tempExecKey(1).Trim
-                            MessageBox.Show("after trimming at second quote: " & cleanedExecKey)
+                            MessageBox.Show("cleaned exec key after trimming at second quote: " & cleanedExecKey)
                             ' Assign the arg variable to the copy of the exec key and replace
                             ' the double-quotes before and after and the new exec key with
                             ' an empty string.
                             'urlList = urlList & " " & originalCleanedExecKey.Replace(Chr(34) & cleanedExecKey & Chr(34), "")
-
+                            MessageBox.Show("urlList before trimming out cleaned exec key: " & urlList)
+                            urlList = originalCleanedExecKey.TrimStart(CType(Chr(34) & cleanedExecKey.ToCharArray & Chr(34), Char()))
+                            MessageBox.Show("urlList after trimming out cleaned exec key: " & urlList)
                         Else
                             ' If there's no double-quotes, assume it's something like
                             ' firefox.exe or another string without spaces.
