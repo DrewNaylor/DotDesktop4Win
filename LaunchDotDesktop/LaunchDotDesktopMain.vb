@@ -108,6 +108,31 @@ Module LaunchDotDesktop
                                 ' If the user cancels, just remove the %f.
                                 cleanedExecKey = cleanedExecKey.Replace(" %f", "")
                             End If
+
+                        ElseIf cleanedExecKey.Contains(" %F") Then
+                            ' If there's a %F, allow for choosing multiple files.
+                            Dim openFileDialog As New OpenFileDialog()
+                            openFileDialog.Filter = "All files (*.*)|*.*"
+                            openFileDialog.RestoreDirectory = True
+                            openFileDialog.Multiselect = True
+
+                            If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                                ' If the user chooses files, replace %F with the filename and paths.
+                                Dim allFilesArray As String() = openFileDialog.FileNames
+                                Dim fileNameList As String() = allFilesArray
+                                For Each fileName As String In fileNameList
+                                    fileName = fileName.TrimEnd(Chr(34))
+                                    fileName = fileName & ";"
+                                    Console.WriteLine(fileName)
+                                Next
+                                Dim filesList As String = String.Join(";", fileNameList)
+
+                                Console.WriteLine(allFilesArray)
+                                cleanedExecKey = cleanedExecKey.Replace(" %F", " " & Chr(34) & filesList & Chr(34))
+                            Else
+                                ' If the user cancels, just remove the %F.
+                                cleanedExecKey = cleanedExecKey.Replace(" %F", "")
+                            End If
                         End If
 
                         ' Split Exec key's program from the arguments, if necessary.
