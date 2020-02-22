@@ -126,6 +126,7 @@ Module LaunchDotDesktop
                                     Console.WriteLine(fileName)
                                 Next
                                 Dim filesList As String = String.Join(";", fileNameList)
+                                filesList = filesList.Replace(";", Chr(34) & " " & Chr(34))
 
                                 Console.WriteLine(allFilesArray)
                                 cleanedExecKey = cleanedExecKey.Replace(" %F", " " & Chr(34) & filesList & Chr(34))
