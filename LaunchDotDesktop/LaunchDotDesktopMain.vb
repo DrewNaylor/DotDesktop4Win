@@ -118,18 +118,16 @@ Module LaunchDotDesktop
 
                             If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
                                 ' If the user chooses files, replace %F with the filename and paths.
-                                Dim allFilesArray As String() = openFileDialog.FileNames
-                                Dim fileNameList As String() = allFilesArray
+                                Dim fileNameList As String() = openFileDialog.FileNames
                                 For Each fileName As String In fileNameList
                                     fileName = fileName.TrimEnd(Chr(34))
-                                    fileName = fileName & ";"
+                                    fileName = fileName & "?"
                                     Console.WriteLine(fileName)
                                 Next
-                                Dim filesList As String = String.Join(";", fileNameList)
-                                filesList = filesList.Replace(";", Chr(34) & " " & Chr(34))
-
-                                Console.WriteLine(allFilesArray)
+                                Dim filesList As String = String.Join("?", fileNameList)
+                                filesList = filesList.Replace("?", Chr(34) & " " & Chr(34))
                                 cleanedExecKey = cleanedExecKey.Replace(" %F", " " & Chr(34) & filesList & Chr(34))
+                                Console.WriteLine(cleanedExecKey)
                             Else
                                 ' If the user cancels, just remove the %F.
                                 cleanedExecKey = cleanedExecKey.Replace(" %F", "")
