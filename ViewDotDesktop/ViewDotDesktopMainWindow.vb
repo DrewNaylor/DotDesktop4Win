@@ -61,6 +61,11 @@ Public Class aaformMainWindow
                     textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Name: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Name",
                                                                             openfiledialogDotDesktopFile.SafeFileName.ToString)
 
+                    ' GenericName key.
+                    If desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "GenericName") IsNot Nothing Then
+                        textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "GenericName: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "GenericName")
+                    End If
+
                     ' Comment key.
                     If desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Comment") IsNot Nothing Then
                         textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Comment: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Comment")
@@ -74,6 +79,16 @@ Public Class aaformMainWindow
                     ' Path key.
                     If desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Path") IsNot Nothing Then
                         textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Path: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Path")
+                    End If
+
+                    ' Terminal key.
+                    If desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Terminal") IsNot Nothing Then
+                        textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Terminal: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Terminal")
+                    End If
+
+                    ' Categories key.
+                    If desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Categories") IsNot Nothing Then
+                        textboxInterpreterOutput.Text = textboxInterpreterOutput.Text & vbCrLf & "Categories: " & desktopEntryStuff.getInfo(openfiledialogDotDesktopFile.FileName, "Categories")
                     End If
 
                     ' URL key.
