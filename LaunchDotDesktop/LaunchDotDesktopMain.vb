@@ -118,16 +118,25 @@ Module LaunchDotDesktop
 
                             If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
                                 ' If the user chooses files, replace %F with the filename and paths.
+                                ' Get a file name list array as a string from the open file dialog.
                                 Dim fileNameList As String() = openFileDialog.FileNames
+                                ' Look in each filename, and replace the end with a question mark
+                                ' for later use when joining the string.
+                                ' It may be a good idea to allow this to be a configurable option
+                                ' in case the user runs into issues on other filesystems that allow
+                                ' the question mark to be in a filename.
                                 For Each fileName As String In fileNameList
                                     fileName = fileName.TrimEnd(Chr(34))
                                     fileName = fileName & "?"
-                                    Console.WriteLine(fileName)
                                 Next
+                                ' Make a new string that joins the file name list into one string.
                                 Dim filesList As String = String.Join("?", fileNameList)
+                                ' Replace the joiner character with double-quotes on each side of a space.
                                 filesList = filesList.Replace("?", Chr(34) & " " & Chr(34))
+                                ' Expand %F with the new file list, and add double-quotes on each side
+                                ' of the file list after putting in a space to separate it from the rest
+                                ' of the command.
                                 cleanedExecKey = cleanedExecKey.Replace(" %F", " " & Chr(34) & filesList & Chr(34))
-                                Console.WriteLine(cleanedExecKey)
                             Else
                                 ' If the user cancels, just remove the %F.
                                 cleanedExecKey = cleanedExecKey.Replace(" %F", "")
