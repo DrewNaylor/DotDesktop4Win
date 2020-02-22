@@ -94,6 +94,20 @@ Module LaunchDotDesktop
                             urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
                             ' Expand %U to what the user entered.
                             cleanedExecKey = cleanedExecKey.Replace(" %U", " " & urlList)
+
+                        ElseIf cleanedExecKey.Contains(" %f") Then
+                            ' If there's a %f, allow for choosing one file.
+                            Dim openFileDialog As New OpenFileDialog()
+                            openFileDialog.Filter = "All files (*.*)|*.*"
+                            openFileDialog.RestoreDirectory = True
+
+                            If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                                ' If the user chooses a file, replace %f with the filename and path.
+                                cleanedExecKey = cleanedExecKey.Replace(" %f", " " & Chr(34) & openFileDialog.FileName & Chr(34))
+                            Else
+                                ' If the user cancels, just remove the %f.
+                                cleanedExecKey = cleanedExecKey.Replace(" %f", "")
+                            End If
                         End If
 
                         ' Split Exec key's program from the arguments, if necessary.
@@ -144,9 +158,9 @@ Module LaunchDotDesktop
                         Console.WriteLine("Launching " & execProgram.FileName & "...")
                     End If
 
-            Process.Start(execProgram)
+                    Process.Start(execProgram)
 
-            Catch ex As System.ComponentModel.Win32Exception
+                Catch ex As System.ComponentModel.Win32Exception
                     ' Show a messagebox for explanation.
                     ' If it's a Link, show the URL key.
                     If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Type") = "Link" Then
