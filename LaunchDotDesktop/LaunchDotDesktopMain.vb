@@ -27,6 +27,10 @@ Module LaunchDotDesktop
 
     Public Sub Main()
 
+        ' Display program info, like name, version, and copyright.
+        Console.WriteLine(My.Application.Info.Title & " Version " & My.Application.Info.Version.ToString)
+        Console.WriteLine(My.Application.Info.Copyright)
+
         ' Before doing anything, make sure this is a valid .desktop file
         ' with the proper Desktop Entry/KDE Desktop Entry header.
         If My.Application.CommandLineArgs.Count = 1 Then
@@ -34,7 +38,8 @@ Module LaunchDotDesktop
                 desktopEntryStuff.checkHeader(My.Application.CommandLineArgs(0).ToString) = "KDE Desktop Entry" Then
 
                 ' First, update titlebar and output the file path.
-                Console.WriteLine(My.Application.CommandLineArgs(0).ToString)
+                Console.WriteLine()
+                Console.WriteLine("Input file: " & My.Application.CommandLineArgs(0).ToString)
                 Console.Title = System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName
 
                 ' Second, update the console after replacing Lf with CrLf.
