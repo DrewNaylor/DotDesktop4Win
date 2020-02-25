@@ -223,18 +223,20 @@ Module LaunchDotDesktop
             End If
 
 
-            ' Add in a pause where the user can hit "Enter" to continue.
-            Console.WriteLine()
-            Console.WriteLine("Please press Enter to continue...")
-            Console.ReadLine()
+            ' Add in a pause where the user can hit "Enter" to continue if enabled.
+            If My.Settings.PauseBeforeExitOnSuccessfulLaunch = True Then
+                Console.WriteLine()
+                Console.WriteLine("Please press Enter to continue...")
+                Console.ReadLine()
+            End If
 
         Else
-            ' If there are no command-line args, then we'll have to show a message instead.
-            ' This'll eventually be replaced with a proper window for .desktop launching and
-            ' configuration stuff.
-            ' TODO: Move the .desktop launching part to its own sub so that it can be run at any time
-            ' after starting the program.
-            MessageBox.Show("Howdy. This message is being shown to let you know that no .desktop file has been passed to LaunchDotDesktop." &
+                ' If there are no command-line args, then we'll have to show a message instead.
+                ' This'll eventually be replaced with a proper window for .desktop launching and
+                ' configuration stuff.
+                ' TODO: Move the .desktop launching part to its own sub so that it can be run at any time
+                ' after starting the program.
+                MessageBox.Show("Howdy. This message is being shown to let you know that no .desktop file has been passed to LaunchDotDesktop." &
                             " Please drag-and-drop the file onto the icon, double-click the file after setting LaunchDotDesktop as its default handler," &
                             " or pass it as a command-line argument in CMD or PowerShell. Eventually a real window will be added to allow for browsing" &
                             " and configuration instead of this message box.", "No file passed - LaunchDotDesktop")
