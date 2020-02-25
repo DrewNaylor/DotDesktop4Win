@@ -26,10 +26,10 @@ Partial Class filePathEditor
         Me.buttonOK = New System.Windows.Forms.Button()
         Me.buttonCancel = New System.Windows.Forms.Button()
         Me.labelEditFileList = New System.Windows.Forms.Label()
-        Me.textboxEditStyleManually = New System.Windows.Forms.TextBox()
         Me.radiobuttonWindowsStyle = New System.Windows.Forms.RadioButton()
         Me.radiobuttonLinuxStyle = New System.Windows.Forms.RadioButton()
         Me.radiobuttonEditStyleManually = New System.Windows.Forms.RadioButton()
+        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.tablelayoutpanelOkCancel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -41,7 +41,7 @@ Partial Class filePathEditor
         Me.tablelayoutpanelOkCancel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.tablelayoutpanelOkCancel.Controls.Add(Me.buttonOK, 0, 0)
         Me.tablelayoutpanelOkCancel.Controls.Add(Me.buttonCancel, 1, 0)
-        Me.tablelayoutpanelOkCancel.Location = New System.Drawing.Point(415, 151)
+        Me.tablelayoutpanelOkCancel.Location = New System.Drawing.Point(415, 364)
         Me.tablelayoutpanelOkCancel.Name = "tablelayoutpanelOkCancel"
         Me.tablelayoutpanelOkCancel.RowCount = 1
         Me.tablelayoutpanelOkCancel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -70,20 +70,13 @@ Partial Class filePathEditor
         'labelEditFileList
         '
         Me.labelEditFileList.AutoSize = True
-        Me.labelEditFileList.Location = New System.Drawing.Point(13, 13)
+        Me.labelEditFileList.Location = New System.Drawing.Point(115, 9)
         Me.labelEditFileList.Name = "labelEditFileList"
-        Me.labelEditFileList.Size = New System.Drawing.Size(556, 26)
+        Me.labelEditFileList.Size = New System.Drawing.Size(341, 39)
         Me.labelEditFileList.TabIndex = 1
         Me.labelEditFileList.Text = "Once you've made your changes to the file list (if any), please click OK." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If you" &
-    "'re editing the file list for WSL, please use single quotes instead of double qu" &
-    "otes if there are spaces in the path."
-        '
-        'textboxEditStyleManually
-        '
-        Me.textboxEditStyleManually.Location = New System.Drawing.Point(16, 125)
-        Me.textboxEditStyleManually.Name = "textboxEditStyleManually"
-        Me.textboxEditStyleManually.Size = New System.Drawing.Size(548, 20)
-        Me.textboxEditStyleManually.TabIndex = 2
+    "'re editing the file list for WSL, please use single quotes instead of" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "double q" &
+    "uotes if there are spaces in the path."
         '
         'radiobuttonWindowsStyle
         '
@@ -118,17 +111,25 @@ Partial Class filePathEditor
         Me.radiobuttonEditStyleManually.Text = "Edit manually"
         Me.radiobuttonEditStyleManually.UseVisualStyleBackColor = True
         '
+        'FlowLayoutPanel1
+        '
+        Me.FlowLayoutPanel1.AutoScroll = True
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(12, 114)
+        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(546, 244)
+        Me.FlowLayoutPanel1.TabIndex = 6
+        '
         'filePathEditor
         '
         Me.AcceptButton = Me.buttonOK
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.CancelButton = Me.buttonCancel
-        Me.ClientSize = New System.Drawing.Size(573, 192)
+        Me.ClientSize = New System.Drawing.Size(573, 405)
+        Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.radiobuttonEditStyleManually)
         Me.Controls.Add(Me.radiobuttonLinuxStyle)
         Me.Controls.Add(Me.radiobuttonWindowsStyle)
-        Me.Controls.Add(Me.textboxEditStyleManually)
         Me.Controls.Add(Me.labelEditFileList)
         Me.Controls.Add(Me.tablelayoutpanelOkCancel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -146,8 +147,8 @@ Partial Class filePathEditor
     Friend WithEvents buttonOK As System.Windows.Forms.Button
     Friend WithEvents buttonCancel As System.Windows.Forms.Button
     Friend WithEvents labelEditFileList As Windows.Forms.Label
-    Friend WithEvents textboxEditStyleManually As Windows.Forms.TextBox
     Friend WithEvents radiobuttonWindowsStyle As Windows.Forms.RadioButton
     Friend WithEvents radiobuttonLinuxStyle As Windows.Forms.RadioButton
     Friend WithEvents radiobuttonEditStyleManually As Windows.Forms.RadioButton
+    Friend WithEvents FlowLayoutPanel1 As Windows.Forms.FlowLayoutPanel
 End Class
