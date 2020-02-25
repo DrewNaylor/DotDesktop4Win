@@ -141,7 +141,11 @@ Module LaunchDotDesktop
                                 filesList = filesList.Replace("?", Chr(34) & " " & Chr(34))
                                 ' If the user wants to, allow for editing the file list before launching.
                                 If My.Settings.AllowEditingFileListBeforeLaunching = True Then
-                                    filesList = InputBox("Once you've made your changes to the file list (if any), please click OK. If you're editing the file list for WSL, please use single quotes instead of double quotes if there are spaces in the path.", "Edit file list", filesList)
+                                    'filesList = InputBox("Once you've made your changes to the file list (if any), please click OK. If you're editing the file list for WSL, please use single quotes instead of double quotes if there are spaces in the path.", "Edit file list", filesList)
+
+                                    Dim editorForm As filePathEditor = New filePathEditor
+                                    editorForm.textboxEditStyleManually.Text = filesList
+                                    editorForm.ShowDialog()
                                 End If
                                 ' Expand %F with the new file list, and add double-quotes on each side
                                 ' of the file list after putting in a space to separate it from the rest
@@ -235,12 +239,12 @@ Module LaunchDotDesktop
             End If
 
         Else
-                ' If there are no command-line args, then we'll have to show a message instead.
-                ' This'll eventually be replaced with a proper window for .desktop launching and
-                ' configuration stuff.
-                ' TODO: Move the .desktop launching part to its own sub so that it can be run at any time
-                ' after starting the program.
-                MessageBox.Show("Howdy. This message is being shown to let you know that no .desktop file has been passed to LaunchDotDesktop." &
+            ' If there are no command-line args, then we'll have to show a message instead.
+            ' This'll eventually be replaced with a proper window for .desktop launching and
+            ' configuration stuff.
+            ' TODO: Move the .desktop launching part to its own sub so that it can be run at any time
+            ' after starting the program.
+            MessageBox.Show("Howdy. This message is being shown to let you know that no .desktop file has been passed to LaunchDotDesktop." &
                             " Please drag-and-drop the file onto the icon, double-click the file after setting LaunchDotDesktop as its default handler," &
                             " or pass it as a command-line argument in CMD or PowerShell. Eventually a real window will be added to allow for browsing" &
                             " and configuration instead of this message box.", "No file passed - LaunchDotDesktop")

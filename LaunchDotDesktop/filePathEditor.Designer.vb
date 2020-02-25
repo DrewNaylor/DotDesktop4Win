@@ -136,7 +136,6 @@ Partial Class filePathEditor
         Me.MinimizeBox = False
         Me.Name = "filePathEditor"
         Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Edit file list"
         Me.tablelayoutpanelOkCancel.ResumeLayout(False)
         Me.ResumeLayout(False)
