@@ -156,7 +156,7 @@ Module LaunchDotDesktop
                             Dim tempExecKey As String() = cleanedExecKey.Split(Chr(34))
                             ' Trim the exec key out at the second double-quote.
                             cleanedExecKey = tempExecKey(1).Trim
-                            ' Assign the arg variable to the copy of the exec key and trim
+                            ' Assign the arg variable to the copy of the exec key and remove
                             ' the double-quotes before and after and the new exec key 
                             ' from the beginning of the URL list/arg variable.
                             urlList = originalCleanedExecKey.Remove(0, cleanedExecKey.Length + 2)
