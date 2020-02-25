@@ -27,6 +27,9 @@ Partial Class filePathEditor
         Me.Cancel_Button = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.tablelayoutpanelOkCancel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -77,10 +80,43 @@ Partial Class filePathEditor
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(13, 43)
+        Me.TextBox1.Location = New System.Drawing.Point(16, 125)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(548, 20)
         Me.TextBox1.TabIndex = 2
+        '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Location = New System.Drawing.Point(16, 43)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(93, 17)
+        Me.RadioButton1.TabIndex = 3
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Text = "Windows-style"
+        Me.RadioButton1.UseVisualStyleBackColor = True
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(16, 67)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(74, 17)
+        Me.RadioButton2.TabIndex = 4
+        Me.RadioButton2.TabStop = True
+        Me.RadioButton2.Text = "Linux-style"
+        Me.RadioButton2.UseVisualStyleBackColor = True
+        '
+        'RadioButton3
+        '
+        Me.RadioButton3.AutoSize = True
+        Me.RadioButton3.Location = New System.Drawing.Point(16, 91)
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.Size = New System.Drawing.Size(87, 17)
+        Me.RadioButton3.TabIndex = 5
+        Me.RadioButton3.TabStop = True
+        Me.RadioButton3.Text = "Edit manually"
+        Me.RadioButton3.UseVisualStyleBackColor = True
         '
         'filePathEditor
         '
@@ -89,6 +125,9 @@ Partial Class filePathEditor
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.CancelButton = Me.Cancel_Button
         Me.ClientSize = New System.Drawing.Size(573, 192)
+        Me.Controls.Add(Me.RadioButton3)
+        Me.Controls.Add(Me.RadioButton2)
+        Me.Controls.Add(Me.RadioButton1)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.tablelayoutpanelOkCancel)
@@ -109,4 +148,7 @@ Partial Class filePathEditor
     Friend WithEvents Cancel_Button As System.Windows.Forms.Button
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents TextBox1 As Windows.Forms.TextBox
+    Friend WithEvents RadioButton1 As Windows.Forms.RadioButton
+    Friend WithEvents RadioButton2 As Windows.Forms.RadioButton
+    Friend WithEvents RadioButton3 As Windows.Forms.RadioButton
 End Class
