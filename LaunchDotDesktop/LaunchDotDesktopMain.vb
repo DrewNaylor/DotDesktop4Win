@@ -30,6 +30,7 @@ Module LaunchDotDesktop
         ' Display program info, like name, version, and copyright.
         Console.WriteLine(My.Application.Info.Title & " Version " & My.Application.Info.Version.ToString)
         Console.WriteLine(My.Application.Info.Copyright)
+        Console.WriteLine("You may obtain a copy of the License at <http://www.apache.org/licenses/LICENSE-2.0>.")
 
         ' Before doing anything, make sure this is a valid .desktop file
         ' with the proper Desktop Entry/KDE Desktop Entry header.
