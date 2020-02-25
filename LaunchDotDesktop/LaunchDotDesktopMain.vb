@@ -224,6 +224,8 @@ Module LaunchDotDesktop
 
 
             ' Add in a pause where the user can hit "Enter" to continue.
+            Console.WriteLine()
+            Console.WriteLine("Please press Enter to continue...")
             Console.ReadLine()
 
         Else
