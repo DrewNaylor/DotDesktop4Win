@@ -159,7 +159,7 @@ Module LaunchDotDesktop
                             ' Assign the arg variable to the copy of the exec key and trim
                             ' the double-quotes before and after and the new exec key 
                             ' from the beginning of the URL list/arg variable.
-                            urlList = originalCleanedExecKey.TrimStart(CType(Chr(34) & cleanedExecKey.ToCharArray & Chr(34), Char()))
+                            urlList = originalCleanedExecKey.Remove(0, cleanedExecKey.Length + 2)
                         Else
                             ' If there's no double-quotes, assume it's something like
                             ' firefox.exe or another string without spaces.
