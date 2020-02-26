@@ -102,6 +102,9 @@ Partial Class filePathEditor
         '
         'flowlayoutpanelFileList
         '
+        Me.flowlayoutpanelFileList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.flowlayoutpanelFileList.AutoScroll = True
         Me.flowlayoutpanelFileList.Location = New System.Drawing.Point(12, 125)
         Me.flowlayoutpanelFileList.Name = "flowlayoutpanelFileList"

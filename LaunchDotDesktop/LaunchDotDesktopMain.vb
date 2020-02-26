@@ -149,15 +149,20 @@ Module LaunchDotDesktop
                                 ' in case the user runs into issues on other filesystems that allow
                                 ' the question mark to be in a filename.
 
-
+                                ' If editing the file list before launching is allowed, set that up.
                                 If My.Settings.AllowEditingFileListBeforeLaunching = True Then
+                                    ' Define editor form to use later.
                                     Dim editorForm As filePathEditor = New filePathEditor
-
-
+                                    ' Look in each filename in the filename list.
                                     For Each fileName As String In fileNameList
+                                        ' Define a textbox to put the filenames into.
                                         Dim editorBox As New TextBox
+                                        ' Set textbox text to the current filename.
                                         editorBox.Text = fileName
+                                        ' Set textbox width to be the same as the flow layout panel, but minus 25.
                                         editorBox.Width = editorForm.flowlayoutpanelFileList.Width - 25
+                                        editorBox.Anchor = AnchorStyles.Left And AnchorStyles.Right
+                                        ' Add that textbox to the flow layout panel.
                                         editorForm.flowlayoutpanelFileList.Controls.Add(editorBox)
                                     Next
                                     If editorForm.ShowDialog() = DialogResult.OK Then
