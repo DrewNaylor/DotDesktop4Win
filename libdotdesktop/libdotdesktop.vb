@@ -199,7 +199,7 @@ Public Class desktopEntryStuff
             ' First make sure it's in there.
             If desktopEntrySection.Keys("Terminal") IsNot Nothing Then
                 ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("Terminal").Value
+                Return desktopEntrySection.Keys("Terminal").Value.ToLowerInvariant
             Else
                 ' Otherwise, return Nothing if the key is unavailable.
                 Return Nothing
@@ -219,7 +219,7 @@ Public Class desktopEntryStuff
             ' First make sure it's in there.
             If desktopEntrySection.Keys("X-DotDesktop4Win-ForceLinuxStyleFilePaths") IsNot Nothing Then
                 ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("X-DotDesktop4Win-ForceLinuxStyleFilePaths").Value
+                Return desktopEntrySection.Keys("X-DotDesktop4Win-ForceLinuxStyleFilePaths").Value.ToLowerInvariant
             Else
                 ' Otherwise, return Nothing if the key is unavailable.
                 Return Nothing
