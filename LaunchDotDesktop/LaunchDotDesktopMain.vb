@@ -131,28 +131,41 @@ Module LaunchDotDesktop
                                 ' It may be a good idea to allow this to be a configurable option
                                 ' in case the user runs into issues on other filesystems that allow
                                 ' the question mark to be in a filename.
+
+                                Dim entirePathList As New List(Of String)
                                 For Each fileName As String In fileNameList
                                     ' If the .desktop file requests it, switch the paths to be Linux-style.
                                     If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "X-DotDesktop4Win-ForceLinuxStylePaths") = "true" Then
+                                        MessageBox.Show(fileName)
                                         If fileName.Substring(1, 2) = ":\" Then
                                             ' Grab the drive letter and make it lowercase for later use.
                                             Dim driveLetter As String = fileName.Substring(0, 1).ToLowerInvariant
                                             ' Remove the drive letter and the colon.
                                             fileName = fileName.Remove(0, 2)
+                                            MessageBox.Show(fileName)
+
                                             ' Prepend "/mnt/" and the drive letter to the textbox text.
                                             fileName = "/mnt/" & driveLetter & fileName
+                                            MessageBox.Show(fileName)
+
                                             ' Replace back slashes with forward slashes.
                                             fileName = fileName.Replace("\", "/")
+                                            MessageBox.Show(fileName)
+
                                         End If
                                         fileName = fileName.TrimEnd(CType("'", Char()))
+                                        MessageBox.Show(fileName)
+                                        entirePathList.Add("'" & fileName & "'" & "?")
+
                                     Else
                                         fileName = fileName.TrimEnd(Chr(34))
+                                        MessageBox.Show(fileName)
+                                        entirePathList.Add(Chr(34) & fileName & Chr(34) & "?")
                                     End If
 
-                                    fileName = fileName & "?"
                                 Next
                                 ' Make a new string that joins the file name list into one string.
-                                Dim filesList As String = String.Join("?", fileNameList)
+                                Dim filesList As String = String.Join("?", entirePathList)
                                 ' Replace the joiner character with double-quotes on each side of a space.
                                 filesList = filesList.Replace("?", Chr(34) & " " & Chr(34))
 
