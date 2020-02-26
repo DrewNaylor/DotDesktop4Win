@@ -54,7 +54,7 @@ Partial Class filePathEditor
         Me.buttonOK.Location = New System.Drawing.Point(3, 3)
         Me.buttonOK.Name = "buttonOK"
         Me.buttonOK.Size = New System.Drawing.Size(67, 23)
-        Me.buttonOK.TabIndex = 0
+        Me.buttonOK.TabIndex = 5
         Me.buttonOK.Text = "OK"
         '
         'buttonCancel
@@ -64,7 +64,7 @@ Partial Class filePathEditor
         Me.buttonCancel.Location = New System.Drawing.Point(76, 3)
         Me.buttonCancel.Name = "buttonCancel"
         Me.buttonCancel.Size = New System.Drawing.Size(67, 23)
-        Me.buttonCancel.TabIndex = 1
+        Me.buttonCancel.TabIndex = 6
         Me.buttonCancel.Text = "Cancel"
         '
         'labelEditFileList
@@ -84,7 +84,7 @@ Partial Class filePathEditor
         Me.radiobuttonWindowsStyle.Location = New System.Drawing.Point(12, 54)
         Me.radiobuttonWindowsStyle.Name = "radiobuttonWindowsStyle"
         Me.radiobuttonWindowsStyle.Size = New System.Drawing.Size(93, 17)
-        Me.radiobuttonWindowsStyle.TabIndex = 3
+        Me.radiobuttonWindowsStyle.TabIndex = 1
         Me.radiobuttonWindowsStyle.TabStop = True
         Me.radiobuttonWindowsStyle.Text = "Windows-style"
         Me.radiobuttonWindowsStyle.UseVisualStyleBackColor = True
@@ -95,7 +95,7 @@ Partial Class filePathEditor
         Me.radiobuttonLinuxStyle.Location = New System.Drawing.Point(12, 78)
         Me.radiobuttonLinuxStyle.Name = "radiobuttonLinuxStyle"
         Me.radiobuttonLinuxStyle.Size = New System.Drawing.Size(74, 17)
-        Me.radiobuttonLinuxStyle.TabIndex = 4
+        Me.radiobuttonLinuxStyle.TabIndex = 2
         Me.radiobuttonLinuxStyle.TabStop = True
         Me.radiobuttonLinuxStyle.Text = "Linux-style"
         Me.radiobuttonLinuxStyle.UseVisualStyleBackColor = True
@@ -106,7 +106,7 @@ Partial Class filePathEditor
         Me.flowlayoutpanelFileList.Location = New System.Drawing.Point(12, 125)
         Me.flowlayoutpanelFileList.Name = "flowlayoutpanelFileList"
         Me.flowlayoutpanelFileList.Size = New System.Drawing.Size(546, 233)
-        Me.flowlayoutpanelFileList.TabIndex = 6
+        Me.flowlayoutpanelFileList.TabIndex = 4
         '
         'checkboxEditManually
         '
@@ -114,7 +114,7 @@ Partial Class filePathEditor
         Me.checkboxEditManually.Location = New System.Drawing.Point(13, 102)
         Me.checkboxEditManually.Name = "checkboxEditManually"
         Me.checkboxEditManually.Size = New System.Drawing.Size(88, 17)
-        Me.checkboxEditManually.TabIndex = 7
+        Me.checkboxEditManually.TabIndex = 3
         Me.checkboxEditManually.Text = "Edit manually"
         Me.checkboxEditManually.UseVisualStyleBackColor = True
         '
