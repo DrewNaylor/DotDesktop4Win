@@ -143,16 +143,22 @@ Module LaunchDotDesktop
                                         editorForm.flowlayoutpanelFileList.Controls.Add(editorBox)
                                     Next
                                     If editorForm.ShowDialog() = DialogResult.OK Then
-
+                                        Console.WriteLine(editorForm.filePaths)
+                                        Console.ReadLine()
+                                        fileNameList = editorForm.filePaths.ToArray
                                     End If
                                 End If
 
+                                ' Define a variable to store the quote character in.
+                                ' This can be changed in case a Linux-style path is desired.
+                                Dim quote As String = Chr(34)
+
                                 For Each fileName As String In fileNameList
-                                        fileName = fileName.TrimEnd(Chr(34))
-                                        fileName = fileName & "?"
-                                    Next
-                                    ' Make a new string that joins the file name list into one string.
-                                    Dim filesList As String = String.Join("?", fileNameList)
+                                    fileName = fileName.TrimEnd(Chr(34))
+                                    fileName = fileName & "?"
+                                Next
+                                ' Make a new string that joins the file name list into one string.
+                                Dim filesList As String = String.Join("?", fileNameList)
                                     ' Replace the joiner character with double-quotes on each side of a space.
                                     filesList = filesList.Replace("?", Chr(34) & " " & Chr(34))
                                     ' If the user wants to, allow for editing the file list before launching.

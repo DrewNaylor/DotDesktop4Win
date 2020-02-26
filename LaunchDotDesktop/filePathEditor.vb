@@ -106,10 +106,10 @@ Public Class filePathEditor
         Next
     End Sub
 
-    ReadOnly Property filePaths As String
+    ReadOnly Property filePaths As List(Of String)
         Get
             ' Define a variable that'll store the entire path list.
-            Dim entireList As String = ""
+            Dim entireList As New List(Of String)
             ' Define a variable to store the quote, defaulting to Windows-style.
             Dim quote As String = Chr(34)
             ' If Linux-style paths are desired, use a single-quote instead of double-quote.
@@ -120,7 +120,7 @@ Public Class filePathEditor
             For Each editBox As TextBox In flowlayoutpanelFileList.Controls
                 ' Take the Text property of each textbox and put it in the
                 ' entireList variable.
-                entireList = entireList & quote & editBox.Text & quote & " "
+                entireList.Add(quote & editBox.Text & quote & " ")
             Next ' Go to the next textbox.
             ' Return the entire list variable.
             Return entireList
