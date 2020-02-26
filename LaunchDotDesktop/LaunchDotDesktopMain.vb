@@ -132,6 +132,19 @@ Module LaunchDotDesktop
                                 ' in case the user runs into issues on other filesystems that allow
                                 ' the question mark to be in a filename.
                                 For Each fileName As String In fileNameList
+                                    ' If the .desktop file requests it, switch the paths to be Linux-style.
+                                    If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "X-DotDesktop4Win-ForceLinuxStylePaths") = "true" Then
+                                        If fileName.Substring(1, 2) = ":\" Then
+                                            ' Grab the drive letter and make it lowercase for later use.
+                                            Dim driveLetter As String = fileName.Substring(0, 1).ToLowerInvariant
+                                            ' Remove the drive letter and the colon.
+                                            fileName = fileName.Remove(0, 2)
+                                            ' Prepend "/mnt/" and the drive letter to the textbox text.
+                                            fileName = "/mnt/" & driveLetter & fileName
+                                            ' Replace back slashes with forward slashes.
+                                            fileName = fileName.Replace("\", "/")
+                                        End If
+                                    End If
                                     fileName = fileName.TrimEnd(Chr(34))
                                     fileName = fileName & "?"
                                 Next
@@ -139,14 +152,9 @@ Module LaunchDotDesktop
                                 Dim filesList As String = String.Join("?", fileNameList)
                                 ' Replace the joiner character with double-quotes on each side of a space.
                                 filesList = filesList.Replace("?", Chr(34) & " " & Chr(34))
-                                ' If the user wants to, allow for editing the file list before launching.
-                                If My.Settings.AllowEditingFileListBeforeLaunching = True Then
-                                    'filesList = InputBox("Once you've made your changes to the file list (if any), please click OK. If you're editing the file list for WSL, please use single quotes instead of double quotes if there are spaces in the path.", "Edit file list", filesList)
 
-                                    Dim editorForm As filePathEditor = New filePathEditor
-                                    editorForm.textboxEditStyleManually.Text = filesList
-                                    editorForm.ShowDialog()
-                                End If
+
+
                                 ' Expand %F with the new file list, and add double-quotes on each side
                                 ' of the file list after putting in a space to separate it from the rest
                                 ' of the command.

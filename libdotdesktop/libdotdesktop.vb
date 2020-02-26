@@ -213,6 +213,7 @@ Public Class desktopEntryStuff
             ' This key is used to force Linux-style paths to be used in
             ' situations like WSL where file paths are expected to be
             ' /mnt/c/whatever instead of C:\whatever.
+            ' This key is a Boolean, and can either be true or false.
 
             ' If we want to get the X-DotDesktop4Win-ForceLinuxStylePaths value, return that.
             ' First make sure it's in there.
