@@ -136,6 +136,8 @@ Module LaunchDotDesktop
                                     fileName = fileName.TrimEnd(Chr(34))
                                 End If
 
+                                ' Update cleanedExecKey with the fileName, which may or may not have been modified
+                                ' to be Linux-style if the desktop entry file wanted it or not.
                                 cleanedExecKey = cleanedExecKey.Replace(" %f", " " & quoteForFilePaths & fileName & quoteForFilePaths)
                             Else
                                 ' If the user cancels, just remove the %f.
