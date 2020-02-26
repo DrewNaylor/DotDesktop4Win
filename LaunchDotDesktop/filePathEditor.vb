@@ -18,14 +18,26 @@ Public Class filePathEditor
         'textboxEditStyleManually.Text = filesInEditor
     End Sub
 
-    Private Sub radiobuttonWindowsStyle_CheckedChanged(sender As Object, e As EventArgs) Handles radiobuttonWindowsStyle.CheckedChanged
-        For Each textbox As TextBox In flowlayoutpanelFileList.Controls
-            If textbox.Text.StartsWith("/mnt") Then
-                textbox.Text = textbox.Text.Remove(0, 5)
-                Dim driveLetter As String = textbox.Text.Substring(0, 1).ToUpperInvariant
-                textbox.Text = textbox.Text.Remove(0, 1)
-                textbox.Text = driveLetter & ":" & textbox.Text
-                textbox.Text = textbox.Text.Replace("/", "\")
+    Private Sub radiobuttonWindowsStyle_Click(sender As Object, e As EventArgs) Handles radiobuttonWindowsStyle.Click
+        For Each editBox As TextBox In flowlayoutpanelFileList.Controls
+            If editBox.Text.StartsWith("/mnt") Then
+                editBox.Text = editBox.Text.Remove(0, 5)
+                Dim driveLetter As String = editBox.Text.Substring(0, 1).ToUpperInvariant
+                editBox.Text = editBox.Text.Remove(0, 1)
+                editBox.Text = driveLetter & ":" & editBox.Text
+                editBox.Text = editBox.Text.Replace("/", "\")
+            End If
+        Next
+    End Sub
+
+    Private Sub radiobuttonLinuxStyle_Click(sender As Object, e As EventArgs) Handles radiobuttonLinuxStyle.Click
+        For Each editBox As TextBox In flowlayoutpanelFileList.Controls
+            If editBox.Text.Remove(0, 1).StartsWith(":\") Then
+                editBox.Text = editBox.Text.Remove(0, 5)
+                Dim driveLetter As String = editBox.Text.Substring(0, 1).ToUpperInvariant
+                editBox.Text = editBox.Text.Remove(0, 1)
+                editBox.Text = driveLetter & ":" & editBox.Text
+                editBox.Text = editBox.Text.Replace("/", "\")
             End If
         Next
     End Sub
