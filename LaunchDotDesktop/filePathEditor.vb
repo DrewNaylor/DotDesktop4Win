@@ -21,7 +21,7 @@ Public Class filePathEditor
     Private Sub radiobuttonWindowsStyle_CheckedChanged(sender As Object, e As EventArgs) Handles radiobuttonWindowsStyle.CheckedChanged
         For Each textbox As TextBox In flowlayoutpanelFileList.Controls
             If textbox.Text.StartsWith("/mnt") Then
-                textbox.Text = textbox.Text.Remove(0, 4)
+                textbox.Text = textbox.Text.Remove(0, 5)
                 Dim driveLetter As String = textbox.Text.Substring(0, 1).ToUpperInvariant
                 textbox.Text = textbox.Text.Remove(0, 1)
                 textbox.Text = driveLetter & ":" & textbox.Text
