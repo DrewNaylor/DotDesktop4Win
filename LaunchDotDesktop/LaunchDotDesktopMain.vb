@@ -172,8 +172,6 @@ Module LaunchDotDesktop
                                 ' Replace the joiner character with double-quotes on each side of a space.
                                 filesList = filesList.Replace("?", quote & " " & quote)
                                 MessageBox.Show(filesList)
-                                filesList = filesList.Replace(quote & quote, quote)
-                                MessageBox.Show(filesList)
 
                                 ' If the user wants to, allow for editing the file list before launching.
                                 'If My.Settings.AllowEditingFileListBeforeLaunching = True Then
