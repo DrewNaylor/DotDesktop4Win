@@ -54,6 +54,8 @@ Module LaunchDotDesktop
                     ' URL list for apps that allow for URLs to be passed to them.
                     Dim urlList As String = ""
 
+                    ' Define a variable to store the quote character for file paths in.
+                    ' This can be changed in case a Linux-style path is desired for something like nano.
                     Dim quote As String = Chr(34)
 
                     ' Check to see if the desktop entry is a link or an application.
@@ -111,19 +113,30 @@ Module LaunchDotDesktop
 
                             If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
                                 ' If the user chooses a file, replace %f with the filename and path.
+                                ' Define variable to store filename into for later use.
                                 Dim fileName As String = openFileDialog.FileName
 
+                                ' If editing the file list before launching is allowed,
+                                ' then get an editor for that.
                                 If My.Settings.AllowEditingFileListBeforeLaunching = True Then
+                                    ' Define an editor form.
                                     Dim editorForm As filePathEditor = New filePathEditor
+                                    ' Define a textbox to store the filename in.
                                     Dim editorBox As New TextBox
+                                    ' Set textbox text to the filename.
                                     editorBox.Text = fileName
+                                    ' Set textbox width to the flow layout panel, minus 25.
                                     editorBox.Width = editorForm.flowlayoutpanelFileList.Width - 25
+                                    ' Add textbox to flow layout panel.
                                     editorForm.flowlayoutpanelFileList.Controls.Add(editorBox)
                                     If editorForm.ShowDialog() = DialogResult.OK Then
+                                        ' If user clicks OK, assign the fileName variable to the textbox
+                                        ' text property.
                                         Console.WriteLine(editorForm.filePaths.ToArray)
                                         Console.ReadLine()
-                                        quote = editorForm.quote
                                         fileName = editorBox.Text
+                                        ' Get the quote variable for later use.
+                                        quote = editorForm.quote
                                     End If
                                 End If
                                 cleanedExecKey = cleanedExecKey.Replace(" %f", " " & quote & fileName & quote)
@@ -176,11 +189,6 @@ Module LaunchDotDesktop
                                         quote = editorForm.quote
                                     End If
                                 End If
-
-                                ' Define a variable to store the quote character in.
-                                ' This can be changed in case a Linux-style path is desired.
-
-
 
 
                                 For Each fileName As String In fileNameList
