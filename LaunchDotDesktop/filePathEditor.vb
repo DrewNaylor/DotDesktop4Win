@@ -102,16 +102,17 @@ Public Class filePathEditor
         Get
             ' Define a variable that'll store the entire path list.
             Dim entireList As String = ""
-            ' Define a variable to store the character at the beginning and end.
-            Dim quoteType As String = Chr(34)
+            ' Define a variable to store the quote, defaulting to Windows-style.
+            Dim quote As String = Chr(34)
+            ' If Linux-style paths are desired, use a single-quote instead of double-quote.
             If radiobuttonLinuxStyle.Checked = True Then
-                quoteType = "'"
+                quote = "'"
             End If
             ' Look in the textboxes inside the flow layout panel.
             For Each editBox As TextBox In flowlayoutpanelFileList.Controls
                 ' Take the Text property of each textbox and put it in the
                 ' entireList variable.
-                entireList = entireList & Chr(34) & editBox.Text & Chr(34) & " "
+                entireList = entireList & quote & editBox.Text & quote & " "
             Next ' Go to the next textbox.
             ' Return the entire list variable.
             Return entireList
