@@ -144,8 +144,11 @@ Module LaunchDotDesktop
                                             ' Replace back slashes with forward slashes.
                                             fileName = fileName.Replace("\", "/")
                                         End If
+                                        fileName = fileName.TrimEnd(CType("'", Char()))
+                                    Else
+                                        fileName = fileName.TrimEnd(Chr(34))
                                     End If
-                                    fileName = fileName.TrimEnd(Chr(34))
+
                                     fileName = fileName & "?"
                                 Next
                                 ' Make a new string that joins the file name list into one string.
