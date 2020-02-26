@@ -188,7 +188,7 @@ Module LaunchDotDesktop
                                         ' It may be a good idea to allow this to be a configurable option
                                         ' in case the user runs into issues on other filesystems that allow
                                         ' the question mark to be in a filename.
-                                        entirePathList.Add(quoteForFilePaths & fileName & quoteForFilePaths & "?")
+                                        entirePathList.Add(quoteForFilePaths & fileName & quoteForFilePaths & " ?")
 
                                     Else
                                         ' Remove the double-quotes on the end of the filename.
@@ -199,7 +199,7 @@ Module LaunchDotDesktop
                                         ' It may be a good idea to allow this to be a configurable option
                                         ' in case the user runs into issues on other filesystems that allow
                                         ' the question mark to be in a filename.
-                                        entirePathList.Add(quoteForFilePaths & fileName & quoteForFilePaths & "?")
+                                        entirePathList.Add(quoteForFilePaths & fileName & quoteForFilePaths & " ?")
                                     End If
 
                                 Next
