@@ -161,14 +161,18 @@ Module LaunchDotDesktop
                                         editorBox.Text = fileName
                                         ' Set textbox width to be the same as the flow layout panel, but minus 25.
                                         editorBox.Width = editorForm.flowlayoutpanelFileList.Width - 25
+                                        ' Anchor that textbox to the left and right.
                                         editorBox.Anchor = AnchorStyles.Left And AnchorStyles.Right
                                         ' Add that textbox to the flow layout panel.
                                         editorForm.flowlayoutpanelFileList.Controls.Add(editorBox)
-                                    Next
+                                    Next ' Go to next filename.
                                     If editorForm.ShowDialog() = DialogResult.OK Then
+                                        ' If the user clicked OK in the editor form, set the filename list
+                                        ' to the filePaths property from the editor form.
                                         Console.WriteLine(editorForm.filePaths.ToArray)
                                         Console.ReadLine()
                                         fileNameList = editorForm.filePaths.ToArray
+                                        ' Assign the quote variable to the quote property in the editor form.
                                         quote = editorForm.quote
                                     End If
                                 End If
