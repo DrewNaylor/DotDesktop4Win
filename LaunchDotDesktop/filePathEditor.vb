@@ -33,11 +33,10 @@ Public Class filePathEditor
     Private Sub radiobuttonLinuxStyle_Click(sender As Object, e As EventArgs) Handles radiobuttonLinuxStyle.Click
         For Each editBox As TextBox In flowlayoutpanelFileList.Controls
             If editBox.Text.Remove(0, 1).StartsWith(":\") Then
-                editBox.Text = editBox.Text.Remove(0, 5)
-                Dim driveLetter As String = editBox.Text.Substring(0, 1).ToUpperInvariant
-                editBox.Text = editBox.Text.Remove(0, 1)
-                editBox.Text = driveLetter & ":" & editBox.Text
-                editBox.Text = editBox.Text.Replace("/", "\")
+                Dim driveLetter As String = editBox.Text.Substring(0, 1).ToLowerInvariant
+                editBox.Text = editBox.Text.Remove(0, 2)
+                editBox.Text = "/mnt/" & driveLetter & editBox.Text
+                editBox.Text = editBox.Text.Replace("\", "/")
             End If
         Next
     End Sub
