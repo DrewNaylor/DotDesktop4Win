@@ -120,7 +120,7 @@ Public Class filePathEditor
             For Each editBox As TextBox In flowlayoutpanelFileList.Controls
                 ' Take the Text property of each textbox and put it in the
                 ' entireList variable.
-                entireList.Add(quote & editBox.Text & quote & " ")
+                entireList.Add(quote & editBox.Text & quote)
             Next ' Go to the next textbox.
             ' Return the entire list variable.
             Return entireList
