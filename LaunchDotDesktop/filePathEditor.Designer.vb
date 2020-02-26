@@ -29,7 +29,7 @@ Partial Class filePathEditor
         Me.radiobuttonWindowsStyle = New System.Windows.Forms.RadioButton()
         Me.radiobuttonLinuxStyle = New System.Windows.Forms.RadioButton()
         Me.radiobuttonEditStyleManually = New System.Windows.Forms.RadioButton()
-        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.flowlayoutpanelFileList = New System.Windows.Forms.FlowLayoutPanel()
         Me.tablelayoutpanelOkCancel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -70,7 +70,7 @@ Partial Class filePathEditor
         'labelEditFileList
         '
         Me.labelEditFileList.AutoSize = True
-        Me.labelEditFileList.Location = New System.Drawing.Point(115, 9)
+        Me.labelEditFileList.Location = New System.Drawing.Point(116, 9)
         Me.labelEditFileList.Name = "labelEditFileList"
         Me.labelEditFileList.Size = New System.Drawing.Size(341, 39)
         Me.labelEditFileList.TabIndex = 1
@@ -81,7 +81,7 @@ Partial Class filePathEditor
         'radiobuttonWindowsStyle
         '
         Me.radiobuttonWindowsStyle.AutoSize = True
-        Me.radiobuttonWindowsStyle.Location = New System.Drawing.Point(16, 43)
+        Me.radiobuttonWindowsStyle.Location = New System.Drawing.Point(12, 54)
         Me.radiobuttonWindowsStyle.Name = "radiobuttonWindowsStyle"
         Me.radiobuttonWindowsStyle.Size = New System.Drawing.Size(93, 17)
         Me.radiobuttonWindowsStyle.TabIndex = 3
@@ -92,7 +92,7 @@ Partial Class filePathEditor
         'radiobuttonLinuxStyle
         '
         Me.radiobuttonLinuxStyle.AutoSize = True
-        Me.radiobuttonLinuxStyle.Location = New System.Drawing.Point(16, 67)
+        Me.radiobuttonLinuxStyle.Location = New System.Drawing.Point(12, 78)
         Me.radiobuttonLinuxStyle.Name = "radiobuttonLinuxStyle"
         Me.radiobuttonLinuxStyle.Size = New System.Drawing.Size(74, 17)
         Me.radiobuttonLinuxStyle.TabIndex = 4
@@ -103,7 +103,7 @@ Partial Class filePathEditor
         'radiobuttonEditStyleManually
         '
         Me.radiobuttonEditStyleManually.AutoSize = True
-        Me.radiobuttonEditStyleManually.Location = New System.Drawing.Point(16, 91)
+        Me.radiobuttonEditStyleManually.Location = New System.Drawing.Point(12, 102)
         Me.radiobuttonEditStyleManually.Name = "radiobuttonEditStyleManually"
         Me.radiobuttonEditStyleManually.Size = New System.Drawing.Size(87, 17)
         Me.radiobuttonEditStyleManually.TabIndex = 5
@@ -111,13 +111,13 @@ Partial Class filePathEditor
         Me.radiobuttonEditStyleManually.Text = "Edit manually"
         Me.radiobuttonEditStyleManually.UseVisualStyleBackColor = True
         '
-        'FlowLayoutPanel1
+        'flowlayoutpanelFileList
         '
-        Me.FlowLayoutPanel1.AutoScroll = True
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(12, 114)
-        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(546, 244)
-        Me.FlowLayoutPanel1.TabIndex = 6
+        Me.flowlayoutpanelFileList.AutoScroll = True
+        Me.flowlayoutpanelFileList.Location = New System.Drawing.Point(12, 125)
+        Me.flowlayoutpanelFileList.Name = "flowlayoutpanelFileList"
+        Me.flowlayoutpanelFileList.Size = New System.Drawing.Size(546, 233)
+        Me.flowlayoutpanelFileList.TabIndex = 6
         '
         'filePathEditor
         '
@@ -126,7 +126,7 @@ Partial Class filePathEditor
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.CancelButton = Me.buttonCancel
         Me.ClientSize = New System.Drawing.Size(573, 405)
-        Me.Controls.Add(Me.FlowLayoutPanel1)
+        Me.Controls.Add(Me.flowlayoutpanelFileList)
         Me.Controls.Add(Me.radiobuttonEditStyleManually)
         Me.Controls.Add(Me.radiobuttonLinuxStyle)
         Me.Controls.Add(Me.radiobuttonWindowsStyle)
@@ -150,5 +150,5 @@ Partial Class filePathEditor
     Friend WithEvents radiobuttonWindowsStyle As Windows.Forms.RadioButton
     Friend WithEvents radiobuttonLinuxStyle As Windows.Forms.RadioButton
     Friend WithEvents radiobuttonEditStyleManually As Windows.Forms.RadioButton
-    Friend WithEvents FlowLayoutPanel1 As Windows.Forms.FlowLayoutPanel
+    Friend WithEvents flowlayoutpanelFileList As Windows.Forms.FlowLayoutPanel
 End Class

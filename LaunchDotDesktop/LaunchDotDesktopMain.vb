@@ -139,8 +139,8 @@ Module LaunchDotDesktop
                                     For Each fileName As String In fileNameList
                                         Dim editorBox As New TextBox
                                         editorBox.Text = fileName
-                                        editorBox.Width = editorForm.FlowLayoutPanel1.Width - 25
-                                        editorForm.FlowLayoutPanel1.Controls.Add(editorBox)
+                                        editorBox.Width = editorForm.flowlayoutpanelFileList.Width - 25
+                                        editorForm.flowlayoutpanelFileList.Controls.Add(editorBox)
                                     Next
                                     editorForm.ShowDialog()
                                 End If
