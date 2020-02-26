@@ -47,8 +47,8 @@ Public Class filePathEditor
     Private Sub checkedWindowsStyleRadioButton()
         ' Look at each textbox inside the flow layout panel.
         For Each editBox As TextBox In flowlayoutpanelFileList.Controls
-            ' Disable textboxes to prevent accidental edits.
-            editBox.Enabled = False
+            ' Enable or disable manual editing.
+            allowManualEditing()
             ' Check to see if the textbox starts with "/mnt".
             If editBox.Text.StartsWith("/mnt") Then
                 ' If it does, then remove "/mnt/" from the text.
@@ -73,8 +73,8 @@ Public Class filePathEditor
     Private Sub radiobuttonLinuxStyle_Click(sender As Object, e As EventArgs) Handles radiobuttonLinuxStyle.Click
         ' Look at each textbox inside the flow layout panel.
         For Each editBox As TextBox In flowlayoutpanelFileList.Controls
-            ' Disable textboxes to prevent accidental edits.
-            editBox.Enabled = False
+            ' Enable or disable manual editing.
+            allowManualEditing()
             ' Check from the first through the third characters to check that they're
             ' ":\" like the Windows path style without the drive letter.
             If editBox.Text.Substring(1, 2) = ":\" Then
@@ -90,13 +90,21 @@ Public Class filePathEditor
         Next
     End Sub
 
-    Private Sub radiobuttonEditStyleManually_CheckedChanged(sender As Object, e As EventArgs) Handles radiobuttonEditStyleManually.CheckedChanged
-        For Each editBox As TextBox In flowlayoutpanelFileList.Controls
-            ' Allow textboxes to be edited.
-            editBox.Enabled = True
-        Next
+    Private Sub checkboxEditManually_CheckedChanged(sender As Object, e As EventArgs) Handles checkboxEditManually.CheckedChanged
+        ' Moved to its own sub for re-use.
+        allowManualEditing()
     End Sub
 
+    Private Sub allowManualEditing()
+        For Each editBox As TextBox In flowlayoutpanelFileList.Controls
+            ' Allow textboxes to be edited if they're not allowed to be at the moment.
+            If checkboxEditManually.Checked = True Then
+                editBox.Enabled = True
+            Else
+                editBox.Enabled = False
+            End If
+        Next
+    End Sub
 
     ReadOnly Property filePaths As String
         Get

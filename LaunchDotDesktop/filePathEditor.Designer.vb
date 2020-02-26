@@ -28,8 +28,8 @@ Partial Class filePathEditor
         Me.labelEditFileList = New System.Windows.Forms.Label()
         Me.radiobuttonWindowsStyle = New System.Windows.Forms.RadioButton()
         Me.radiobuttonLinuxStyle = New System.Windows.Forms.RadioButton()
-        Me.radiobuttonEditStyleManually = New System.Windows.Forms.RadioButton()
         Me.flowlayoutpanelFileList = New System.Windows.Forms.FlowLayoutPanel()
+        Me.checkboxEditManually = New System.Windows.Forms.CheckBox()
         Me.tablelayoutpanelOkCancel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -100,17 +100,6 @@ Partial Class filePathEditor
         Me.radiobuttonLinuxStyle.Text = "Linux-style"
         Me.radiobuttonLinuxStyle.UseVisualStyleBackColor = True
         '
-        'radiobuttonEditStyleManually
-        '
-        Me.radiobuttonEditStyleManually.AutoSize = True
-        Me.radiobuttonEditStyleManually.Location = New System.Drawing.Point(12, 102)
-        Me.radiobuttonEditStyleManually.Name = "radiobuttonEditStyleManually"
-        Me.radiobuttonEditStyleManually.Size = New System.Drawing.Size(87, 17)
-        Me.radiobuttonEditStyleManually.TabIndex = 5
-        Me.radiobuttonEditStyleManually.TabStop = True
-        Me.radiobuttonEditStyleManually.Text = "Edit manually"
-        Me.radiobuttonEditStyleManually.UseVisualStyleBackColor = True
-        '
         'flowlayoutpanelFileList
         '
         Me.flowlayoutpanelFileList.AutoScroll = True
@@ -119,6 +108,16 @@ Partial Class filePathEditor
         Me.flowlayoutpanelFileList.Size = New System.Drawing.Size(546, 233)
         Me.flowlayoutpanelFileList.TabIndex = 6
         '
+        'checkboxEditManually
+        '
+        Me.checkboxEditManually.AutoSize = True
+        Me.checkboxEditManually.Location = New System.Drawing.Point(13, 102)
+        Me.checkboxEditManually.Name = "checkboxEditManually"
+        Me.checkboxEditManually.Size = New System.Drawing.Size(88, 17)
+        Me.checkboxEditManually.TabIndex = 7
+        Me.checkboxEditManually.Text = "Edit manually"
+        Me.checkboxEditManually.UseVisualStyleBackColor = True
+        '
         'filePathEditor
         '
         Me.AcceptButton = Me.buttonOK
@@ -126,8 +125,8 @@ Partial Class filePathEditor
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.CancelButton = Me.buttonCancel
         Me.ClientSize = New System.Drawing.Size(573, 405)
+        Me.Controls.Add(Me.checkboxEditManually)
         Me.Controls.Add(Me.flowlayoutpanelFileList)
-        Me.Controls.Add(Me.radiobuttonEditStyleManually)
         Me.Controls.Add(Me.radiobuttonLinuxStyle)
         Me.Controls.Add(Me.radiobuttonWindowsStyle)
         Me.Controls.Add(Me.labelEditFileList)
@@ -149,6 +148,6 @@ Partial Class filePathEditor
     Friend WithEvents labelEditFileList As Windows.Forms.Label
     Friend WithEvents radiobuttonWindowsStyle As Windows.Forms.RadioButton
     Friend WithEvents radiobuttonLinuxStyle As Windows.Forms.RadioButton
-    Friend WithEvents radiobuttonEditStyleManually As Windows.Forms.RadioButton
     Friend WithEvents flowlayoutpanelFileList As Windows.Forms.FlowLayoutPanel
+    Friend WithEvents checkboxEditManually As Windows.Forms.CheckBox
 End Class
