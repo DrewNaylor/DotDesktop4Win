@@ -102,7 +102,7 @@ Public Class filePathEditor
         Get
             Dim entireList As String = ""
             For Each editBox As TextBox In flowlayoutpanelFileList.Controls
-                entireList = entireList & Chr(34) & editBox.Text & Chr(34)
+                entireList = entireList & Chr(34) & editBox.Text & Chr(34) & " "
             Next
             Return entireList
         End Get
