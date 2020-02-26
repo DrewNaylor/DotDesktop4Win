@@ -96,4 +96,15 @@ Public Class filePathEditor
             editBox.Enabled = True
         Next
     End Sub
+
+
+    ReadOnly Property filePaths As String
+        Get
+            Dim entireList As String = ""
+            For Each editBox As TextBox In flowlayoutpanelFileList.Controls
+                entireList = entireList & Chr(34) & editBox.Text & Chr(34)
+            Next
+            Return entireList
+        End Get
+    End Property
 End Class

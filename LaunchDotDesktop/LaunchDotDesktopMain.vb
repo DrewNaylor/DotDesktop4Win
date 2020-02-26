@@ -142,7 +142,9 @@ Module LaunchDotDesktop
                                         editorBox.Width = editorForm.flowlayoutpanelFileList.Width - 25
                                         editorForm.flowlayoutpanelFileList.Controls.Add(editorBox)
                                     Next
-                                    editorForm.ShowDialog()
+                                    If editorForm.ShowDialog() = DialogResult.OK Then
+
+                                    End If
                                 End If
 
                                 For Each fileName As String In fileNameList
