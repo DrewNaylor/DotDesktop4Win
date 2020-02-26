@@ -111,7 +111,22 @@ Module LaunchDotDesktop
 
                             If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
                                 ' If the user chooses a file, replace %f with the filename and path.
-                                cleanedExecKey = cleanedExecKey.Replace(" %f", " " & Chr(34) & openFileDialog.FileName & Chr(34))
+                                Dim fileName As String = openFileDialog.FileName
+
+                                If My.Settings.AllowEditingFileListBeforeLaunching = True Then
+                                    Dim editorForm As filePathEditor = New filePathEditor
+                                    Dim editorBox As New TextBox
+                                    editorBox.Text = fileName
+                                    editorBox.Width = editorForm.flowlayoutpanelFileList.Width - 25
+                                    editorForm.flowlayoutpanelFileList.Controls.Add(editorBox)
+                                    If editorForm.ShowDialog() = DialogResult.OK Then
+                                        Console.WriteLine(editorForm.filePaths.ToArray)
+                                        Console.ReadLine()
+                                        quote = editorForm.quote
+                                        fileName = editorBox.Text
+                                    End If
+                                End If
+                                cleanedExecKey = cleanedExecKey.Replace(" %f", " " & quote & fileName & quote)
                             Else
                                 ' If the user cancels, just remove the %f.
                                 cleanedExecKey = cleanedExecKey.Replace(" %f", "")
@@ -189,8 +204,8 @@ Module LaunchDotDesktop
                                 cleanedExecKey = cleanedExecKey.Replace(quote & quote, quote)
                                 MessageBox.Show(cleanedExecKey)
                             Else
-                                    ' If the user cancels, just remove the %F.
-                                    cleanedExecKey = cleanedExecKey.Replace(" %F", "")
+                                ' If the user cancels, just remove the %F.
+                                cleanedExecKey = cleanedExecKey.Replace(" %F", "")
                             End If
                         End If
 
@@ -287,5 +302,4 @@ Module LaunchDotDesktop
                             " and configuration instead of this message box.", "No file passed - LaunchDotDesktop")
         End If
     End Sub
-
 End Module
