@@ -206,6 +206,25 @@ Public Class desktopEntryStuff
             End If
 #End Region
 
+#Region "Get X-DotDesktop4Win-ForceLinuxStylePaths key."
+        ElseIf keyToGet = "X-DotDesktop4Win-ForceLinuxStylePaths" Then
+
+            ' X-DotDesktop4Win-ForceLinuxStylePaths definition and use:
+            ' This key is used to force Linux-style paths to be used in
+            ' situations like WSL where file paths are expected to be
+            ' /mnt/c/whatever instead of C:\whatever.
+
+            ' If we want to get the X-DotDesktop4Win-ForceLinuxStylePaths value, return that.
+            ' First make sure it's in there.
+            If desktopEntrySection.Keys("X-DotDesktop4Win-ForceLinuxStylePaths") IsNot Nothing Then
+                ' If it is in there, return it as expected.
+                Return desktopEntrySection.Keys("X-DotDesktop4Win-ForceLinuxStylePaths").Value
+            Else
+                ' Otherwise, return Nothing if the key is unavailable.
+                Return Nothing
+            End If
+#End Region
+
 #Region "What to do when the key isn't an option here."
         Else
 
