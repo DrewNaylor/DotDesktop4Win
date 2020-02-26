@@ -21,6 +21,8 @@ Public Class filePathEditor
     Private Sub radiobuttonWindowsStyle_Click(sender As Object, e As EventArgs) Handles radiobuttonWindowsStyle.Click
         ' Look at each textbox inside the flow layout panel.
         For Each editBox As TextBox In flowlayoutpanelFileList.Controls
+            ' Disable textboxes to prevent accidental edits.
+            editBox.Enabled = False
             ' Check to see if the textbox starts with "/mnt".
             If editBox.Text.StartsWith("/mnt") Then
                 ' If it does, then remove "/mnt/" from the text.
@@ -40,6 +42,8 @@ Public Class filePathEditor
     Private Sub radiobuttonLinuxStyle_Click(sender As Object, e As EventArgs) Handles radiobuttonLinuxStyle.Click
         ' Look at each textbox inside the flow layout panel.
         For Each editBox As TextBox In flowlayoutpanelFileList.Controls
+            ' Disable textboxes to prevent accidental edits.
+            editBox.Enabled = False
             ' Check from the first through the third characters to check that they're
             ' ":\" like the Windows path style without the drive letter.
             If editBox.Text.Substring(1, 2) = ":\" Then
@@ -52,6 +56,13 @@ Public Class filePathEditor
                 ' Replace back slashes with forward slashes.
                 editBox.Text = editBox.Text.Replace("\", "/")
             End If
+        Next
+    End Sub
+
+    Private Sub radiobuttonEditStyleManually_CheckedChanged(sender As Object, e As EventArgs) Handles radiobuttonEditStyleManually.CheckedChanged
+        For Each editBox As TextBox In flowlayoutpanelFileList.Controls
+            ' Allow textboxes to be edited.
+            editBox.Enabled = True
         Next
     End Sub
 End Class
