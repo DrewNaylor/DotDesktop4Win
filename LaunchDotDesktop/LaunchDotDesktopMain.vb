@@ -126,13 +126,13 @@ Module LaunchDotDesktop
                                 ' If the user chooses files, replace %F with the filename and paths.
                                 ' Get a file name list array as a string from the open file dialog.
                                 Dim fileNameList As String() = openFileDialog.FileNames
-                                ' Look in each filename, and replace the end with a question mark
-                                ' for later use when joining the string.
-                                ' It may be a good idea to allow this to be a configurable option
-                                ' in case the user runs into issues on other filesystems that allow
-                                ' the question mark to be in a filename.
 
+                                ' Define a path list to store the filenames into.
                                 Dim entirePathList As New List(Of String)
+                                ' Define a quote character for putting at the beginning
+                                ' and end of filenames. This can be changed if necessary,
+                                ' such as if a desktop entry file wants to use a Linux-style
+                                ' path instead of Windows-style.
                                 Dim quoteForFilePaths As String = Chr(34)
                                 For Each fileName As String In fileNameList
                                     ' If the .desktop file requests it, switch the paths to be Linux-style.
@@ -150,12 +150,27 @@ Module LaunchDotDesktop
                                             fileName = fileName.Replace("\", "/")
 
                                         End If
+                                        ' Remove the single quote on the end.
                                         fileName = fileName.TrimEnd(CType("'", Char()))
+                                        ' Set quote used in file paths to a single quote.
                                         quoteForFilePaths = "'"
+                                        ' Add the newly-modified filename to the path list.
+                                        ' Put a question mark at the end of the filename
+                                        ' for later use when joining the string.
+                                        ' It may be a good idea to allow this to be a configurable option
+                                        ' in case the user runs into issues on other filesystems that allow
+                                        ' the question mark to be in a filename.
                                         entirePathList.Add(quoteForFilePaths & fileName & quoteForFilePaths & "?")
 
                                     Else
+                                        ' Remove the double-quotes on the end of the filename.
                                         fileName = fileName.TrimEnd(Chr(34))
+                                        ' Add the filename to the path list.
+                                        ' Put a question mark at the end of the filename
+                                        ' for later use when joining the string.
+                                        ' It may be a good idea to allow this to be a configurable option
+                                        ' in case the user runs into issues on other filesystems that allow
+                                        ' the question mark to be in a filename.
                                         entirePathList.Add(quoteForFilePaths & fileName & quoteForFilePaths & "?")
                                     End If
 
@@ -164,8 +179,6 @@ Module LaunchDotDesktop
                                 Dim filesList As String = String.Join("?", entirePathList)
                                 ' Replace the joiner character with an empty string.
                                 filesList = filesList.Replace("?", "")
-
-
 
                                 ' Expand %F with the new file list, and add double-quotes on each side
                                 ' of the file list after putting in a space to separate it from the rest
