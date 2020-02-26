@@ -172,6 +172,8 @@ Module LaunchDotDesktop
                                 ' Replace the joiner character with double-quotes on each side of a space.
                                 filesList = filesList.Replace("?", quote & " " & quote)
                                 MessageBox.Show(filesList)
+                                filesList = filesList.Replace(quote & quote, quote)
+                                MessageBox.Show(filesList)
 
                                 ' If the user wants to, allow for editing the file list before launching.
                                 'If My.Settings.AllowEditingFileListBeforeLaunching = True Then
@@ -185,6 +187,9 @@ Module LaunchDotDesktop
                                 ' of the file list after putting in a space to separate it from the rest
                                 ' of the command.
                                 cleanedExecKey = cleanedExecKey.Replace(" %F", " " & quote & filesList & quote)
+                                MessageBox.Show(cleanedExecKey)
+                                cleanedExecKey = cleanedExecKey.Replace(quote & quote, quote)
+                                MessageBox.Show(cleanedExecKey)
                             Else
                                     ' If the user cancels, just remove the %F.
                                     cleanedExecKey = cleanedExecKey.Replace(" %F", "")
