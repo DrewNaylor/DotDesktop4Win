@@ -22,7 +22,6 @@
 
 Imports System.Windows.Forms
 Imports libdotdesktop
-Imports System.IO
 Module LaunchDotDesktop
 
     Public Sub Main()
@@ -113,21 +112,21 @@ Module LaunchDotDesktop
                                 Dim quoteForFilePaths As String = Chr(34)
                                 ' If the .desktop file requests it, switch the paths to be Linux-style.
                                 If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "X-DotDesktop4Win-ForceLinuxStylePaths") = "true" Then
-                                        If fileName.Substring(1, 2) = ":\" Then
-                                            ' Grab the drive letter and make it lowercase for later use.
-                                            Dim driveLetter As String = fileName.Substring(0, 1).ToLowerInvariant
-                                            ' Remove the drive letter and the colon.
-                                            fileName = fileName.Remove(0, 2)
+                                    If fileName.Substring(1, 2) = ":\" Then
+                                        ' Grab the drive letter and make it lowercase for later use.
+                                        Dim driveLetter As String = fileName.Substring(0, 1).ToLowerInvariant
+                                        ' Remove the drive letter and the colon.
+                                        fileName = fileName.Remove(0, 2)
 
-                                            ' Prepend "/mnt/" and the drive letter to the textbox text.
-                                            fileName = "/mnt/" & driveLetter & fileName
+                                        ' Prepend "/mnt/" and the drive letter to the textbox text.
+                                        fileName = "/mnt/" & driveLetter & fileName
 
-                                            ' Replace back slashes with forward slashes.
-                                            fileName = fileName.Replace("\", "/")
+                                        ' Replace back slashes with forward slashes.
+                                        fileName = fileName.Replace("\", "/")
 
-                                        End If
-                                        ' Remove the single quote on the end.
-                                        fileName = fileName.TrimEnd(CType("'", Char()))
+                                    End If
+                                    ' Remove the single quote on the end.
+                                    fileName = fileName.TrimEnd(CType("'", Char()))
                                     ' Set quote used in file paths to a single quote.
                                     quoteForFilePaths = "'"
 
