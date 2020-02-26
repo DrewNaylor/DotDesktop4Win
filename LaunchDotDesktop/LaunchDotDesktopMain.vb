@@ -54,6 +54,8 @@ Module LaunchDotDesktop
                     ' URL list for apps that allow for URLs to be passed to them.
                     Dim urlList As String = ""
 
+                    Dim quote As String = Chr(34)
+
                     ' Check to see if the desktop entry is a link or an application.
                     If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Type") = "Link" AndAlso
                        desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "URL") IsNot Nothing Then
@@ -131,7 +133,7 @@ Module LaunchDotDesktop
                                 ' It may be a good idea to allow this to be a configurable option
                                 ' in case the user runs into issues on other filesystems that allow
                                 ' the question mark to be in a filename.
-                                Dim quote As String = Chr(34)
+
 
                                 If My.Settings.AllowEditingFileListBeforeLaunching = True Then
                                     Dim editorForm As filePathEditor = New filePathEditor
@@ -158,13 +160,19 @@ Module LaunchDotDesktop
 
 
                                 For Each fileName As String In fileNameList
+                                    MessageBox.Show(fileName)
                                     fileName = fileName.TrimEnd(CType(quote, Char()))
+                                    MessageBox.Show(fileName)
                                     fileName = fileName & "?"
+                                    MessageBox.Show(fileName)
                                 Next
                                 ' Make a new string that joins the file name list into one string.
                                 Dim filesList As String = String.Join("?", fileNameList)
+                                MessageBox.Show(filesList)
                                 ' Replace the joiner character with double-quotes on each side of a space.
                                 filesList = filesList.Replace("?", quote & " " & quote)
+                                MessageBox.Show(filesList)
+
                                 ' If the user wants to, allow for editing the file list before launching.
                                 'If My.Settings.AllowEditingFileListBeforeLaunching = True Then
                                 '    'filesList = InputBox("Once you've made your changes to the file list (if any), please click OK. If you're editing the file list for WSL, please use single quotes instead of double quotes if there are spaces in the path.", "Edit file list", filesList)
@@ -189,11 +197,11 @@ Module LaunchDotDesktop
                         cleanedExecKey = LTrim(cleanedExecKey)
 
                         ' Check for Chr(34), which is the double-quote character.
-                        If cleanedExecKey.StartsWith(Chr(34)) Then
+                        If cleanedExecKey.StartsWith(quote) Then
                             ' Copy the original cleaned exec key for later use in the arg variable.
                             Dim originalCleanedExecKey As String = cleanedExecKey
                             ' Create a temp key to be used when splitting out the EXE filename.
-                            Dim tempExecKey As String() = cleanedExecKey.Split(Chr(34))
+                            Dim tempExecKey As String() = cleanedExecKey.Split(CType(quote, Char()))
                             ' Trim the exec key out at the second double-quote.
                             cleanedExecKey = tempExecKey(1).Trim
                             ' Assign the arg variable to the copy of the exec key and remove
