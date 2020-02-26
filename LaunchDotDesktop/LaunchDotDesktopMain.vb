@@ -131,6 +131,7 @@ Module LaunchDotDesktop
                                 ' It may be a good idea to allow this to be a configurable option
                                 ' in case the user runs into issues on other filesystems that allow
                                 ' the question mark to be in a filename.
+                                Dim quote As String = Chr(34)
 
                                 If My.Settings.AllowEditingFileListBeforeLaunching = True Then
                                     Dim editorForm As filePathEditor = New filePathEditor
@@ -143,37 +144,40 @@ Module LaunchDotDesktop
                                         editorForm.flowlayoutpanelFileList.Controls.Add(editorBox)
                                     Next
                                     If editorForm.ShowDialog() = DialogResult.OK Then
-                                        Console.WriteLine(editorForm.filePaths)
+                                        Console.WriteLine(editorForm.filePaths.ToArray)
                                         Console.ReadLine()
                                         fileNameList = editorForm.filePaths.ToArray
+                                        quote = editorForm.quote
                                     End If
                                 End If
 
                                 ' Define a variable to store the quote character in.
                                 ' This can be changed in case a Linux-style path is desired.
-                                Dim quote As String = Chr(34)
+
+
+
 
                                 For Each fileName As String In fileNameList
-                                    fileName = fileName.TrimEnd(Chr(34))
+                                    fileName = fileName.TrimEnd(CType(quote, Char()))
                                     fileName = fileName & "?"
                                 Next
                                 ' Make a new string that joins the file name list into one string.
                                 Dim filesList As String = String.Join("?", fileNameList)
-                                    ' Replace the joiner character with double-quotes on each side of a space.
-                                    filesList = filesList.Replace("?", Chr(34) & " " & Chr(34))
-                                    ' If the user wants to, allow for editing the file list before launching.
-                                    'If My.Settings.AllowEditingFileListBeforeLaunching = True Then
-                                    '    'filesList = InputBox("Once you've made your changes to the file list (if any), please click OK. If you're editing the file list for WSL, please use single quotes instead of double quotes if there are spaces in the path.", "Edit file list", filesList)
+                                ' Replace the joiner character with double-quotes on each side of a space.
+                                filesList = filesList.Replace("?", quote & " " & quote)
+                                ' If the user wants to, allow for editing the file list before launching.
+                                'If My.Settings.AllowEditingFileListBeforeLaunching = True Then
+                                '    'filesList = InputBox("Once you've made your changes to the file list (if any), please click OK. If you're editing the file list for WSL, please use single quotes instead of double quotes if there are spaces in the path.", "Edit file list", filesList)
 
-                                    '    Dim editorForm As filePathEditor = New filePathEditor
-                                    '    editorForm.textboxEditStyleManually.Text = filesList
-                                    '    editorForm.ShowDialog()
-                                    'End If
-                                    ' Expand %F with the new file list, and add double-quotes on each side
-                                    ' of the file list after putting in a space to separate it from the rest
-                                    ' of the command.
-                                    cleanedExecKey = cleanedExecKey.Replace(" %F", " " & Chr(34) & filesList & Chr(34))
-                                Else
+                                '    Dim editorForm As filePathEditor = New filePathEditor
+                                '    editorForm.textboxEditStyleManually.Text = filesList
+                                '    editorForm.ShowDialog()
+                                'End If
+                                ' Expand %F with the new file list, and add double-quotes on each side
+                                ' of the file list after putting in a space to separate it from the rest
+                                ' of the command.
+                                cleanedExecKey = cleanedExecKey.Replace(" %F", " " & quote & filesList & quote)
+                            Else
                                     ' If the user cancels, just remove the %F.
                                     cleanedExecKey = cleanedExecKey.Replace(" %F", "")
                             End If

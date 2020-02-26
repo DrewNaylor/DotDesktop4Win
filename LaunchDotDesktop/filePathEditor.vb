@@ -126,4 +126,14 @@ Public Class filePathEditor
             Return entireList
         End Get
     End Property
+
+    ReadOnly Property quote As String
+        Get
+            If radiobuttonLinuxStyle.Checked = True Then
+                Return "'"
+            Else
+                Return Chr(34)
+            End If
+        End Get
+    End Property
 End Class
