@@ -15,10 +15,13 @@ Public Class filePathEditor
     End Sub
 
     Private Sub filePathEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'textboxEditStyleManually.Text = filesInEditor
+        ' Make sure to check the Windows-style radio button and run the code it uses
+        ' to enable/disable it and stuff.
+        radiobuttonWindowsStyle.Checked = True
+        checkedWindowsStyleRadioButton()
     End Sub
 
-    Private Sub radiobuttonWindowsStyle_Click(sender As Object, e As EventArgs) Handles radiobuttonWindowsStyle.Click
+    Private Sub checkedWindowsStyleRadioButton()
         ' Look at each textbox inside the flow layout panel.
         For Each editBox As TextBox In flowlayoutpanelFileList.Controls
             ' Disable textboxes to prevent accidental edits.
@@ -37,6 +40,11 @@ Public Class filePathEditor
                 editBox.Text = editBox.Text.Replace("/", "\")
             End If
         Next
+    End Sub
+
+    Private Sub radiobuttonWindowsStyle_Click(sender As Object, e As EventArgs) Handles radiobuttonWindowsStyle.Click
+        ' Moved to its own sub for use elsewhere.
+        checkedWindowsStyleRadioButton()
     End Sub
 
     Private Sub radiobuttonLinuxStyle_Click(sender As Object, e As EventArgs) Handles radiobuttonLinuxStyle.Click
