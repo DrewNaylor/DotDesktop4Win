@@ -38,11 +38,18 @@ Public Class filePathEditor
     End Sub
 
     Private Sub radiobuttonLinuxStyle_Click(sender As Object, e As EventArgs) Handles radiobuttonLinuxStyle.Click
+        ' Look at each textbox inside the flow layout panel.
         For Each editBox As TextBox In flowlayoutpanelFileList.Controls
-            If editBox.Text.Remove(0, 1).StartsWith(":\") Then
+            ' Check from the first through the third characters to check that they're
+            ' ":\" like the Windows path style without the drive letter.
+            If editBox.Text.Substring(1, 2) = ":\" Then
+                ' Grab the drive letter and make it lowercase for later use.
                 Dim driveLetter As String = editBox.Text.Substring(0, 1).ToLowerInvariant
+                ' Remove the drive letter and the colon.
                 editBox.Text = editBox.Text.Remove(0, 2)
+                ' Prepend "/mnt/" and the drive letter to the textbox text.
                 editBox.Text = "/mnt/" & driveLetter & editBox.Text
+                ' Replace back slashes with forward slashes.
                 editBox.Text = editBox.Text.Replace("\", "/")
             End If
         Next
