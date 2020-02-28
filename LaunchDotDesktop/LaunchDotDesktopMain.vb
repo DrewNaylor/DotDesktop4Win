@@ -113,7 +113,7 @@ Module LaunchDotDesktop
                                 ' If the .desktop file requests it, switch the paths to be Linux-style.
                                 If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
 
-                                    ' Remove the single quote on the end.
+                                    ' Convert the filename/file path to what WSL distros expect.
                                     fileName = convertPathsStyleToWSL(fileName)
                                     ' Set quote used in file paths to a single quote.
                                     quoteForFilePaths = "'"
@@ -157,17 +157,21 @@ Module LaunchDotDesktop
                                         ' Set quote used in file paths to a single quote.
                                         quoteForFilePaths = "'"
                                         ' Add the newly-modified filename to the path list.
+
                                         ' Put a question mark at the end of the filename
                                         ' for later use when joining the string.
                                         ' It may be a good idea to allow this to be a configurable option
                                         ' in case the user runs into issues on other filesystems that allow
                                         ' the question mark to be in a filename.
+
+                                        ' Convert the filename/file path to what WSL distros expect.
                                         entirePathList.Add(quoteForFilePaths & convertPathsStyleToWSL(fileName) & quoteForFilePaths & " ?")
 
                                     Else
                                         ' Remove the double-quotes on the end of the filename.
                                         fileName = fileName.TrimEnd(Chr(34))
                                         ' Add the filename to the path list.
+
                                         ' Put a question mark at the end of the filename
                                         ' for later use when joining the string.
                                         ' It may be a good idea to allow this to be a configurable option
