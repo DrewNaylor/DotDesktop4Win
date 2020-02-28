@@ -111,7 +111,7 @@ Module LaunchDotDesktop
                                 Dim fileName As String = openFileDialog.FileName
                                 Dim quoteForFilePaths As String = Chr(34)
                                 ' If the .desktop file requests it, switch the paths to be Linux-style.
-                                If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "X-DotDesktop4Win-ForceLinuxStyleFilePaths") = "true" Then
+                                If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
                                     If fileName.Substring(1, 2) = ":\" Then
                                         ' Grab the drive letter and make it lowercase for later use.
                                         Dim driveLetter As String = fileName.Substring(0, 1).ToLowerInvariant
@@ -164,7 +164,7 @@ Module LaunchDotDesktop
                                 Dim quoteForFilePaths As String = Chr(34)
                                 For Each fileName As String In fileNameList
                                     ' If the .desktop file requests it, switch the paths to be Linux-style.
-                                    If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "X-DotDesktop4Win-ForceLinuxStyleFilePaths") = "true" Then
+                                    If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
                                         If fileName.Substring(1, 2) = ":\" Then
                                             ' Grab the drive letter and make it lowercase for later use.
                                             Dim driveLetter As String = fileName.Substring(0, 1).ToLowerInvariant
