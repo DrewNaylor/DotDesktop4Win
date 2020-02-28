@@ -112,21 +112,9 @@ Module LaunchDotDesktop
                                 Dim quoteForFilePaths As String = Chr(34)
                                 ' If the .desktop file requests it, switch the paths to be Linux-style.
                                 If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
-                                    If fileName.Substring(1, 2) = ":\" Then
-                                        ' Grab the drive letter and make it lowercase for later use.
-                                        Dim driveLetter As String = fileName.Substring(0, 1).ToLowerInvariant
-                                        ' Remove the drive letter and the colon.
-                                        fileName = fileName.Remove(0, 2)
 
-                                        ' Prepend "/mnt/" and the drive letter to the textbox text.
-                                        fileName = "/mnt/" & driveLetter & fileName
-
-                                        ' Replace back slashes with forward slashes.
-                                        fileName = fileName.Replace("\", "/")
-
-                                    End If
                                     ' Remove the single quote on the end.
-                                    fileName = fileName.TrimEnd(CType("'", Char()))
+                                    fileName = convertPathsStyleToWSL(fileName)
                                     ' Set quote used in file paths to a single quote.
                                     quoteForFilePaths = "'"
 
@@ -165,21 +153,7 @@ Module LaunchDotDesktop
                                 For Each fileName As String In fileNameList
                                     ' If the .desktop file requests it, switch the paths to be Linux-style.
                                     If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
-                                        If fileName.Substring(1, 2) = ":\" Then
-                                            ' Grab the drive letter and make it lowercase for later use.
-                                            Dim driveLetter As String = fileName.Substring(0, 1).ToLowerInvariant
-                                            ' Remove the drive letter and the colon.
-                                            fileName = fileName.Remove(0, 2)
-
-                                            ' Prepend "/mnt/" and the drive letter to the textbox text.
-                                            fileName = "/mnt/" & driveLetter & fileName
-
-                                            ' Replace back slashes with forward slashes.
-                                            fileName = fileName.Replace("\", "/")
-
-                                        End If
-                                        ' Remove the single quote on the end.
-                                        fileName = fileName.TrimEnd(CType("'", Char()))
+                                        
                                         ' Set quote used in file paths to a single quote.
                                         quoteForFilePaths = "'"
                                         ' Add the newly-modified filename to the path list.
@@ -188,7 +162,7 @@ Module LaunchDotDesktop
                                         ' It may be a good idea to allow this to be a configurable option
                                         ' in case the user runs into issues on other filesystems that allow
                                         ' the question mark to be in a filename.
-                                        entirePathList.Add(quoteForFilePaths & fileName & quoteForFilePaths & " ?")
+                                        entirePathList.Add(quoteForFilePaths & convertPathsStyleToWSL(fileName) & quoteForFilePaths & " ?")
 
                                     Else
                                         ' Remove the double-quotes on the end of the filename.
@@ -311,5 +285,24 @@ Module LaunchDotDesktop
                             " and configuration instead of this message box.", "No file passed - LaunchDotDesktop")
         End If
     End Sub
+
+    Private Function convertPathsStyleToWSL(fileName As String) As String
+        If fileName.Substring(1, 2) = ":\" Then
+            ' Grab the drive letter and make it lowercase for later use.
+            Dim driveLetter As String = fileName.Substring(0, 1).ToLowerInvariant
+            ' Remove the drive letter and the colon.
+            fileName = fileName.Remove(0, 2)
+
+            ' Prepend "/mnt/" and the drive letter to the textbox text.
+            fileName = "/mnt/" & driveLetter & fileName
+
+            ' Replace back slashes with forward slashes.
+            fileName = fileName.Replace("\", "/")
+
+        End If
+        ' Remove the single quote on the end.
+        fileName = fileName.TrimEnd(CType("'", Char()))
+        Return fileName
+    End Function
 
 End Module
