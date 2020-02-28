@@ -129,6 +129,8 @@ Module LaunchDotDesktop
                             Else
                                 ' If the user cancels, just remove the %f.
                                 cleanedExecKey = cleanedExecKey.Replace(" %f", "")
+
+                                ' TODO: Remove any instances of %u, %U, and %F.
                             End If
 
                         ElseIf cleanedExecKey.Contains(" %F") Then
