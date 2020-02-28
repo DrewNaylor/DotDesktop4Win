@@ -287,6 +287,7 @@ Module LaunchDotDesktop
     End Sub
 
     Private Function convertPathsStyleToWSL(fileName As String) As String
+        ' Convert Windows paths to be usable under WSL.
         If fileName.Substring(1, 2) = ":\" Then
             ' Grab the drive letter and make it lowercase for later use.
             Dim driveLetter As String = fileName.Substring(0, 1).ToLowerInvariant
