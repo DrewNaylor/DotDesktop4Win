@@ -76,31 +76,31 @@ Module LaunchDotDesktop
 #Region "Clean up Exec key if needed, and allow for choosing files and URLs."
 
                         ' %d is deprecated.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "d", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%d", "")
                         ' %D is deprecated.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "D", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%D", "")
                         ' %n is deprecated.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "n", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%n", "")
                         ' %N is deprecated.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "N", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%N", "")
                         ' %v is deprecated.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "v", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%v", "")
                         ' %m is deprecated.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "m", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%m", "")
 
                         ' Determine if the application allows for entering a URL,
                         ' and provide a space to type it in.
-                        If regexCheckFlags(cleanedExecKey, "u") Then
+                        If regexCheckFlags(cleanedExecKey, "%u") Then
                             ' If there's a %u in the file, open a window to ask for a URL.
                             urlList = InputBox("Please type or paste a URL:", "Single URL input")
                             ' Expand %u to what the user entered.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "u", urlList)
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", " " & urlList)
 
-                        ElseIf regexCheckFlags(cleanedExecKey, "U") Then
+                        ElseIf regexCheckFlags(cleanedExecKey, "%U") Then
                             ' If there's a %U in the file, open a window to allow for entering URLs.
                             urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
                             ' Expand %U to what the user entered.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "U", urlList)
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", " " & urlList)
 
                         ElseIf cleanedExecKey.Contains(" %f") Then
                             ' If there's a %f, allow for choosing one file.
@@ -335,12 +335,12 @@ Module LaunchDotDesktop
     'End Function
 
     Private Function regexReplaceFlags(input As String, flag As String, desiredReplacement As String) As String
-        Dim regexThing As New Regex("%" & flag & "\b")
+        Dim regexThing As New Regex("\s" & flag & "\b")
         Return regexThing.Replace(input, desiredReplacement)
     End Function
 
     Private Function regexCheckFlags(input As String, flag As String) As Boolean
-        Return Regex.IsMatch(input, "\s%" & flag & "\b")
+        Return Regex.IsMatch(input, "\s" & flag & "\b")
     End Function
 
 End Module
