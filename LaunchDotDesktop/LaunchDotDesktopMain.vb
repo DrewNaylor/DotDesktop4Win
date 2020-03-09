@@ -95,12 +95,15 @@ Module LaunchDotDesktop
                             urlList = InputBox("Please type or paste a URL:", "Single URL input")
                             ' Expand %u to what the user entered.
                             cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", " " & urlList)
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+
 
                         ElseIf regexCheckFlags(cleanedExecKey, "%U") Then
                             ' If there's a %U in the file, open a window to allow for entering URLs.
                             urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
                             ' Expand %U to what the user entered.
                             cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", " " & urlList)
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
 
                         ElseIf cleanedExecKey.Contains(" %f") Then
                             ' If there's a %f, allow for choosing one file.
