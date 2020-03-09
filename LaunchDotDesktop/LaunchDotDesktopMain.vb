@@ -86,21 +86,22 @@ Module LaunchDotDesktop
                         ' %v is deprecated.
                         cleanedExecKey = cleanedExecKey.Replace(" %v", "")
                         ' %m is deprecated.
-                        cleanedExecKey = cleanedExecKey.Replace(" %m", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "m", "")
+                        MessageBox.Show(cleanedExecKey)
 
                         ' Determine if the application allows for entering a URL,
                         ' and provide a space to type it in.
-                        If regexCheckFlags(cleanedExecKey, "%u") Then
+                        If regexCheckFlags(cleanedExecKey, "u") Then
                             ' If there's a %u in the file, open a window to ask for a URL.
                             urlList = InputBox("Please type or paste a URL:", "Single URL input")
                             ' Expand %u to what the user entered.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", urlList)
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "u", urlList)
 
-                        ElseIf regexCheckFlags(cleanedExecKey, "%U") Then
+                        ElseIf regexCheckFlags(cleanedExecKey, "U") Then
                             ' If there's a %U in the file, open a window to allow for entering URLs.
                             urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
                             ' Expand %U to what the user entered.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", urlList)
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "U", urlList)
 
                         ElseIf cleanedExecKey.Contains(" %f") Then
                             ' If there's a %f, allow for choosing one file.
@@ -334,13 +335,13 @@ Module LaunchDotDesktop
 
     'End Function
 
-    Private Function regexReplaceFlags(input As String, flag As String, desiredPath As String) As String
-        Dim regexThing As New Regex("\" & flag & "$")
-        Return regexThing.Replace(input.TrimEnd, desiredPath)
+    Private Function regexReplaceFlags(input As String, flag As String, desiredReplacement As String) As String
+        Dim regexThing As New Regex("%" & flag & "\b")
+        Return regexThing.Replace(input, desiredReplacement)
     End Function
 
     Private Function regexCheckFlags(input As String, flag As String) As Boolean
-        Return Regex.IsMatch(input.TrimEnd, "\s\" & flag & "$")
+        Return Regex.IsMatch(input, "\s%" & flag & "\b")
     End Function
 
 End Module
