@@ -22,6 +22,8 @@
 
 Imports System.Windows.Forms
 Imports libdotdesktop
+Imports System.Text.RegularExpressions
+
 Module LaunchDotDesktop
 
     Public Sub Main()
@@ -94,11 +96,12 @@ Module LaunchDotDesktop
                             ' Expand %u to what the user entered.
                             cleanedExecKey = cleanedExecKey.Replace(" %u", " " & urlList)
 
-                        ElseIf cleanedExecKey.Contains(" %U") Then
+                        ElseIf Regex.IsMatch(cleanedExecKey, "\s\%U\s") Then
                             ' If there's a %U in the file, open a window to allow for entering URLs.
                             urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
                             ' Expand %U to what the user entered.
-                            cleanedExecKey = cleanedExecKey.Replace(" %U", " " & urlList)
+                            'cleanedExecKey = cleanedExecKey.Replace(" %U", " " & urlList)
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "\%U\s", urlList)
 
                         ElseIf cleanedExecKey.Contains(" %f") Then
                             ' If there's a %f, allow for choosing one file.
@@ -320,6 +323,21 @@ Module LaunchDotDesktop
         ' Remove the single quote on the end.
         fileName = fileName.TrimEnd(CType("'", Char()))
         Return fileName
+    End Function
+
+    'Private Function regexReplacer(inputText As String, regexExpression As String)
+    '    Dim matchList As MatchCollection = Regex.Matches(inputText, regexExpression)
+    '    Dim match As Match
+
+    '    For Each match In matchList
+    '        If match Then
+    '    Next
+
+    'End Function
+
+    Private Function regexReplaceFlags(input As String, flag As String, desiredPath As String) As String
+        Dim regexThing As New Regex(flag)
+        Return regexThing.Replace(input, desiredPath)
     End Function
 
 End Module
