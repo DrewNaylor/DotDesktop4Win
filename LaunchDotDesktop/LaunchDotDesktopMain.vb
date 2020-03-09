@@ -132,6 +132,15 @@ Module LaunchDotDesktop
 
                                 ' TODO: Remove any instances of %u, %U, and %F
                                 ' after merging back into master.
+                                ' Actually, this will probably require using Regex.
+                                ' The developer of WinYourDesktop appears to have done
+                                ' the same thing where they used Regex to replace variables,
+                                ' and it looks like a good way to do this to make sure the correct
+                                ' variables are replaced.
+                                ' Maybe what should be done is to have this code
+                                ' in a function so that it's reusable, kinda like what's done in WinYourDesktop.
+                                ' This tutorial on Regex in VB.Net looks pretty good:
+                                ' https://www.tutorialspoint.com/vb.net/vb.net_regular_expressions.htm
                             End If
 
                         ElseIf cleanedExecKey.Contains(" %F") Then
@@ -156,7 +165,7 @@ Module LaunchDotDesktop
                                 For Each fileName As String In fileNameList
                                     ' If the .desktop file requests it, switch the paths to be Linux-style.
                                     If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
-                                        
+
                                         ' Set quote used in file paths to a single quote.
                                         quoteForFilePaths = "'"
                                         ' Add the newly-modified filename to the path list.
