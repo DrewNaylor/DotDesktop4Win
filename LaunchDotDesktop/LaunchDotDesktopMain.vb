@@ -336,12 +336,12 @@ Module LaunchDotDesktop
     'End Function
 
     Private Function regexReplaceFlags(input As String, flag As String, desiredPath As String) As String
-        Dim regexThing As New Regex("\" & flag & "\s*")
+        Dim regexThing As New Regex("\" & flag & "$")
         Return regexThing.Replace(input, desiredPath)
     End Function
 
     Private Function regexCheckFlags(input As String, flag As String) As Boolean
-        Return Regex.IsMatch(input, "\s\" & flag & "\s*")
+        Return Regex.IsMatch(input, "\s\" & flag & "$")
     End Function
 
 End Module
