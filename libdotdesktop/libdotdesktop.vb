@@ -199,7 +199,27 @@ Public Class desktopEntryStuff
             ' First make sure it's in there.
             If desktopEntrySection.Keys("Terminal") IsNot Nothing Then
                 ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("Terminal").Value
+                Return desktopEntrySection.Keys("Terminal").Value.ToLowerInvariant
+            Else
+                ' Otherwise, return Nothing if the key is unavailable.
+                Return Nothing
+            End If
+#End Region
+
+#Region "Get X-DotDesktop4Win-UseWSLFilePaths key."
+        ElseIf keyToGet = "X-DotDesktop4Win-UseWSLFilePaths" Then
+
+            ' X-DotDesktop4Win-UseWSLFilePaths definition and use:
+            ' This key is used to force Linux-style paths to be used in
+            ' situations like WSL where file paths are expected to be
+            ' /mnt/c/whatever instead of C:\whatever.
+            ' This key is a Boolean, and can either be true or false.
+
+            ' If we want to get the X-DotDesktop4Win-UseWSLFilePaths value, return that.
+            ' First make sure it's in there.
+            If desktopEntrySection.Keys("X-DotDesktop4Win-UseWSLFilePaths") IsNot Nothing Then
+                ' If it is in there, return it as expected.
+                Return desktopEntrySection.Keys("X-DotDesktop4Win-UseWSLFilePaths").Value.ToLowerInvariant
             Else
                 ' Otherwise, return Nothing if the key is unavailable.
                 Return Nothing

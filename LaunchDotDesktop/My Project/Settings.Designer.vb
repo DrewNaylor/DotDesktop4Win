@@ -65,18 +65,6 @@ Namespace My
                 Me("PauseBeforeExitOnSuccessfulLaunch") = value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property AllowEditingFileListBeforeLaunching() As Boolean
-            Get
-                Return CType(Me("AllowEditingFileListBeforeLaunching"),Boolean)
-            End Get
-            Set
-                Me("AllowEditingFileListBeforeLaunching") = value
-            End Set
-        End Property
     End Class
 End Namespace
 
