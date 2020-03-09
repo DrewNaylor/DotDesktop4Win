@@ -96,7 +96,7 @@ Module LaunchDotDesktop
                             ' Expand %u to what the user entered.
                             cleanedExecKey = cleanedExecKey.Replace(" %u", " " & urlList)
 
-                        ElseIf Regex.IsMatch(cleanedExecKey, "\s\%U\s") Then
+                        ElseIf regexCheckFlags(cleanedExecKey, "%U") Then
                             ' If there's a %U in the file, open a window to allow for entering URLs.
                             urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
                             ' Expand %U to what the user entered.
@@ -338,6 +338,10 @@ Module LaunchDotDesktop
     Private Function regexReplaceFlags(input As String, flag As String, desiredPath As String) As String
         Dim regexThing As New Regex(flag)
         Return regexThing.Replace(input, desiredPath)
+    End Function
+
+    Private Function regexCheckFlags(input As String, flag As String) As Boolean
+        Return Regex.IsMatch(input, "\s\" & flag & "\s+")
     End Function
 
 End Module
