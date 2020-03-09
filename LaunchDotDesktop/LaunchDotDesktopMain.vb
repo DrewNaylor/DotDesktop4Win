@@ -101,7 +101,7 @@ Module LaunchDotDesktop
                             urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
                             ' Expand %U to what the user entered.
                             'cleanedExecKey = cleanedExecKey.Replace(" %U", " " & urlList)
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "\%U\s", urlList)
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", urlList)
 
                         ElseIf cleanedExecKey.Contains(" %f") Then
                             ' If there's a %f, allow for choosing one file.
@@ -336,12 +336,12 @@ Module LaunchDotDesktop
     'End Function
 
     Private Function regexReplaceFlags(input As String, flag As String, desiredPath As String) As String
-        Dim regexThing As New Regex(flag)
+        Dim regexThing As New Regex("\" & flag & "\s*")
         Return regexThing.Replace(input, desiredPath)
     End Function
 
     Private Function regexCheckFlags(input As String, flag As String) As Boolean
-        Return Regex.IsMatch(input, "\s\" & flag & "\s+")
+        Return Regex.IsMatch(input, "\s\" & flag & "\s*")
     End Function
 
 End Module
