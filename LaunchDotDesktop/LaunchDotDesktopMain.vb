@@ -76,18 +76,17 @@ Module LaunchDotDesktop
 #Region "Clean up Exec key if needed, and allow for choosing files and URLs."
 
                         ' %d is deprecated.
-                        cleanedExecKey = cleanedExecKey.Replace(" %d", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "d", "")
                         ' %D is deprecated.
-                        cleanedExecKey = cleanedExecKey.Replace(" %D", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "D", "")
                         ' %n is deprecated.
-                        cleanedExecKey = cleanedExecKey.Replace(" %n", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "n", "")
                         ' %N is deprecated.
-                        cleanedExecKey = cleanedExecKey.Replace(" %N", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "N", "")
                         ' %v is deprecated.
-                        cleanedExecKey = cleanedExecKey.Replace(" %v", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "v", "")
                         ' %m is deprecated.
                         cleanedExecKey = regexReplaceFlags(cleanedExecKey, "m", "")
-                        MessageBox.Show(cleanedExecKey)
 
                         ' Determine if the application allows for entering a URL,
                         ' and provide a space to type it in.
