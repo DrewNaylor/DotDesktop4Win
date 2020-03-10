@@ -376,11 +376,13 @@ Module LaunchDotDesktop
         ' \b is for the word border at the end.
         ' This can't be used with flags/environment variables
         ' that end with a percent sign.
-        Dim percent As String = ""
+        Dim tempRegex As String = "\s+" & flag & "\b"
+
         If flag.EndsWith("%") Then
-            percent = "%"
+            tempRegex = "\s+" & flag.TrimEnd(CType("%", Char())) & "\b%"
         End If
-        Return Regex.IsMatch(input, "\s+" & flag & "\b" & percent)
+
+        Return Regex.IsMatch(input, tempRegex)
     End Function
 
 End Module
