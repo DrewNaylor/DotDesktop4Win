@@ -259,6 +259,7 @@ Module LaunchDotDesktop
 
                     ' Expand environment variables.
                     cleanedExecKey = expandEnvVars(cleanedExecKey)
+                    MessageBox.Show(cleanedExecKey)
                     ' TODO: Switch the urlList to WSL paths if
                     ' the .desktop file wants it.
                     urlList = expandEnvVars(urlList)
@@ -376,13 +377,15 @@ Module LaunchDotDesktop
         End If
     End Function
 
-    Private Function regexCheckFlags(input As String, flag As String, Optional caseSensitive As Boolean = True) As Boolean
+    Private Function regexCheckFlags(input As String, flag As String, Optional caseSensitive As Boolean = True, Optional isSpecialFolder As Boolean = False) As Boolean
         ' Check to see if the input string contains a flag in the style of %u using regex.
         ' If there's a match, this'll return a Boolean.
         ' \s+ is for whitespace before the flag.
         ' \b is for the word border at the end.
         ' This can be used with flags/environment variables
         ' that end with a percent sign.
+
+        ' If this is a special folder, ignore space at beginning.
 
         ' Create temporary string for regex pattern.
         Dim tempRegex As String = "\s+" & flag & "\b"
@@ -407,12 +410,24 @@ Module LaunchDotDesktop
 
     End Function
 
-    Private Function expandEnvVars(input As String) As String
 
+    Private Function expandEnvVars(execOrArg As String) As String
+        MessageBox.Show(execOrArg)
         ' First we expand %USERPROFILE%.
-        input = regexReplaceFlags(input, "%USERPROFILE%", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), False)
+        Dim output As String = execOrArg
+        If regexCheckFlags(execOrArg, "%USERPROFILE%", False) Then
+            output = regexReplaceFlags(execOrArg, "%USERPROFILE%", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), False)
+            MessageBox.Show(output)
+        End If
 
-        Return input
+        ' Now we can replace %WINDIR%.
+        If regexCheckFlags(execOrArg, "%WINDIR%", False) Then
+            MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.Windows))
+            output = regexReplaceFlags(execOrArg, "%WINDIR%", Environment.GetFolderPath(Environment.SpecialFolder.Windows), False)
+            MessageBox.Show(output)
+        End If
+
+        Return output
     End Function
 
 End Module
