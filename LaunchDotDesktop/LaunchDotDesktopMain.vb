@@ -22,6 +22,8 @@
 
 Imports System.Windows.Forms
 Imports libdotdesktop
+Imports System.Text.RegularExpressions
+
 Module LaunchDotDesktop
 
     Public Sub Main()
@@ -74,33 +76,40 @@ Module LaunchDotDesktop
 #Region "Clean up Exec key if needed, and allow for choosing files and URLs."
 
                         ' %d is deprecated.
-                        cleanedExecKey = cleanedExecKey.Replace(" %d", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%d", "")
                         ' %D is deprecated.
-                        cleanedExecKey = cleanedExecKey.Replace(" %D", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%D", "")
                         ' %n is deprecated.
-                        cleanedExecKey = cleanedExecKey.Replace(" %n", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%n", "")
                         ' %N is deprecated.
-                        cleanedExecKey = cleanedExecKey.Replace(" %N", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%N", "")
                         ' %v is deprecated.
-                        cleanedExecKey = cleanedExecKey.Replace(" %v", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%v", "")
                         ' %m is deprecated.
-                        cleanedExecKey = cleanedExecKey.Replace(" %m", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%m", "")
 
                         ' Determine if the application allows for entering a URL,
                         ' and provide a space to type it in.
-                        If cleanedExecKey.Contains(" %u") Then
+                        If regexCheckFlags(cleanedExecKey, "%u") Then
                             ' If there's a %u in the file, open a window to ask for a URL.
                             urlList = InputBox("Please type or paste a URL:", "Single URL input")
                             ' Expand %u to what the user entered.
-                            cleanedExecKey = cleanedExecKey.Replace(" %u", " " & urlList)
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", " " & urlList)
+                            ' Clean up unused flags.
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
 
-                        ElseIf cleanedExecKey.Contains(" %U") Then
+
+                        ElseIf regexCheckFlags(cleanedExecKey, "%U") Then
                             ' If there's a %U in the file, open a window to allow for entering URLs.
                             urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
                             ' Expand %U to what the user entered.
-                            cleanedExecKey = cleanedExecKey.Replace(" %U", " " & urlList)
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", " " & urlList)
+                            ' Clean up unused flags.
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
 
-                        ElseIf cleanedExecKey.Contains(" %f") Then
+                        ElseIf regexCheckFlags(cleanedExecKey, "%f") Then
                             ' If there's a %f, allow for choosing one file.
                             Dim openFileDialog As New OpenFileDialog()
                             openFileDialog.Filter = "All files (*.*)|*.*"
@@ -125,16 +134,21 @@ Module LaunchDotDesktop
 
                                 ' Update cleanedExecKey with the fileName, which may or may not have been modified
                                 ' to be Linux-style if the desktop entry file wanted it or not.
-                                cleanedExecKey = cleanedExecKey.Replace(" %f", " " & quoteForFilePaths & fileName & quoteForFilePaths)
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", " " & quoteForFilePaths & fileName & quoteForFilePaths)
+                                ' Clean up unused flags.
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
                             Else
                                 ' If the user cancels, just remove the %f.
-                                cleanedExecKey = cleanedExecKey.Replace(" %f", "")
-
-                                ' TODO: Remove any instances of %u, %U, and %F
-                                ' after merging back into master.
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
+                                ' Clean up unused flags.
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
                             End If
 
-                        ElseIf cleanedExecKey.Contains(" %F") Then
+                        ElseIf regexCheckFlags(cleanedExecKey, "%F") Then
                             ' If there's a %F, allow for choosing multiple files.
                             Dim openFileDialog As New OpenFileDialog()
                             openFileDialog.Filter = "All files (*.*)|*.*"
@@ -156,7 +170,7 @@ Module LaunchDotDesktop
                                 For Each fileName As String In fileNameList
                                     ' If the .desktop file requests it, switch the paths to be Linux-style.
                                     If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
-                                        
+
                                         ' Set quote used in file paths to a single quote.
                                         quoteForFilePaths = "'"
                                         ' Add the newly-modified filename to the path list.
@@ -192,10 +206,18 @@ Module LaunchDotDesktop
                                 ' Expand %F with the new file list, and add double-quotes on each side
                                 ' of the file list after putting in a space to separate it from the rest
                                 ' of the command.
-                                cleanedExecKey = cleanedExecKey.Replace(" %F", " " & filesList)
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", " " & filesList.TrimEnd)
+                                ' Clean up unused flags.
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
                             Else
                                 ' If the user cancels, just remove the %F.
-                                cleanedExecKey = cleanedExecKey.Replace(" %F", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
+                                ' Clean up unused flags.
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
                             End If
                         End If
 
@@ -311,6 +333,72 @@ Module LaunchDotDesktop
         ' Remove the single quote on the end.
         fileName = fileName.TrimEnd(CType("'", Char()))
         Return fileName
+    End Function
+
+    Private Function regexReplaceFlags(input As String, flag As String, desiredReplacement As String, Optional caseSensitive As Boolean = True) As String
+        ' Replaces flags in the style of %u with a string using regex.
+        ' First we need to create a regular expression to match what'll
+        ' be replaced.
+        ' \s+ is for whitespace before the flag.
+        ' \b is for the word border at the end.
+        ' This can be used with flags/environment variables
+        ' that end with a percent sign.
+        ' The case-sensitive if statement may need to be cleaned up a bit.
+
+        ' Create a temp string to hold the regex for now.
+        Dim tempRegex As String = "\s+" & flag & "\b"
+
+        If flag.EndsWith("%") Then
+            ' If the flag ends with a percent sign,
+            ' change the regex temp string to work
+            ' with it so it's matched later.
+            tempRegex = "\s+" & flag.TrimEnd(CType("%", Char())) & "\b%"
+        End If
+
+        If caseSensitive = False Then
+            ' If case-insensitivity is fine for this
+            ' flag, have the regex thing ignore case.
+            Dim regexThing As New Regex(tempRegex, RegexOptions.IgnoreCase)
+            ' Now we perform the replacement.
+            Return regexThing.Replace(input, desiredReplacement)
+        Else
+            ' Otherwise, don't have the regex thing
+            ' ignore case.
+            Dim regexThing As New Regex(tempRegex)
+            ' Now we perform the replacement.
+            Return regexThing.Replace(input, desiredReplacement)
+        End If
+    End Function
+
+    Private Function regexCheckFlags(input As String, flag As String, Optional caseSensitive As Boolean = True) As Boolean
+        ' Check to see if the input string contains a flag in the style of %u using regex.
+        ' If there's a match, this'll return a Boolean.
+        ' \s+ is for whitespace before the flag.
+        ' \b is for the word border at the end.
+        ' This can be used with flags/environment variables
+        ' that end with a percent sign.
+
+        ' Create temporary string for regex pattern.
+        Dim tempRegex As String = "\s+" & flag & "\b"
+
+        If flag.EndsWith("%") Then
+            ' If the flag ends with a percent sign,
+            ' change the regex string to work with it.
+            tempRegex = "\s+" & flag.TrimEnd(CType("%", Char())) & "\b%"
+        End If
+
+        If caseSensitive = False Then
+            ' If case sensitivity isn't desired for this
+            ' flag (such as for %userprofile%), have
+            ' the regex thing ignore case when returning
+            ' the boolean.
+            Return Regex.IsMatch(input, tempRegex, RegexOptions.IgnoreCase)
+        Else
+            ' Otherwise, case sensitivity is necessary, so
+            ' it'll be used.
+            Return Regex.IsMatch(input, tempRegex)
+        End If
+
     End Function
 
 End Module
