@@ -357,11 +357,10 @@ Module LaunchDotDesktop
         ' This can't be used with flags/environment variables
         ' that end with a percent sign.
 
-        Dim tempRegex As String = ""
+        Dim tempRegex As String = "\s+" & flag & "\b"
+
         If flag.EndsWith("%") Then
             tempRegex = "\s+" & flag.TrimEnd(CType("%", Char())) & "\b%"
-        Else
-            tempRegex = "\s+" & flag & "\b"
         End If
 
         Dim regexThing As New Regex(tempRegex)
