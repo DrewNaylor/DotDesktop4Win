@@ -257,6 +257,10 @@ Module LaunchDotDesktop
                         ' Done figuring out the desktop entry type.
                     End If
 
+                    ' Expand environment variables.
+                    cleanedExecKey = expandEnvVars(cleanedExecKey)
+                    urlList = expandEnvVars(urlList)
+
                     ' Now, see if urlList has anything in it, and if it does,
                     ' send that URL as an argument to the application.
                     Dim execProgram As New ProcessStartInfo
