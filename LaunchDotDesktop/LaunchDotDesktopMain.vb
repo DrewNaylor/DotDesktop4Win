@@ -430,6 +430,14 @@ Module LaunchDotDesktop
         End If
 
         ' Replace %ProgramFiles%.
+        ' This returns "C:\Program Files (x86)" on 64-bit Windows
+        ' when running an application in 32-bit mode, so to get the
+        ' "real" Program Files, we'd need %ProgramW6432% instead.
+        ' That requires a runtime check to make sure it's running
+        ' on a 64-bit system, and if not, it'll use the "%ProgramFiles%"
+        ' special folder instead.
+        ' There's also the "%programfiles(x86)%" variable, which
+        ' would go to "C:\Program Files (x86)" without redirection.
         If regexCheckFlags(execOrArg, "%programfiles%", False) Then
             MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles))
             output = regexReplaceFlags(execOrArg, "%ProgramFiles%", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), False)
