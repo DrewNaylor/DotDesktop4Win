@@ -269,7 +269,7 @@ Module LaunchDotDesktop
                         ' Done figuring out the desktop entry type.
                     End If
 
-                    urlList = regexReplaceFlags(urlList, "%userprofile%", "C:\Users\drewn\")
+                    urlList = regexReplaceFlags(urlList, "%userprofile%", "C:\Users\drewn\", False)
                     ' Now, see if urlList has anything in it, and if it does,
                     ' send that URL as an argument to the application.
                     Dim execProgram As New ProcessStartInfo
@@ -348,16 +348,15 @@ Module LaunchDotDesktop
         Return fileName
     End Function
 
-    Private Function regexReplaceFlags(input As String, flag As String, desiredReplacement As String) As String
+    Private Function regexReplaceFlags(input As String, flag As String, desiredReplacement As String, Optional caseSensitive As Boolean = True) As String
         ' Replaces flags in the style of %u with a string using regex.
         ' First we need to create a regular expression to match what'll
         ' be replaced.
         ' \s+ is for whitespace before the flag.
         ' \b is for the word border at the end.
         ' This can be used with flags/environment variables
-        ' that end with a percent sign, though case sensitivity
-        ' is still enforced for now and it needs to be allowed
-        ' to be turned off.
+        ' that end with a percent sign.
+        ' The case-sensitive if statement may need to be cleaned up a bit.
 
         Dim tempRegex As String = "\s+" & flag & "\b"
 
@@ -365,10 +364,15 @@ Module LaunchDotDesktop
             tempRegex = "\s+" & flag.TrimEnd(CType("%", Char())) & "\b%"
         End If
 
-        Dim regexThing As New Regex(tempRegex)
-
-        ' Now we perform the replacement.
-        Return regexThing.Replace(input, desiredReplacement)
+        If caseSensitive = False Then
+            Dim regexThing As New Regex(tempRegex, RegexOptions.IgnoreCase)
+            ' Now we perform the replacement.
+            Return regexThing.Replace(input, desiredReplacement)
+        Else
+            Dim regexThing As New Regex(tempRegex)
+            ' Now we perform the replacement.
+            Return regexThing.Replace(input, desiredReplacement)
+        End If
     End Function
 
     Private Function regexCheckFlags(input As String, flag As String) As Boolean
