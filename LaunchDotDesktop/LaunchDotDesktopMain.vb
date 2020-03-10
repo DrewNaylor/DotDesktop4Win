@@ -269,6 +269,7 @@ Module LaunchDotDesktop
                         ' Done figuring out the desktop entry type.
                     End If
 
+                    urlList = regexReplaceFlags(urlList, "%userprofile%", "C:\Users\drewn\")
                     ' Now, see if urlList has anything in it, and if it does,
                     ' send that URL as an argument to the application.
                     Dim execProgram As New ProcessStartInfo
@@ -355,7 +356,16 @@ Module LaunchDotDesktop
         ' \b is for the word border at the end.
         ' This can't be used with flags/environment variables
         ' that end with a percent sign.
-        Dim regexThing As New Regex("\s+" & flag & "\b")
+
+        Dim tempRegex As String = ""
+        If flag.EndsWith("%") Then
+            tempRegex = "\s+" & flag.TrimEnd(CType("%", Char())) & "\b%"
+        Else
+            tempRegex = "\s+" & flag & "\b"
+        End If
+
+        Dim regexThing As New Regex(tempRegex)
+
         ' Now we perform the replacement.
         Return regexThing.Replace(input, desiredReplacement)
     End Function
@@ -367,7 +377,11 @@ Module LaunchDotDesktop
         ' \b is for the word border at the end.
         ' This can't be used with flags/environment variables
         ' that end with a percent sign.
-        Return Regex.IsMatch(input, "\s+" & flag & "\b")
+        Dim percent As String = ""
+        If flag.EndsWith("%") Then
+            percent = "%"
+        End If
+        Return Regex.IsMatch(input, "\s+" & flag & "\b" & percent)
     End Function
 
 End Module
