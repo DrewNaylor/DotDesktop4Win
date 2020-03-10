@@ -259,6 +259,8 @@ Module LaunchDotDesktop
 
                     ' Expand environment variables.
                     cleanedExecKey = expandEnvVars(cleanedExecKey)
+                    ' TODO: Switch the urlList to WSL paths if
+                    ' the .desktop file wants it.
                     urlList = expandEnvVars(urlList)
 
                     ' Now, see if urlList has anything in it, and if it does,
