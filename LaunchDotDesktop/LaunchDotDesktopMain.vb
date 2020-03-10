@@ -160,7 +160,7 @@ Module LaunchDotDesktop
                                 ' https://www.tutorialspoint.com/vb.net/vb.net_regular_expressions.htm
                             End If
 
-                        ElseIf cleanedExecKey.Contains(" %F") Then
+                        ElseIf regexCheckFlags(cleanedExecKey, "%F") Then
                             ' If there's a %F, allow for choosing multiple files.
                             Dim openFileDialog As New OpenFileDialog()
                             openFileDialog.Filter = "All files (*.*)|*.*"
@@ -218,14 +218,14 @@ Module LaunchDotDesktop
                                 ' Expand %F with the new file list, and add double-quotes on each side
                                 ' of the file list after putting in a space to separate it from the rest
                                 ' of the command.
-                                cleanedExecKey = cleanedExecKey.Replace(" %F", " " & filesList)
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", " " & filesList)
                                 ' Clean up unused flags.
                                 cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
                                 cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
                                 cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
                             Else
                                 ' If the user cancels, just remove the %F.
-                                cleanedExecKey = cleanedExecKey.Replace(" %F", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
                                 ' Clean up unused flags.
                                 cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
                                 cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
