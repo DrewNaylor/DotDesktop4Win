@@ -218,7 +218,7 @@ Module LaunchDotDesktop
                                 ' Expand %F with the new file list, and add double-quotes on each side
                                 ' of the file list after putting in a space to separate it from the rest
                                 ' of the command.
-                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", " " & filesList)
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", " " & filesList.TrimEnd)
                                 ' Clean up unused flags.
                                 cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
                                 cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
