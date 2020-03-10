@@ -401,4 +401,8 @@ Module LaunchDotDesktop
 
     End Function
 
+    Private Function expandEnvVars(input As String) As String
+
+    End Function
+
 End Module
