@@ -359,7 +359,7 @@ Module LaunchDotDesktop
             ' If the flag ends with a percent sign,
             ' change the regex temp string to work
             ' with it so it's matched later.
-            tempRegex = "\s+" & flag.TrimEnd(CType("%", Char())) & "\b%"
+            tempRegex = flag.TrimEnd(CType("%", Char())) & "\b%"
         End If
 
         If caseSensitive = False Then
@@ -377,7 +377,7 @@ Module LaunchDotDesktop
         End If
     End Function
 
-    Private Function regexCheckFlags(input As String, flag As String, Optional caseSensitive As Boolean = True, Optional isSpecialFolder As Boolean = False) As Boolean
+    Private Function regexCheckFlags(input As String, flag As String, Optional caseSensitive As Boolean = True) As Boolean
         ' Check to see if the input string contains a flag in the style of %u using regex.
         ' If there's a match, this'll return a Boolean.
         ' \s+ is for whitespace before the flag.
@@ -393,7 +393,9 @@ Module LaunchDotDesktop
         If flag.EndsWith("%") Then
             ' If the flag ends with a percent sign,
             ' change the regex string to work with it.
-            tempRegex = "\s+" & flag.TrimEnd(CType("%", Char())) & "\b%"
+            ' This is a special folder, so ignore spacing
+            ' requirements.
+            tempRegex = flag.TrimEnd(CType("%", Char())) & "\b%"
         End If
 
         If caseSensitive = False Then
