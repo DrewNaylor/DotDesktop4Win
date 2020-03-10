@@ -269,7 +269,10 @@ Module LaunchDotDesktop
                         ' Done figuring out the desktop entry type.
                     End If
 
-                    urlList = regexReplaceFlags(urlList, "%userprofile%", "C:\Users\drewn\", False)
+                    If regexCheckFlags(urlList, "%userprofile%", False) Then
+                        urlList = regexReplaceFlags(urlList, "%userprofile%", "C:\Users\drewn\", False)
+                    End If
+
                     ' Now, see if urlList has anything in it, and if it does,
                     ' send that URL as an argument to the application.
                     Dim execProgram As New ProcessStartInfo
@@ -383,7 +386,7 @@ Module LaunchDotDesktop
         End If
     End Function
 
-    Private Function regexCheckFlags(input As String, flag As String) As Boolean
+    Private Function regexCheckFlags(input As String, flag As String, Optional caseSensitive As Boolean = True) As Boolean
         ' Check to see if the input string contains a flag in the style of %u using regex.
         ' If there's a match, this'll return a Boolean.
         ' \s+ is for whitespace before the flag.
@@ -396,7 +399,12 @@ Module LaunchDotDesktop
             tempRegex = "\s+" & flag.TrimEnd(CType("%", Char())) & "\b%"
         End If
 
-        Return Regex.IsMatch(input, tempRegex)
+        If caseSensitive = False Then
+            Return Regex.IsMatch(input, tempRegex, RegexOptions.IgnoreCase)
+        Else
+            Return Regex.IsMatch(input, tempRegex)
+        End If
+
     End Function
 
 End Module
