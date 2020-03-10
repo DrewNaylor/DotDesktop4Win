@@ -95,6 +95,7 @@ Module LaunchDotDesktop
                             urlList = InputBox("Please type or paste a URL:", "Single URL input")
                             ' Expand %u to what the user entered.
                             cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", " " & urlList)
+                            ' Clean up unused flags.
                             cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
 
 
@@ -103,6 +104,7 @@ Module LaunchDotDesktop
                             urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
                             ' Expand %U to what the user entered.
                             cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", " " & urlList)
+                            ' Clean up unused flags.
                             cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
 
                         ElseIf cleanedExecKey.Contains(" %f") Then
@@ -327,23 +329,27 @@ Module LaunchDotDesktop
         Return fileName
     End Function
 
-    'Private Function regexReplacer(inputText As String, regexExpression As String)
-    '    Dim matchList As MatchCollection = Regex.Matches(inputText, regexExpression)
-    '    Dim match As Match
-
-    '    For Each match In matchList
-    '        If match Then
-    '    Next
-
-    'End Function
-
     Private Function regexReplaceFlags(input As String, flag As String, desiredReplacement As String) As String
-        Dim regexThing As New Regex("\s" & flag & "\b")
+        ' Replaces flags in the style of %u with a string using regex.
+        ' First we need to create a regular expression to match what'll
+        ' be replaced.
+        ' \s+ is for whitespace before the flag.
+        ' \b is for the word border at the end.
+        ' This can't be used with flags/environment variables
+        ' that end with a percent sign.
+        Dim regexThing As New Regex("\s+" & flag & "\b")
+        ' Now we perform the replacement.
         Return regexThing.Replace(input, desiredReplacement)
     End Function
 
     Private Function regexCheckFlags(input As String, flag As String) As Boolean
-        Return Regex.IsMatch(input, "\s" & flag & "\b")
+        ' Check to see if the input string contains a flag in the style of %u using regex.
+        ' If there's a match, this'll return a Boolean.
+        ' \s+ is for whitespace before the flag.
+        ' \b is for the word border at the end.
+        ' This can't be used with flags/environment variables
+        ' that end with a percent sign.
+        Return Regex.IsMatch(input, "\s+" & flag & "\b")
     End Function
 
 End Module
