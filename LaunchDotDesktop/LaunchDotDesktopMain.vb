@@ -109,7 +109,7 @@ Module LaunchDotDesktop
                             ' Clean up unused flags.
                             cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
 
-                        ElseIf cleanedExecKey.Contains(" %f") Then
+                        ElseIf regexCheckFlags(cleanedExecKey, "%f") Then
                             ' If there's a %f, allow for choosing one file.
                             Dim openFileDialog As New OpenFileDialog()
                             openFileDialog.Filter = "All files (*.*)|*.*"
@@ -134,7 +134,7 @@ Module LaunchDotDesktop
 
                                 ' Update cleanedExecKey with the fileName, which may or may not have been modified
                                 ' to be Linux-style if the desktop entry file wanted it or not.
-                                cleanedExecKey = cleanedExecKey.Replace(" %f", " " & quoteForFilePaths & fileName & quoteForFilePaths)
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", " " & quoteForFilePaths & fileName & quoteForFilePaths)
                                 ' Clean up unused flags.
                                 cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
                                 cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
