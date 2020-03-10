@@ -429,6 +429,12 @@ Module LaunchDotDesktop
             MessageBox.Show(output)
         End If
 
+        ' Replace %ProgramFiles%.
+        If regexCheckFlags(execOrArg, "%programfiles%", False) Then
+            MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles))
+            output = regexReplaceFlags(execOrArg, "%ProgramFiles%", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), False)
+        End If
+
         Return output
     End Function
 
