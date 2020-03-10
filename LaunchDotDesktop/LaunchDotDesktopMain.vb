@@ -97,6 +97,8 @@ Module LaunchDotDesktop
                             cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", " " & urlList)
                             ' Clean up unused flags.
                             cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
 
 
                         ElseIf regexCheckFlags(cleanedExecKey, "%U") Then
@@ -133,6 +135,10 @@ Module LaunchDotDesktop
                                 ' Update cleanedExecKey with the fileName, which may or may not have been modified
                                 ' to be Linux-style if the desktop entry file wanted it or not.
                                 cleanedExecKey = cleanedExecKey.Replace(" %f", " " & quoteForFilePaths & fileName & quoteForFilePaths)
+                                ' Clean up unused flags.
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
                             Else
                                 ' If the user cancels, just remove the %f.
                                 cleanedExecKey = cleanedExecKey.Replace(" %f", "")
@@ -209,9 +215,17 @@ Module LaunchDotDesktop
                                 ' of the file list after putting in a space to separate it from the rest
                                 ' of the command.
                                 cleanedExecKey = cleanedExecKey.Replace(" %F", " " & filesList)
+                                ' Clean up unused flags.
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
                             Else
                                 ' If the user cancels, just remove the %F.
                                 cleanedExecKey = cleanedExecKey.Replace(" %F", "")
+                                ' Clean up unused flags.
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
                             End If
                         End If
 
