@@ -358,17 +358,25 @@ Module LaunchDotDesktop
         ' that end with a percent sign.
         ' The case-sensitive if statement may need to be cleaned up a bit.
 
+        ' Create a temp string to hold the regex for now.
         Dim tempRegex As String = "\s+" & flag & "\b"
 
         If flag.EndsWith("%") Then
+            ' If the flag ends with a percent sign,
+            ' change the regex temp string to work
+            ' with it so it's matched later.
             tempRegex = "\s+" & flag.TrimEnd(CType("%", Char())) & "\b%"
         End If
 
         If caseSensitive = False Then
+            ' If case-insensitivity is fine for this
+            ' flag, have the regex thing ignore case.
             Dim regexThing As New Regex(tempRegex, RegexOptions.IgnoreCase)
             ' Now we perform the replacement.
             Return regexThing.Replace(input, desiredReplacement)
         Else
+            ' Otherwise, don't have the regex thing
+            ' ignore case.
             Dim regexThing As New Regex(tempRegex)
             ' Now we perform the replacement.
             Return regexThing.Replace(input, desiredReplacement)
