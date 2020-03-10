@@ -403,6 +403,10 @@ Module LaunchDotDesktop
 
     Private Function expandEnvVars(input As String) As String
 
+        ' First we expand %USERPROFILE%.
+        input = regexReplaceFlags(input, "%USERPROFILE%", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), False)
+
+        Return input
     End Function
 
 End Module
