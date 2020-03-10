@@ -142,6 +142,10 @@ Module LaunchDotDesktop
                             Else
                                 ' If the user cancels, just remove the %f.
                                 cleanedExecKey = cleanedExecKey.Replace(" %f", "")
+                                ' Clean up unused flags.
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
 
                                 ' TODO: Remove any instances of %u, %U, and %F
                                 ' after merging back into master.
