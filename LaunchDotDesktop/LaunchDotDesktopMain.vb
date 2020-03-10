@@ -354,8 +354,10 @@ Module LaunchDotDesktop
         ' be replaced.
         ' \s+ is for whitespace before the flag.
         ' \b is for the word border at the end.
-        ' This can't be used with flags/environment variables
-        ' that end with a percent sign.
+        ' This can be used with flags/environment variables
+        ' that end with a percent sign, though case sensitivity
+        ' is still enforced for now and it needs to be allowed
+        ' to be turned off.
 
         Dim tempRegex As String = "\s+" & flag & "\b"
 
