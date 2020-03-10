@@ -391,17 +391,27 @@ Module LaunchDotDesktop
         ' If there's a match, this'll return a Boolean.
         ' \s+ is for whitespace before the flag.
         ' \b is for the word border at the end.
-        ' This can't be used with flags/environment variables
+        ' This can be used with flags/environment variables
         ' that end with a percent sign.
+
+        ' Create temporary string for regex pattern.
         Dim tempRegex As String = "\s+" & flag & "\b"
 
         If flag.EndsWith("%") Then
+            ' If the flag ends with a percent sign,
+            ' change the regex string to work with it.
             tempRegex = "\s+" & flag.TrimEnd(CType("%", Char())) & "\b%"
         End If
 
         If caseSensitive = False Then
+            ' If case sensitivity isn't desired for this
+            ' flag (such as for %userprofile%), have
+            ' the regex thing ignore case when returning
+            ' the boolean.
             Return Regex.IsMatch(input, tempRegex, RegexOptions.IgnoreCase)
         Else
+            ' Otherwise, case sensitivity is necessary, so
+            ' it'll be used.
             Return Regex.IsMatch(input, tempRegex)
         End If
 
