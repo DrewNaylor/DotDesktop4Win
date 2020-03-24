@@ -449,6 +449,12 @@ Module LaunchDotDesktop
             output = regexReplaceFlags(execOrArg, "%APPDATA%", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), False)
         End If
 
+        ' Replace LocalAppData.
+        If regexCheckFlags(execOrArg, "%LOCALAPPDATA%", False) Then
+            MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))
+            output = regexReplaceFlags(execOrArg, "%LOCALAPPDATA%", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), False)
+        End If
+
         Return output
     End Function
 
