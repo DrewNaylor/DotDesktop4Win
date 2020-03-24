@@ -438,9 +438,15 @@ Module LaunchDotDesktop
         ' special folder instead.
         ' There's also the "%programfiles(x86)%" variable, which
         ' would go to "C:\Program Files (x86)" without redirection.
-        If regexCheckFlags(execOrArg, "%programfiles%", False) Then
+        If regexCheckFlags(execOrArg, "%PROGRAMFILES%", False) Then
             MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles))
-            output = regexReplaceFlags(execOrArg, "%ProgramFiles%", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), False)
+            output = regexReplaceFlags(execOrArg, "%PROGRAMFILES%", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), False)
+        End If
+
+        ' Replace AppData.
+        If regexCheckFlags(execOrArg, "%APPDATA%", False) Then
+            MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData))
+            output = regexReplaceFlags(execOrArg, "%APPDATA%", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), False)
         End If
 
         Return output
