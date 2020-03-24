@@ -458,13 +458,13 @@ Module LaunchDotDesktop
         ' Replace LocalAppData.
         If regexCheckFlags(execOrArg, "%TEMP%", False) Then
             MessageBox.Show(System.IO.Path.GetTempPath)
-            output = regexReplaceFlags(execOrArg, "%TEMP%", System.IO.Path.GetTempPath, False)
+            output = regexReplaceFlags(execOrArg, "%TEMP%", IO.Path.GetTempPath, False)
         End If
 
         ' Replace LocalAppData.
         If regexCheckFlags(execOrArg, "%TMP%", False) Then
             MessageBox.Show(System.IO.Path.GetTempPath)
-            output = regexReplaceFlags(execOrArg, "%TMP%", System.IO.Path.GetTempPath, False)
+            output = regexReplaceFlags(execOrArg, "%TMP%", IO.Path.GetTempPath, False)
         End If
 
         Return output
