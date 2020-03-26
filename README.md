@@ -5,7 +5,7 @@ There's another project called [WinYourDesktop](https://github.com/dd86k/WinYour
 
 In order to read .desktop files, [MadMilkman.Ini](https://github.com/MarioZ/MadMilkman.Ini) is being used.
 
-Switching tabs with the mouse wheel is implemented using libscrollswitchtabs, part of the [drews-libs](https://github.com/DrewNaylor/drews-libs) project.
+Switching TabControl tabs with the mouse wheel is implemented using libscrollswitchtabs, part of the [drews-libs](https://github.com/DrewNaylor/drews-libs) project.
 
 ## Planned features
 - Starting an application with the `Exec` key's value, including by double-clicking the file if it's associated with the launcher program.
