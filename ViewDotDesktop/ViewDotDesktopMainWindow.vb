@@ -21,6 +21,8 @@
 
 
 Imports libdotdesktop
+Imports libscrollswitchtabs
+
 Public Class aaformMainWindow
     Private Sub buttonBrowse_Click(sender As Object, e As EventArgs) Handles buttonBrowse.Click
 
@@ -127,5 +129,10 @@ Public Class aaformMainWindow
     Private Sub menuitemExitItem_Click(sender As Object, e As EventArgs) Handles menuitemExitItem.Click
         ' Exit application.
         Application.Exit()
+    End Sub
+
+    Private Sub tabcontrolFileOutput_MouseWheel(sender As Object, e As MouseEventArgs) Handles tabcontrolFileOutput.MouseWheel
+        ' Allow switching tabs by scrolling on them with the mouse wheel.
+        ScrollSwitchTabs.switch(tabcontrolFileOutput.SelectedTab, tabcontrolFileOutput, e)
     End Sub
 End Class

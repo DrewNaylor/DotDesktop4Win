@@ -88,7 +88,7 @@ Partial Class aaformMainWindow
         'menuitemAboutItem
         '
         Me.menuitemAboutItem.Name = "menuitemAboutItem"
-        Me.menuitemAboutItem.Size = New System.Drawing.Size(152, 22)
+        Me.menuitemAboutItem.Size = New System.Drawing.Size(107, 22)
         Me.menuitemAboutItem.Text = "&About"
         '
         'tablelayoutpanelMainWindow
