@@ -133,6 +133,6 @@ Public Class aaformMainWindow
 
     Private Sub tabcontrolFileOutput_MouseWheel(sender As Object, e As MouseEventArgs) Handles tabcontrolFileOutput.MouseWheel
         ' Allow switching tabs by scrolling on them with the mouse wheel.
-        ScrollSwitchTabs.switch(tabcontrolFileOutput.SelectedTab, tabcontrolFileOutput, e)
+        ScrollSwitchTabs.switch(tabcontrolFileOutput, e)
     End Sub
 End Class
