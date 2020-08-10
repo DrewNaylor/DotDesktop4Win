@@ -65,6 +65,18 @@ Namespace My
                 Me("PauseBeforeExitOnSuccessfulLaunch") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property ShowExecKeyBeforeLaunch() As Boolean
+            Get
+                Return CType(Me("ShowExecKeyBeforeLaunch"),Boolean)
+            End Get
+            Set
+                Me("ShowExecKeyBeforeLaunch") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

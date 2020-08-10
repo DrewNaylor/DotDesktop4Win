@@ -259,7 +259,9 @@ Module LaunchDotDesktop
 
                     ' Expand environment variables.
                     cleanedExecKey = expandEnvVars(cleanedExecKey)
-                    MessageBox.Show(cleanedExecKey)
+                    If My.Settings.ShowExecKeyBeforeLaunch = True Then
+                        MessageBox.Show(cleanedExecKey)
+                    End If
                     ' TODO: Switch the urlList to WSL paths if
                     ' the .desktop file wants it.
                     urlList = expandEnvVars(urlList)
@@ -414,7 +416,9 @@ Module LaunchDotDesktop
 
 
     Private Function expandEnvVars(execOrArg As String) As String
-        MessageBox.Show(execOrArg)
+        If My.Settings.ShowExecKeyBeforeLaunch = True Then
+            MessageBox.Show(execOrArg)
+        End If
         ' First we expand %USERPROFILE%.
         Dim output As String = execOrArg
         If regexCheckFlags(execOrArg, "%USERPROFILE%", False) Then
