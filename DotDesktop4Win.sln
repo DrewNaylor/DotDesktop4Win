@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ViewDotDesktop", "ViewDotDesktop\ViewDotDesktop.vbproj", "{CBF595D5-4106-439D-A098-88E37BA731C8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{446DDD07-C1ED-482F-AEB0-B0E69EEAB5EF} = {446DDD07-C1ED-482F-AEB0-B0E69EEAB5EF}
-	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "libdotdesktop", "libdotdesktop\libdotdesktop.vbproj", "{446DDD07-C1ED-482F-AEB0-B0E69EEAB5EF}"
 EndProject
