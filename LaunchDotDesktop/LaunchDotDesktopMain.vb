@@ -21,7 +21,7 @@
 
 
 Imports System.Windows.Forms
-Imports libdotdesktop
+Imports libdotdesktop_standard
 Imports System.Text.RegularExpressions
 
 Module LaunchDotDesktop

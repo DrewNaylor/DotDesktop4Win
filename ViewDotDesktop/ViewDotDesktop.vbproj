@@ -74,10 +74,6 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="libdotdesktop, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\CommonBuild\bin\Debug\libdotdesktop.dll</HintPath>
-    </Reference>
     <Reference Include="libscrollswitchtabs, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\libscrollswitchtabs.dll</HintPath>

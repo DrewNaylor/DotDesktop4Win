@@ -146,9 +146,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\libdotdesktop\libdotdesktop.vbproj">
-      <Project>{446ddd07-c1ed-482f-aeb0-b0e69eeab5ef}</Project>
-      <Name>libdotdesktop</Name>
+    <ProjectReference Include="..\libdotdesktop-standard\libdotdesktop-standard.vbproj">
+      <Project>{60927813-32b9-4a49-9b28-4c947dcbf42a}</Project>
+      <Name>libdotdesktop-standard</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
