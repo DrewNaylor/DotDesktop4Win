@@ -21,7 +21,7 @@ Switching TabControl tabs with the mouse wheel is implemented using libscrollswi
 
 ## Building and Modifying
 
-You can build this project by opening the `DotDesktop4Win.sln` file in Visual Studio 2015 Community, which is the version being used for the project. Newer versions may work, but that's the version being used.
+You can build this project by opening the `DotDesktop4Win.sln` file in Visual Studio 2019 Community, which is the version being used for the project. Newer versions may work, but that's the version being used.
 
 If you don't want to manually build it, you can [use the build artifacts](https://ci.appveyor.com/project/DrewNaylor/dotdesktop4win/build/artifacts) instead.
 
