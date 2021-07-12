@@ -197,11 +197,25 @@ Public Class desktopEntryStuff
 #Region "Get Terminal key."
         ElseIf keyToGet = "Terminal" Then
 
-            ' If we want to get the URL value, return that.
+            ' If we want to get the Terminal value, return that.
             ' First make sure it's in there.
             If desktopEntrySection.Keys("Terminal") IsNot Nothing Then
                 ' If it is in there, return it as expected.
                 Return desktopEntrySection.Keys("Terminal").Value.ToLowerInvariant
+            Else
+                ' Otherwise, return Nothing if the key is unavailable.
+                Return Nothing
+            End If
+#End Region
+
+#Region "Get NoDisplay key."
+        ElseIf keyToGet = "NoDisplay" Then
+
+            ' If we want to get the NoDisplay value, return that.
+            ' First make sure it's in there.
+            If desktopEntrySection.Keys("NoDisplay") IsNot Nothing Then
+                ' If it is in there, return it as expected.
+                Return desktopEntrySection.Keys("NoDisplay").Value.ToLowerInvariant
             Else
                 ' Otherwise, return Nothing if the key is unavailable.
                 Return Nothing
