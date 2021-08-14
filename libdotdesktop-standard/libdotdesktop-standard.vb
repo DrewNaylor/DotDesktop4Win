@@ -53,7 +53,7 @@ Public Class desktopEntryStuff
         End If
     End Function
 
-    Public Shared Function getInfo(inputFile As String, keyToGet As String, Optional fileName As String = "") As String
+    Public Shared Function getInfo(inputFile As String, keyToGet As String, Optional fileName As String = "", Optional IsCustomKey As Boolean = False) As String
 
         ' Get the input file and put it in an INI file object for later use.
         Dim dotDesktopFile As New IniFile(
@@ -242,10 +242,26 @@ Public Class desktopEntryStuff
             End If
 #End Region
 
+#Region "Return the custom key if that's what the calling app wants."
+        ElseIf IsCustomKey = True Then
+
+            ' The calling app wants a custom key that's not otherwise supported by
+            ' libdotdesktop.
+            ' First make sure it's in there.
+            If desktopEntrySection.Keys(keyToGet) IsNot Nothing Then
+                ' If it is in there, return it as expected.
+                Return desktopEntrySection.Keys(keyToGet).Value.ToLowerInvariant
+            Else
+                ' Otherwise, return Nothing if the key is unavailable.
+                Return Nothing
+            End If
+#End Region
+
 #Region "What to do when the key isn't an option here."
         Else
 
-            ' Otherwise, just return whatever the user specified in the key field.
+            ' Otherwise, just return whatever the user specified in the key field
+            ' if it's not a custom key.
             Return "(Key not implemented)"
 #End Region
 
