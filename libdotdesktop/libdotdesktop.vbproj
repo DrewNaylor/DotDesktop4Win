@@ -49,9 +49,8 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MadMilkman.Ini, Version=1.0.6.2, Culture=neutral, PublicKeyToken=4e0b5157a7ffbb74, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\MadMilkman.Ini.dll</HintPath>
+    <Reference Include="libinidotnet">
+      <HintPath>..\lib\libinidotnet.dll</HintPath>
     </Reference>
     <Reference Include="netstandard" />
     <Reference Include="System" />
