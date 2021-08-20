@@ -67,205 +67,212 @@ Public Class desktopEntryStuff
 #Region "Getting and returning key values."
 
         ' Look in the inputFile and return the value for the keyToGet.
-#Region "Get Type key."
-        If keyToGet = "Type" Then
+        ' This is using Select Case so it should be faster.
+        ' We need another Select Case for custom keys.
+        Select Case IsCustomKey
+            Case True
 
-            ' If we want to get the Type value, return that.
-            ' First make sure it's in there.
-            If desktopEntrySection.Keys("Type") IsNot Nothing Then
-                ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("Type").Value
-            Else
-                ' Otherwise, return "Application" as the type.
-                Return "Application"
-            End If
+#Region "Return the custom key if that's what the calling app wants."
+                ' The calling app wants a custom key that's not otherwise supported by
+                ' libdotdesktop.
+                ' First make sure it's in there.
+                If desktopEntrySection.Keys(keyToGet) IsNot Nothing Then
+                    ' If it is in there, return it as expected.
+                    Return desktopEntrySection.Keys(keyToGet).Value.ToLowerInvariant
+                Else
+                    ' Otherwise, return Nothing if the key is unavailable.
+                    Return Nothing
+                End If
+#End Region
+            Case False
+                ' The calling app doesn't need a custom key.
+                Select Case keyToGet
+#Region "Get Type key."
+                    Case "Type"
+
+                        ' If we want to get the Type value, return that.
+                        ' First make sure it's in there.
+                        If desktopEntrySection.Keys("Type") IsNot Nothing Then
+                            ' If it is in there, return it as expected.
+                            Return desktopEntrySection.Keys("Type").Value
+                        Else
+                            ' Otherwise, return "Application" as the type.
+                            Return "Application"
+                        End If
 #End Region
 
 #Region "Get Name key."
-        ElseIf keyToGet = "Name" Then
+                    Case "Name"
 
-            ' If we want to get the Name value, return that.
-            ' First make sure it's in there.
-            If desktopEntrySection.Keys("Name") IsNot Nothing Then
-                ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("Name").Value
-            Else
-                ' Otherwise, return the filename as the name.
-                Return fileName
-            End If
+                        ' If we want to get the Name value, return that.
+                        ' First make sure it's in there.
+                        If desktopEntrySection.Keys("Name") IsNot Nothing Then
+                            ' If it is in there, return it as expected.
+                            Return desktopEntrySection.Keys("Name").Value
+                        Else
+                            ' Otherwise, return the filename as the name.
+                            Return fileName
+                        End If
 #End Region
 
 #Region "Get GenericName key."
-        ElseIf keyToGet = "GenericName" Then
+                    Case "GenericName"
 
-            ' If we want to get the Name value, return that.
-            ' First make sure it's in there.
-            If desktopEntrySection.Keys("GenericName") IsNot Nothing Then
-                ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("GenericName").Value
-            Else
-                ' Otherwise, return the filename as the name.
-                Return Nothing
-            End If
+                        ' If we want to get the Name value, return that.
+                        ' First make sure it's in there.
+                        If desktopEntrySection.Keys("GenericName") IsNot Nothing Then
+                            ' If it is in there, return it as expected.
+                            Return desktopEntrySection.Keys("GenericName").Value
+                        Else
+                            ' Otherwise, return the filename as the name.
+                            Return Nothing
+                        End If
 #End Region
 
 #Region "Get Exec key."
-        ElseIf keyToGet = "Exec" Then
+                    Case "Exec"
 
-            ' If we want to get the Exec value, return that.
-            ' First make sure it's in there.
-            If desktopEntrySection.Keys("Exec") IsNot Nothing Then
-                ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("Exec").Value
-            Else
-                ' Otherwise, return Nothing if the key is unavailable.
-                Return Nothing
-            End If
+                        ' If we want to get the Exec value, return that.
+                        ' First make sure it's in there.
+                        If desktopEntrySection.Keys("Exec") IsNot Nothing Then
+                            ' If it is in there, return it as expected.
+                            Return desktopEntrySection.Keys("Exec").Value
+                        Else
+                            ' Otherwise, return Nothing if the key is unavailable.
+                            Return Nothing
+                        End If
 #End Region
 
 #Region "Get Path key."
-        ElseIf keyToGet = "Path" Then
+                    Case "Path"
 
-            ' If we want to get the Path value, return that.
-            ' First make sure it's in there.
-            If desktopEntrySection.Keys("Path") IsNot Nothing Then
-                ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("Path").Value
-            Else
-                ' Otherwise, return Nothing if the key is unavailable so
-                ' the application can hide the info.
-                Return Nothing
-            End If
+                        ' If we want to get the Path value, return that.
+                        ' First make sure it's in there.
+                        If desktopEntrySection.Keys("Path") IsNot Nothing Then
+                            ' If it is in there, return it as expected.
+                            Return desktopEntrySection.Keys("Path").Value
+                        Else
+                            ' Otherwise, return Nothing if the key is unavailable so
+                            ' the application can hide the info.
+                            Return Nothing
+                        End If
 #End Region
 
 #Region "Get Version key."
-        ElseIf keyToGet = "Version" Then
+                    Case "Version"
 
-            ' If we want to get the Version value, return that.
-            ' First make sure it's in there.
-            If desktopEntrySection.Keys("Version") IsNot Nothing Then
-                ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("Version").Value
-            Else
-                ' Otherwise, return Nothing if the key is unavailable.
-                Return Nothing
-            End If
+                        ' If we want to get the Version value, return that.
+                        ' First make sure it's in there.
+                        If desktopEntrySection.Keys("Version") IsNot Nothing Then
+                            ' If it is in there, return it as expected.
+                            Return desktopEntrySection.Keys("Version").Value
+                        Else
+                            ' Otherwise, return Nothing if the key is unavailable.
+                            Return Nothing
+                        End If
 #End Region
 
 #Region "Get Comment key."
-        ElseIf keyToGet = "Comment" Then
+                    Case "Comment"
 
-            ' If we want to get the Comment value, return that.
-            ' First make sure it's in there.
-            If desktopEntrySection.Keys("Comment") IsNot Nothing Then
-                ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("Comment").Value
-            Else
-                ' Otherwise, return Nothing if the key is unavailable.
-                Return Nothing
-            End If
+                        ' If we want to get the Comment value, return that.
+                        ' First make sure it's in there.
+                        If desktopEntrySection.Keys("Comment") IsNot Nothing Then
+                            ' If it is in there, return it as expected.
+                            Return desktopEntrySection.Keys("Comment").Value
+                        Else
+                            ' Otherwise, return Nothing if the key is unavailable.
+                            Return Nothing
+                        End If
 #End Region
 
 #Region "Get Categories key."
-        ElseIf keyToGet = "Categories" Then
+                    Case "Categories"
 
-            ' If we want to get the Name value, return that.
-            ' First make sure it's in there.
-            If desktopEntrySection.Keys("Categories") IsNot Nothing Then
-                ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("Categories").Value
-            Else
-                ' Otherwise, return the filename as the name.
-                Return Nothing
-            End If
+                        ' If we want to get the Name value, return that.
+                        ' First make sure it's in there.
+                        If desktopEntrySection.Keys("Categories") IsNot Nothing Then
+                            ' If it is in there, return it as expected.
+                            Return desktopEntrySection.Keys("Categories").Value
+                        Else
+                            ' Otherwise, return the filename as the name.
+                            Return Nothing
+                        End If
 #End Region
 
 #Region "Get URL key."
-        ElseIf keyToGet = "URL" Then
+                    Case "URL"
 
-            ' If we want to get the URL value, return that.
-            ' First make sure it's in there.
-            If desktopEntrySection.Keys("URL") IsNot Nothing Then
-                ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("URL").Value
-            Else
-                ' Otherwise, return Nothing if the key is unavailable.
-                Return Nothing
-            End If
+                        ' If we want to get the URL value, return that.
+                        ' First make sure it's in there.
+                        If desktopEntrySection.Keys("URL") IsNot Nothing Then
+                            ' If it is in there, return it as expected.
+                            Return desktopEntrySection.Keys("URL").Value
+                        Else
+                            ' Otherwise, return Nothing if the key is unavailable.
+                            Return Nothing
+                        End If
 #End Region
 
 #Region "Get Terminal key."
-        ElseIf keyToGet = "Terminal" Then
+                    Case "Terminal"
 
-            ' If we want to get the Terminal value, return that.
-            ' First make sure it's in there.
-            If desktopEntrySection.Keys("Terminal") IsNot Nothing Then
-                ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("Terminal").Value.ToLowerInvariant
-            Else
-                ' Otherwise, return Nothing if the key is unavailable.
-                Return Nothing
-            End If
+                        ' If we want to get the Terminal value, return that.
+                        ' First make sure it's in there.
+                        If desktopEntrySection.Keys("Terminal") IsNot Nothing Then
+                            ' If it is in there, return it as expected.
+                            Return desktopEntrySection.Keys("Terminal").Value.ToLowerInvariant
+                        Else
+                            ' Otherwise, return Nothing if the key is unavailable.
+                            Return Nothing
+                        End If
 #End Region
 
 #Region "Get NoDisplay key."
-        ElseIf keyToGet = "NoDisplay" Then
+                    Case "NoDisplay"
 
-            ' If we want to get the NoDisplay value, return that.
-            ' First make sure it's in there.
-            If desktopEntrySection.Keys("NoDisplay") IsNot Nothing Then
-                ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("NoDisplay").Value.ToLowerInvariant
-            Else
-                ' Otherwise, return Nothing if the key is unavailable.
-                Return Nothing
-            End If
+                        ' If we want to get the NoDisplay value, return that.
+                        ' First make sure it's in there.
+                        If desktopEntrySection.Keys("NoDisplay") IsNot Nothing Then
+                            ' If it is in there, return it as expected.
+                            Return desktopEntrySection.Keys("NoDisplay").Value.ToLowerInvariant
+                        Else
+                            ' Otherwise, return Nothing if the key is unavailable.
+                            Return Nothing
+                        End If
 #End Region
 
 #Region "Get X-DotDesktop4Win-UseWSLFilePaths key."
-        ElseIf keyToGet = "X-DotDesktop4Win-UseWSLFilePaths" Then
+                    Case "X-DotDesktop4Win-UseWSLFilePaths"
 
-            ' X-DotDesktop4Win-UseWSLFilePaths definition and use:
-            ' This key is used to force Linux-style paths to be used in
-            ' situations like WSL where file paths are expected to be
-            ' /mnt/c/whatever instead of C:\whatever.
-            ' This key is a Boolean, and can either be true or false.
+                        ' X-DotDesktop4Win-UseWSLFilePaths definition and use:
+                        ' This key is used to force Linux-style paths to be used in
+                        ' situations like WSL where file paths are expected to be
+                        ' /mnt/c/whatever instead of C:\whatever.
+                        ' This key is a Boolean, and can either be true or false.
 
-            ' If we want to get the X-DotDesktop4Win-UseWSLFilePaths value, return that.
-            ' First make sure it's in there.
-            If desktopEntrySection.Keys("X-DotDesktop4Win-UseWSLFilePaths") IsNot Nothing Then
-                ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys("X-DotDesktop4Win-UseWSLFilePaths").Value.ToLowerInvariant
-            Else
-                ' Otherwise, return Nothing if the key is unavailable.
-                Return Nothing
-            End If
-#End Region
-
-#Region "Return the custom key if that's what the calling app wants."
-        ElseIf IsCustomKey = True Then
-
-            ' The calling app wants a custom key that's not otherwise supported by
-            ' libdotdesktop.
-            ' First make sure it's in there.
-            If desktopEntrySection.Keys(keyToGet) IsNot Nothing Then
-                ' If it is in there, return it as expected.
-                Return desktopEntrySection.Keys(keyToGet).Value.ToLowerInvariant
-            Else
-                ' Otherwise, return Nothing if the key is unavailable.
-                Return Nothing
-            End If
+                        ' If we want to get the X-DotDesktop4Win-UseWSLFilePaths value, return that.
+                        ' First make sure it's in there.
+                        If desktopEntrySection.Keys("X-DotDesktop4Win-UseWSLFilePaths") IsNot Nothing Then
+                            ' If it is in there, return it as expected.
+                            Return desktopEntrySection.Keys("X-DotDesktop4Win-UseWSLFilePaths").Value.ToLowerInvariant
+                        Else
+                            ' Otherwise, return Nothing if the key is unavailable.
+                            Return Nothing
+                        End If
 #End Region
 
 #Region "What to do when the key isn't an option here."
-        Else
+                    Case Else
 
-            ' Otherwise, just return whatever the user specified in the key field
-            ' if it's not a custom key.
-            Return "(Key not implemented)"
+                        ' Otherwise, just return whatever the user specified in the key field
+                        ' if it's not a custom key.
+                        Return "(Key not implemented)"
 #End Region
 
-        End If
+                End Select
+
+        End Select
 #End Region
 
     End Function
