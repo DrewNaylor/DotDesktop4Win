@@ -284,7 +284,7 @@ Public Class desktopEntryStuff
     ' This function will clean keys as passed to it.
     ' Some features are only available on Windows, such as the file browser dialog.
     Public Shared Function cleanExecKey(inputFile As String, Optional autoCleanMissingFilePathsAndUrls As Boolean = True,
-                                        Optional manuallyProvidedUrl As String = Nothing) As String
+                                        Optional manuallyProvidedUrl As String = Nothing) As List(Of String)
         ' Before doing anything, make sure this is a valid .desktop file
         ' with the proper Desktop Entry/KDE Desktop Entry header.
         If checkHeader(inputFile) = "Desktop Entry" OrElse checkHeader(inputFile) = "KDE Desktop Entry" Then
@@ -532,8 +532,13 @@ Public Class desktopEntryStuff
             ' the .desktop file wants it.
             urlList = expandEnvVars(urlList)
 
+            ' Need to add the urlList to the end of the cleanedExecKey as a String() array.
+            Dim completeExecKey As List(Of String)
+            completeExecKey.Add(cleanedExecKey)
+            completeExecKey.Add(urlList)
+
             ' Return the cleanedExecKey to the program that requested it.
-            Return cleanedExecKey
+            Return completeExecKey
 
 
             ' The launcher code is commented out because it may be useful.
