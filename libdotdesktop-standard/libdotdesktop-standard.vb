@@ -370,97 +370,109 @@ Public Class desktopEntryStuff
 
                     ElseIf regexCheckFlags(cleanedExecKey, "%f") Then
                         ' If there's a %f, allow for choosing one file.
-                        Dim openFileDialog As New OpenFileDialog()
-                        openFileDialog.Filter = "All files (*.*)|*.*"
-                        openFileDialog.RestoreDirectory = True
+                        ' For now this is commented out because there
+                        ' needs to be a way to get a file from the calling
+                        ' app, rather than in this library.
+                        If autoCleanMissingFilePathsAndUrls = False Then
+                            'Dim openFileDialog As New OpenFileDialog()
+                            'openFileDialog.Filter = "All files (*.*)|*.*"
+                            'openFileDialog.RestoreDirectory = True
 
-                        If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                            ' If the user chooses a file, replace %f with the filename and path.
-                            Dim fileName As String = openFileDialog.FileName
-                            Dim quoteForFilePaths As String = Chr(34)
-                            ' If the .desktop file requests it, switch the paths to be Linux-style.
-                            If getInfo(inputFile, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
+                            'If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                            '    ' If the user chooses a file, replace %f with the filename and path.
+                            '    Dim fileName As String = openFileDialog.FileName
+                            '    Dim quoteForFilePaths As String = (CChar(""""))
+                            '    ' If the .desktop file requests it, switch the paths to be Linux-style.
+                            '    If getInfo(inputFile, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
 
-                                ' Convert the filename/file path to what WSL distros expect.
-                                fileName = convertPathsStyleToWSL(fileName)
-                                ' Set quote used in file paths to a single quote.
-                                quoteForFilePaths = "'"
+                            '        ' Convert the filename/file path to what WSL distros expect.
+                            '        fileName = convertPathsStyleToWSL(fileName)
+                            '        ' Set quote used in file paths to a single quote.
+                            '        quoteForFilePaths = "'"
 
+                            '    Else
+                            '        ' Remove the double-quotes on the end of the filename.
+                            '        fileName = fileName.TrimEnd(CChar(""""))
+                            '    End If
+
+                            '    ' Update cleanedExecKey with the fileName, which may or may not have been modified
+                            '    ' to be Linux-style if the desktop entry file wanted it or not.
+                            '    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", " " & quoteForFilePaths & fileName & quoteForFilePaths)
+                        Else
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", String.Empty)
+                            End If
+                            ' Clean up unused flags.
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
                             Else
-                                ' Remove the double-quotes on the end of the filename.
-                                fileName = fileName.TrimEnd(Chr(34))
+                                ' If the user cancels, just remove the %f.
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
+                                ' Clean up unused flags.
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
                             End If
 
-                            ' Update cleanedExecKey with the fileName, which may or may not have been modified
-                            ' to be Linux-style if the desktop entry file wanted it or not.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", " " & quoteForFilePaths & fileName & quoteForFilePaths)
-                            ' Clean up unused flags.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
-                        Else
-                            ' If the user cancels, just remove the %f.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
-                            ' Clean up unused flags.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
-                        End If
+                        ElseIf regexCheckFlags(cleanedExecKey, "%F") Then
+                            ' If there's a %F, allow for choosing multiple files.
+                            If autoCleanMissingFilePathsAndUrls = False Then
+                            ' This needs to be set up in a way that'll allow the calling app to send
+                            ' over the list of files. Not sure how to do this at the moment, so it's
+                            ' commented out for now.
 
-                    ElseIf regexCheckFlags(cleanedExecKey, "%F") Then
-                        ' If there's a %F, allow for choosing multiple files.
-                        Dim openFileDialog As New OpenFileDialog()
-                        openFileDialog.Filter = "All files (*.*)|*.*"
-                        openFileDialog.RestoreDirectory = True
-                        openFileDialog.Multiselect = True
+                            '    Dim openFileDialog As New OpenFileDialog()
+                            'openFileDialog.Filter = "All files (*.*)|*.*"
+                            'openFileDialog.RestoreDirectory = True
+                            'openFileDialog.Multiselect = True
 
-                        If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                            ' If the user chooses files, replace %F with the filename and paths.
-                            ' Get a file name list array as a string from the open file dialog.
-                            Dim fileNameList As String() = openFileDialog.FileNames
+                            'If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                            '    ' If the user chooses files, replace %F with the filename and paths.
+                            '    ' Get a file name list array as a string from the open file dialog.
+                            '    Dim fileNameList As String() = openFileDialog.FileNames
 
-                            ' Define a path list to store the filenames into.
-                            Dim entirePathList As New List(Of String)
-                            ' Define a quote character for putting at the beginning
-                            ' and end of filenames. This can be changed if necessary,
-                            ' such as if a desktop entry file wants to use a Linux-style
-                            ' path instead of Windows-style.
-                            Dim quoteForFilePaths As String = Chr(34)
-                            For Each fileName As String In fileNameList
-                                ' If the .desktop file requests it, switch the paths to be Linux-style.
-                                If getInfo(inputFile, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
+                            '    ' Define a path list to store the filenames into.
+                            '    Dim entirePathList As New List(Of String)
+                            '    ' Define a quote character for putting at the beginning
+                            '    ' and end of filenames. This can be changed if necessary,
+                            '    ' such as if a desktop entry file wants to use a Linux-style
+                            '    ' path instead of Windows-style.
+                            '    Dim quoteForFilePaths As String = Chr(34)
+                            '    For Each fileName As String In fileNameList
+                            '        ' If the .desktop file requests it, switch the paths to be Linux-style.
+                            '        If getInfo(inputFile, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
 
-                                    ' Set quote used in file paths to a single quote.
-                                    quoteForFilePaths = "'"
-                                    ' Add the newly-modified filename to the path list.
+                            '            ' Set quote used in file paths to a single quote.
+                            '            quoteForFilePaths = "'"
+                            '            ' Add the newly-modified filename to the path list.
 
-                                    ' Put a question mark at the end of the filename
-                                    ' for later use when joining the string.
-                                    ' It may be a good idea to allow this to be a configurable option
-                                    ' in case the user runs into issues on other filesystems that allow
-                                    ' the question mark to be in a filename.
+                            '            ' Put a question mark at the end of the filename
+                            '            ' for later use when joining the string.
+                            '            ' It may be a good idea to allow this to be a configurable option
+                            '            ' in case the user runs into issues on other filesystems that allow
+                            '            ' the question mark to be in a filename.
 
-                                    ' Convert the filename/file path to what WSL distros expect.
-                                    entirePathList.Add(quoteForFilePaths & convertPathsStyleToWSL(fileName) & quoteForFilePaths & " ?")
+                            '            ' Convert the filename/file path to what WSL distros expect.
+                            '            entirePathList.Add(quoteForFilePaths & convertPathsStyleToWSL(fileName) & quoteForFilePaths & " ?")
 
-                                Else
-                                    ' Remove the double-quotes on the end of the filename.
-                                    fileName = fileName.TrimEnd(Chr(34))
-                                    ' Add the filename to the path list.
+                            '        Else
+                            '            ' Remove the double-quotes on the end of the filename.
+                            '            fileName = fileName.TrimEnd(Chr(34))
+                            '            ' Add the filename to the path list.
 
-                                    ' Put a question mark at the end of the filename
-                                    ' for later use when joining the string.
-                                    ' It may be a good idea to allow this to be a configurable option
-                                    ' in case the user runs into issues on other filesystems that allow
-                                    ' the question mark to be in a filename.
-                                    entirePathList.Add(quoteForFilePaths & fileName & quoteForFilePaths & " ?")
-                                End If
+                            '            ' Put a question mark at the end of the filename
+                            '            ' for later use when joining the string.
+                            '            ' It may be a good idea to allow this to be a configurable option
+                            '            ' in case the user runs into issues on other filesystems that allow
+                            '            ' the question mark to be in a filename.
+                            '            entirePathList.Add(quoteForFilePaths & fileName & quoteForFilePaths & " ?")
+                            '        End If
 
-                            Next
-                            ' Make a new string that joins the file name list into one string.
-                            Dim filesList As String = String.Join("?", entirePathList)
-                            ' Replace the joiner character with an empty string.
-                            filesList = filesList.Replace("?", "")
+                            '    Next
+                            '    ' Make a new string that joins the file name list into one string.
+                            '    Dim filesList As String = String.Join("?", entirePathList)
+                            '    ' Replace the joiner character with an empty string.
+                            '    filesList = filesList.Replace("?", "")
 
                             ' Expand %F with the new file list, and add double-quotes on each side
                             ' of the file list after putting in a space to separate it from the rest
