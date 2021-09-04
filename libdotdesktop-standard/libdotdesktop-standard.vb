@@ -366,7 +366,7 @@ Public Class desktopEntryStuff
                             Dim fileName As String = openFileDialog.FileName
                             Dim quoteForFilePaths As String = Chr(34)
                             ' If the .desktop file requests it, switch the paths to be Linux-style.
-                            If desktopEntryStuff.getInfo(inputFile, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
+                            If getInfo(inputFile, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
 
                                 ' Convert the filename/file path to what WSL distros expect.
                                 fileName = convertPathsStyleToWSL(fileName)
@@ -415,7 +415,7 @@ Public Class desktopEntryStuff
                             Dim quoteForFilePaths As String = Chr(34)
                             For Each fileName As String In fileNameList
                                 ' If the .desktop file requests it, switch the paths to be Linux-style.
-                                If desktopEntryStuff.getInfo(inputFile, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
+                                If getInfo(inputFile, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
 
                                     ' Set quote used in file paths to a single quote.
                                     quoteForFilePaths = "'"
