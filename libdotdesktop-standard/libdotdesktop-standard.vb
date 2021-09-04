@@ -519,9 +519,12 @@ Public Class desktopEntryStuff
 
                 ' Expand environment variables.
                 cleanedExecKey = expandEnvVars(cleanedExecKey)
-                If My.Settings.ShowExecKeyBeforeLaunch = True Then
-                    MessageBox.Show(cleanedExecKey)
-                End If
+                ' Comment out the stuff to determine whether the cleaned exec
+                ' key should be shown before launch as that'll be handled
+                ' by the calling app.
+                'If My.Settings.ShowExecKeyBeforeLaunch = True Then
+                '    MessageBox.Show(cleanedExecKey)
+                'End If
                 ' TODO: Switch the urlList to WSL paths if
                 ' the .desktop file wants it.
                 urlList = expandEnvVars(urlList)
