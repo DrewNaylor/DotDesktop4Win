@@ -482,7 +482,9 @@ Public Class desktopEntryStuff
                     ' Split Exec key's program from the arguments, if necessary.
                     ' Check to see if it starts with double-quotes.
                     ' Get rid of whitespace on the left side.
-                    cleanedExecKey = LTrim(cleanedExecKey)
+                    ' This needs to be in a .NET 5 library, as .NET Standard 2.0
+                    ' doesn't support it.
+                    'cleanedExecKey = LTrim(cleanedExecKey)
 
                     ' Check for Chr(34), which is the double-quote character.
                     If cleanedExecKey.StartsWith(Chr(34)) Then
