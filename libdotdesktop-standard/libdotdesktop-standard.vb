@@ -533,7 +533,7 @@ Public Class desktopEntryStuff
             urlList = expandEnvVars(urlList)
 
             ' Need to add the urlList to the end of the cleanedExecKey as a String() array.
-            Dim completeExecKey As List(Of String)
+            Dim completeExecKey As New List(Of String)
             completeExecKey.Add(cleanedExecKey)
             completeExecKey.Add(urlList)
 
