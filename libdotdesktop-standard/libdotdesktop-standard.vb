@@ -405,14 +405,6 @@ Public Class desktopEntryStuff
                         cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
                         cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
                         cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
-                    Else
-                        ' If the user cancels, just remove the %f.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
-                        ' Clean up unused flags.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
-                    End If
 
                         ElseIf regexCheckFlags(cleanedExecKey, "%F") Then
                             ' If there's a %F, allow for choosing multiple files.
