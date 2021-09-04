@@ -278,6 +278,8 @@ Public Class desktopEntryStuff
 #End Region
 
 #Region "Cleaning keys."
+    ' This function will clean keys as passed to it.
+    ' Some features are only available on Windows, such as the file browser dialog.
 
 #End Region
 
