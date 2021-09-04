@@ -53,6 +53,7 @@ Public Class desktopEntryStuff
         End If
     End Function
 
+#Region "GetInfo function."
     Public Shared Function getInfo(inputFile As String, keyToGet As String, Optional fileName As String = "", Optional IsCustomKey As Boolean = False) As String
 
         ' Get the input file and put it in an INI file object for later use.
@@ -273,14 +274,17 @@ Public Class desktopEntryStuff
                 End Select
 
         End Select
-
+#End Region
     End Function
 #End Region
+
 
 #Region "Cleaning keys."
     ' This function will clean keys as passed to it.
     ' Some features are only available on Windows, such as the file browser dialog.
+    Public Shared Function cleanKey(inputFile As String) As String
 
+    End Function
 #End Region
 
 End Class
