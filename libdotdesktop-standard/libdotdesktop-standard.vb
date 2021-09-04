@@ -399,20 +399,20 @@ Public Class desktopEntryStuff
                             '    ' to be Linux-style if the desktop entry file wanted it or not.
                             '    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", " " & quoteForFilePaths & fileName & quoteForFilePaths)
                         Else
-                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", String.Empty)
-                            End If
-                            ' Clean up unused flags.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
-                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
-                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
-                            Else
-                                ' If the user cancels, just remove the %f.
-                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
-                                ' Clean up unused flags.
-                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
-                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
-                                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
-                            End If
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", String.Empty)
+                        End If
+                        ' Clean up unused flags.
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
+                    Else
+                        ' If the user cancels, just remove the %f.
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
+                        ' Clean up unused flags.
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
+                    End If
 
                         ElseIf regexCheckFlags(cleanedExecKey, "%F") Then
                             ' If there's a %F, allow for choosing multiple files.
