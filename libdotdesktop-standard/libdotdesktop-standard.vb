@@ -317,8 +317,8 @@ Public Class desktopEntryStuff
                 ElseIf getInfo(inputFile, "Type") = "Directory" Then
                     ' Directories aren't supported in this program.
                     Console.WriteLine("Directory entries aren't supported by libdotdesktop-standard.", "Unsupported entry type")
-                    Exit Try
-                Else
+                Exit Function
+            Else
                     ' Otherwise, assume it's an application.
                     cleanedExecKey = getInfo(inputFile, "Exec")
 #Region "Clean up Exec key if needed, and allow for choosing files and URLs."
