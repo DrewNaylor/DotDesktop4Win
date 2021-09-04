@@ -531,7 +531,10 @@ Public Class desktopEntryStuff
                 ' the .desktop file wants it.
                 urlList = expandEnvVars(urlList)
 
-                ' Return the cleanedExecKey to the program that requested it.
+            ' Return the cleanedExecKey to the program that requested it.
+            Return cleanedExecKey
+
+
             ' The launcher code is commented out because it may be useful.
 
 
