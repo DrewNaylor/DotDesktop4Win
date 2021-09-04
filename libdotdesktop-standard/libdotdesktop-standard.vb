@@ -337,10 +337,16 @@ Public Class desktopEntryStuff
                     ' Determine if the application allows for entering a URL,
                     ' and provide a space to type it in.
                     If regexCheckFlags(cleanedExecKey, "%u") Then
-                        ' If there's a %u in the file, open a window to ask for a URL.
-                        urlList = InputBox("Please type or paste a URL:", "Single URL input")
-                        ' Expand %u to what the user entered.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", " " & urlList)
+                        ' If there's a %u in the file, either remove or expand the flag
+                        ' based on the calling app.
+                        If autoCleanMissingFilePathsAndUrls = False AndAlso manuallyProvidedUrl IsNot Nothing Then
+                            urlList = manuallyProvidedUrl
+                            ' Expand %u to what the user entered.
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", " " & urlList)
+                        Else
+                            ' Automatically clean the flag.
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", String.Empty)
+                        End If
                         ' Clean up unused flags.
                         cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
                         cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
@@ -348,7 +354,8 @@ Public Class desktopEntryStuff
 
 
                     ElseIf regexCheckFlags(cleanedExecKey, "%U") Then
-                        ' If there's a %U in the file, open a window to allow for entering URLs.
+                        ' If there's a %U in the file, either remove or expand the flag
+                        ' based on the calling app.
                         If autoCleanMissingFilePathsAndUrls = False AndAlso manuallyProvidedUrl IsNot Nothing Then
                             urlList = manuallyProvidedUrl
                             ' Expand %U to what the user entered.
