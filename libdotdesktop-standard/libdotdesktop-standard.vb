@@ -407,8 +407,8 @@ Public Class desktopEntryStuff
                         cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
 
                         ElseIf regexCheckFlags(cleanedExecKey, "%F") Then
-                            ' If there's a %F, allow for choosing multiple files.
-                            If autoCleanMissingFilePathsAndUrls = False Then
+                        ' If there's a %F, allow for choosing multiple files.
+                        If autoCleanMissingFilePathsAndUrls = False Then
                             ' This needs to be set up in a way that'll allow the calling app to send
                             ' over the list of files. Not sure how to do this at the moment, so it's
                             ' commented out for now.
@@ -469,19 +469,14 @@ Public Class desktopEntryStuff
                             ' Expand %F with the new file list, and add double-quotes on each side
                             ' of the file list after putting in a space to separate it from the rest
                             ' of the command.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", " " & filesList.TrimEnd)
-                            ' Clean up unused flags.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
+                            'cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", " " & filesList.TrimEnd)
                         Else
-                            ' If the user cancels, just remove the %F.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
-                            ' Clean up unused flags.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", String.Empty)
                         End If
+                        ' Clean up unused flags.
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
                     End If
 
                     ' Split Exec key's program from the arguments, if necessary.
