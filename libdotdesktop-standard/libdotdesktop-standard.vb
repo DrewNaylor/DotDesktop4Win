@@ -551,4 +551,154 @@ Public Class desktopEntryStuff
     End Function
 #End Region
 
+    Private Function convertPathsStyleToWSL(fileName As String) As String
+        ' Convert Windows paths to be usable under WSL.
+        If fileName.Substring(1, 2) = ":\" Then
+            ' Grab the drive letter and make it lowercase for later use.
+            Dim driveLetter As String = fileName.Substring(0, 1).ToLowerInvariant
+            ' Remove the drive letter and the colon.
+            fileName = fileName.Remove(0, 2)
+
+            ' Prepend "/mnt/" and the drive letter to the textbox text.
+            fileName = "/mnt/" & driveLetter & fileName
+
+            ' Replace back slashes with forward slashes.
+            fileName = fileName.Replace("\", "/")
+
+        End If
+        ' Remove the single quote on the end.
+        fileName = fileName.TrimEnd(CType("'", Char()))
+        Return fileName
+    End Function
+
+    Private Function regexReplaceFlags(input As String, flag As String, desiredReplacement As String, Optional caseSensitive As Boolean = True) As String
+        ' Replaces flags in the style of %u with a string using regex.
+        ' First we need to create a regular expression to match what'll
+        ' be replaced.
+        ' \s+ is for whitespace before the flag.
+        ' \b is for the word border at the end.
+        ' This can be used with flags/environment variables
+        ' that end with a percent sign.
+        ' The case-sensitive if statement may need to be cleaned up a bit.
+
+        ' Create a temp string to hold the regex for now.
+        Dim tempRegex As String = "\s+" & flag & "\b"
+
+        If flag.EndsWith("%") Then
+            ' If the flag ends with a percent sign,
+            ' change the regex temp string to work
+            ' with it so it's matched later.
+            tempRegex = flag.TrimEnd(CType("%", Char())) & "\b%"
+        End If
+
+        If caseSensitive = False Then
+            ' If case-insensitivity is fine for this
+            ' flag, have the regex thing ignore case.
+            Dim regexThing As New Regex(tempRegex, RegexOptions.IgnoreCase)
+            ' Now we perform the replacement.
+            Return regexThing.Replace(input, desiredReplacement)
+        Else
+            ' Otherwise, don't have the regex thing
+            ' ignore case.
+            Dim regexThing As New Regex(tempRegex)
+            ' Now we perform the replacement.
+            Return regexThing.Replace(input, desiredReplacement)
+        End If
+    End Function
+
+    Private Function regexCheckFlags(input As String, flag As String, Optional caseSensitive As Boolean = True) As Boolean
+        ' Check to see if the input string contains a flag in the style of %u using regex.
+        ' If there's a match, this'll return a Boolean.
+        ' \s+ is for whitespace before the flag.
+        ' \b is for the word border at the end.
+        ' This can be used with flags/environment variables
+        ' that end with a percent sign.
+
+        ' If this is a special folder, ignore space at beginning.
+
+        ' Create temporary string for regex pattern.
+        Dim tempRegex As String = "\s+" & flag & "\b"
+
+        If flag.EndsWith("%") Then
+            ' If the flag ends with a percent sign,
+            ' change the regex string to work with it.
+            ' This is a special folder, so ignore spacing
+            ' requirements.
+            tempRegex = flag.TrimEnd(CType("%", Char())) & "\b%"
+        End If
+
+        If caseSensitive = False Then
+            ' If case sensitivity isn't desired for this
+            ' flag (such as for %userprofile%), have
+            ' the regex thing ignore case when returning
+            ' the boolean.
+            Return Regex.IsMatch(input, tempRegex, RegexOptions.IgnoreCase)
+        Else
+            ' Otherwise, case sensitivity is necessary, so
+            ' it'll be used.
+            Return Regex.IsMatch(input, tempRegex)
+        End If
+
+    End Function
+
+
+    Private Function expandEnvVars(execOrArg As String) As String
+        If My.Settings.ShowExecKeyBeforeLaunch = True Then
+            MessageBox.Show(execOrArg)
+        End If
+        ' First we expand %USERPROFILE%.
+        Dim output As String = execOrArg
+        If regexCheckFlags(execOrArg, "%USERPROFILE%", False) Then
+            output = regexReplaceFlags(execOrArg, "%USERPROFILE%", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), False)
+            MessageBox.Show(output)
+        End If
+
+        ' Now we can replace %WINDIR%.
+        If regexCheckFlags(execOrArg, "%WINDIR%", False) Then
+            MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.Windows))
+            output = regexReplaceFlags(execOrArg, "%WINDIR%", Environment.GetFolderPath(Environment.SpecialFolder.Windows), False)
+            MessageBox.Show(output)
+        End If
+
+        ' Replace %ProgramFiles%.
+        ' This returns "C:\Program Files (x86)" on 64-bit Windows
+        ' when running an application in 32-bit mode, so to get the
+        ' "real" Program Files, we'd need %ProgramW6432% instead.
+        ' That requires a runtime check to make sure it's running
+        ' on a 64-bit system, and if not, it'll use the "%ProgramFiles%"
+        ' special folder instead.
+        ' There's also the "%programfiles(x86)%" variable, which
+        ' would go to "C:\Program Files (x86)" without redirection.
+        If regexCheckFlags(execOrArg, "%PROGRAMFILES%", False) Then
+            MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles))
+            output = regexReplaceFlags(execOrArg, "%PROGRAMFILES%", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), False)
+        End If
+
+        ' Replace AppData.
+        If regexCheckFlags(execOrArg, "%APPDATA%", False) Then
+            MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData))
+            output = regexReplaceFlags(execOrArg, "%APPDATA%", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), False)
+        End If
+
+        ' Replace LocalAppData.
+        If regexCheckFlags(execOrArg, "%LOCALAPPDATA%", False) Then
+            MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))
+            output = regexReplaceFlags(execOrArg, "%LOCALAPPDATA%", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), False)
+        End If
+
+        ' Replace LocalAppData.
+        If regexCheckFlags(execOrArg, "%TEMP%", False) Then
+            MessageBox.Show(System.IO.Path.GetTempPath)
+            output = regexReplaceFlags(execOrArg, "%TEMP%", IO.Path.GetTempPath, False)
+        End If
+
+        ' Replace LocalAppData.
+        If regexCheckFlags(execOrArg, "%TMP%", False) Then
+            MessageBox.Show(System.IO.Path.GetTempPath)
+            output = regexReplaceFlags(execOrArg, "%TMP%", IO.Path.GetTempPath, False)
+        End If
+
+        Return output
+    End Function
+
 End Class
