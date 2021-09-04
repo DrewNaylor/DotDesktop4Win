@@ -296,8 +296,8 @@ Public Class desktopEntryStuff
             'Try
             ' Exec key.
             Dim cleanedExecKey As String
-            ' URL list for apps that allow for URLs to be passed to them.
-            Dim urlList As String = ""
+            ' Arguments list for apps that allow for passing arguments to apps.
+            Dim argsList As String = ""
 
             ' Check to see if the desktop entry is a link or an application.
             If getInfo(inputFile, "Type") = "Link" AndAlso
@@ -343,9 +343,9 @@ Public Class desktopEntryStuff
                     ' If there's a %u in the file, either remove or expand the flag
                     ' based on the calling app.
                     If autoCleanMissingFilePathsAndUrls = False AndAlso manuallyProvidedUrl IsNot Nothing Then
-                        urlList = manuallyProvidedUrl
+                        argsList = manuallyProvidedUrl
                         ' Expand %u to what the user entered.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", " " & urlList)
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", " " & argsList)
                     Else
                         ' Automatically clean the flag.
                         cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", String.Empty)
@@ -360,9 +360,9 @@ Public Class desktopEntryStuff
                     ' If there's a %U in the file, either remove or expand the flag
                     ' based on the calling app.
                     If autoCleanMissingFilePathsAndUrls = False AndAlso manuallyProvidedUrl IsNot Nothing Then
-                        urlList = manuallyProvidedUrl
+                        argsList = manuallyProvidedUrl
                         ' Expand %U to what the user entered.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", " " & urlList)
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", " " & argsList)
                     Else
                         ' Automatically clean the flag.
                         cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", String.Empty)
@@ -500,7 +500,7 @@ Public Class desktopEntryStuff
                     ' Assign the arg variable to the copy of the exec key and remove
                     ' the double-quotes before and after and the new exec key 
                     ' from the beginning of the URL list/arg variable.
-                    urlList = originalCleanedExecKey.Remove(0, cleanedExecKey.Length + 2)
+                    argsList = originalCleanedExecKey.Remove(0, cleanedExecKey.Length + 2)
                 Else
                     ' If there's no double-quotes, assume it's something like
                     ' firefox.exe or another string without spaces.
@@ -514,7 +514,7 @@ Public Class desktopEntryStuff
                     cleanedExecKey = tempExecKey(0).Trim
                     ' Assign the arg variable to the copy of the exec key and trim
                     ' out the exec key.
-                    urlList = originalCleanedExecKey.TrimStart(cleanedExecKey.ToCharArray)
+                    argsList = originalCleanedExecKey.TrimStart(cleanedExecKey.ToCharArray)
                 End If
 #End Region
                 ' Done figuring out the desktop entry type.
@@ -530,12 +530,12 @@ Public Class desktopEntryStuff
             'End If
             ' TODO: Switch the urlList to WSL paths if
             ' the .desktop file wants it.
-            urlList = expandEnvVars(urlList)
+            argsList = expandEnvVars(argsList)
 
             ' Need to add the urlList to the end of the cleanedExecKey as a String() array.
             Dim completeExecKey As New List(Of String)
             completeExecKey.Add(cleanedExecKey)
-            completeExecKey.Add(urlList)
+            completeExecKey.Add(argsList)
 
             ' Return the cleanedExecKey to the program that requested it.
             Return completeExecKey
