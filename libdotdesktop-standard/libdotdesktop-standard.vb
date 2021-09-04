@@ -296,23 +296,23 @@ Public Class desktopEntryStuff
                 Dim urlList As String = ""
 
                 ' Check to see if the desktop entry is a link or an application.
-                If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Type") = "Link" AndAlso
-                       desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "URL") IsNot Nothing Then
+                If desktopEntryStuff.getInfo(inputFile, "Type") = "Link" AndAlso
+                       desktopEntryStuff.getInfo(inputFile, "URL") IsNot Nothing Then
                     ' If it's a link, grab the URL key if it exists.
-                    cleanedExecKey = desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "URL")
+                    cleanedExecKey = desktopEntryStuff.getInfo(inputFile, "URL")
 
-                ElseIf desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Type") = "Link" AndAlso
-                       desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "URL") Is Nothing Then
+                ElseIf desktopEntryStuff.getInfo(inputFile, "Type") = "Link" AndAlso
+                       desktopEntryStuff.getInfo(inputFile, "URL") Is Nothing Then
                     ' If the URL key doesn't exist, allow for URL entry.
                     cleanedExecKey = InputBox("Please type or paste a URL:", "URL key missing")
 
-                ElseIf desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Type") = "Directory" Then
+                ElseIf desktopEntryStuff.getInfo(inputFile, "Type") = "Directory" Then
                     ' Directories aren't supported in this program.
                     MessageBox.Show("Directory entries aren't supported by LaunchDotDesktop.", "Unsupported entry type")
                     Exit Try
                 Else
                     ' Otherwise, assume it's an application.
-                    cleanedExecKey = desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Exec")
+                    cleanedExecKey = desktopEntryStuff.getInfo(inputFile, "Exec")
 #Region "Clean up Exec key if needed, and allow for choosing files and URLs."
 
                     ' %d is deprecated.
@@ -360,7 +360,7 @@ Public Class desktopEntryStuff
                             Dim fileName As String = openFileDialog.FileName
                             Dim quoteForFilePaths As String = Chr(34)
                             ' If the .desktop file requests it, switch the paths to be Linux-style.
-                            If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
+                            If desktopEntryStuff.getInfo(inputFile, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
 
                                 ' Convert the filename/file path to what WSL distros expect.
                                 fileName = convertPathsStyleToWSL(fileName)
@@ -409,7 +409,7 @@ Public Class desktopEntryStuff
                             Dim quoteForFilePaths As String = Chr(34)
                             For Each fileName As String In fileNameList
                                 ' If the .desktop file requests it, switch the paths to be Linux-style.
-                                If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
+                                If desktopEntryStuff.getInfo(inputFile, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
 
                                     ' Set quote used in file paths to a single quote.
                                     quoteForFilePaths = "'"
@@ -523,15 +523,15 @@ Public Class desktopEntryStuff
             Catch ex As System.ComponentModel.Win32Exception
                 ' Show a messagebox for explanation.
                 ' If it's a Link, show the URL key.
-                If desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Type") = "Link" Then
+                If desktopEntryStuff.getInfo(inputFile, "Type") = "Link" Then
                     MessageBox.Show("We couldn't find the address that was listed in the URL key or passed manually. You can check the console output if you want to see what it could be." & vbCrLf &
                             vbCrLf &
-                            "URL key value: " & desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "URL"), System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName)
+                            "URL key value: " & desktopEntryStuff.getInfo(inputFile, "URL"), System.IO.Path.GetFileName(inputFile) & " - " & Application.ProductName)
                 Else
                     ' If it's an application, show the Exec key.
                     MessageBox.Show("Either there are characters where they shouldn't be, or we couldn't find the program specified in the Exec key. You can check the console output if you want to see what it could be." & vbCrLf &
                                                     vbCrLf &
-                                                    "Exec key value: " & desktopEntryStuff.getInfo(My.Application.CommandLineArgs(0).ToString, "Exec"), System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName)
+                                                    "Exec key value: " & desktopEntryStuff.getInfo(inputFile, "Exec"), System.IO.Path.GetFileName(inputFile) & " - " & Application.ProductName)
                 End If
 
 
