@@ -551,7 +551,7 @@ Public Class desktopEntryStuff
     End Function
 #End Region
 
-    Private Function convertPathsStyleToWSL(fileName As String) As String
+    Private Shared Function convertPathsStyleToWSL(fileName As String) As String
         ' Convert Windows paths to be usable under WSL.
         If fileName.Substring(1, 2) = ":\" Then
             ' Grab the drive letter and make it lowercase for later use.
@@ -571,7 +571,7 @@ Public Class desktopEntryStuff
         Return fileName
     End Function
 
-    Private Function regexReplaceFlags(input As String, flag As String, desiredReplacement As String, Optional caseSensitive As Boolean = True) As String
+    Private Shared Function regexReplaceFlags(input As String, flag As String, desiredReplacement As String, Optional caseSensitive As Boolean = True) As String
         ' Replaces flags in the style of %u with a string using regex.
         ' First we need to create a regular expression to match what'll
         ' be replaced.
@@ -606,7 +606,7 @@ Public Class desktopEntryStuff
         End If
     End Function
 
-    Private Function regexCheckFlags(input As String, flag As String, Optional caseSensitive As Boolean = True) As Boolean
+    Private Shared Function regexCheckFlags(input As String, flag As String, Optional caseSensitive As Boolean = True) As Boolean
         ' Check to see if the input string contains a flag in the style of %u using regex.
         ' If there's a match, this'll return a Boolean.
         ' \s+ is for whitespace before the flag.
@@ -642,7 +642,7 @@ Public Class desktopEntryStuff
     End Function
 
 
-    Private Function expandEnvVars(execOrArg As String) As String
+    Private Shared Function expandEnvVars(execOrArg As String) As String
         If My.Settings.ShowExecKeyBeforeLaunch = True Then
             MessageBox.Show(execOrArg)
         End If
