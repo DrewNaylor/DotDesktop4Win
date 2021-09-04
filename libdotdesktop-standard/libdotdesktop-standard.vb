@@ -529,41 +529,46 @@ Public Class desktopEntryStuff
                 ' the .desktop file wants it.
                 urlList = expandEnvVars(urlList)
 
-                ' Now, see if urlList has anything in it, and if it does,
-                ' send that URL as an argument to the application.
-                Dim execProgram As New ProcessStartInfo
-                execProgram.FileName = cleanedExecKey
-                execProgram.Arguments = urlList.Trim
-                ' Don't add space if there are no args.
-                If execProgram.Arguments.Length > 0 Then
-                    Console.WriteLine("Launching " & execProgram.FileName & " " & execProgram.Arguments & "...")
-                Else
-                    Console.WriteLine("Launching " & execProgram.FileName & "...")
-                End If
-
-                Process.Start(execProgram)
-
-            Catch ex As System.ComponentModel.Win32Exception
-                ' Show a messagebox for explanation.
-                ' If it's a Link, show the URL key.
-                If getInfo(inputFile, "Type") = "Link" Then
-                    MessageBox.Show("We couldn't find the address that was listed in the URL key or passed manually. You can check the console output if you want to see what it could be." & vbCrLf &
-                            vbCrLf &
-                            "URL key value: " & getInfo(inputFile, "URL"), System.IO.Path.GetFileName(inputFile) & " - " & Application.ProductName)
-                Else
-                    ' If it's an application, show the Exec key.
-                    MessageBox.Show("Either there are characters where they shouldn't be, or we couldn't find the program specified in the Exec key. You can check the console output if you want to see what it could be." & vbCrLf &
-                                                    vbCrLf &
-                                                    "Exec key value: " & getInfo(inputFile, "Exec"), System.IO.Path.GetFileName(inputFile) & " - " & Application.ProductName)
-                End If
+            ' Return the cleanedExecKey to the program that requested it.
+            ' The launcher code is commented out because it may be useful.
 
 
-            End Try
 
-        Else
-            ' If it's not a valid Freedesktop.org .desktop file, tell the user.
-            MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec.",
-                                "Launch .desktop file")
+            '        ' Now, see if urlList has anything in it, and if it does,
+            '        ' send that URL as an argument to the application.
+            '        Dim execProgram As New ProcessStartInfo
+            '        execProgram.FileName = cleanedExecKey
+            '        execProgram.Arguments = urlList.Trim
+            '        ' Don't add space if there are no args.
+            '        If execProgram.Arguments.Length > 0 Then
+            '            Console.WriteLine("Launching " & execProgram.FileName & " " & execProgram.Arguments & "...")
+            '        Else
+            '            Console.WriteLine("Launching " & execProgram.FileName & "...")
+            '        End If
+
+            '        Process.Start(execProgram)
+
+            '    Catch ex As System.ComponentModel.Win32Exception
+            '        ' Show a messagebox for explanation.
+            '        ' If it's a Link, show the URL key.
+            '        If getInfo(inputFile, "Type") = "Link" Then
+            '            Console.WriteLine("We couldn't find the address that was listed in the URL key or passed manually. You can check the console output if you want to see what it could be." & vbCrLf &
+            '                    vbCrLf &
+            '                    "URL key value: " & getInfo(inputFile, "URL"), System.IO.Path.GetFileName(inputFile) & " - libdotdesktop-standard")
+            '        Else
+            '            ' If it's an application, show the Exec key.
+            '            Console.WriteLine("Either there are characters where they shouldn't be, or we couldn't find the program specified in the Exec key. You can check the console output if you want to see what it could be." & vbCrLf &
+            '                                            vbCrLf &
+            '                                            "Exec key value: " & getInfo(inputFile, "Exec"), System.IO.Path.GetFileName(inputFile) & " - libdotdesktop-standard")
+            '        End If
+
+
+            '    End Try
+
+            'Else
+            '    ' If it's not a valid Freedesktop.org .desktop file, tell the user.
+            '    Console.WriteLine("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec.",
+            '                        "Launch .desktop file")
         End If
     End Function
 #End Region
