@@ -282,7 +282,8 @@ Public Class desktopEntryStuff
 #Region "Cleaning keys."
     ' This function will clean keys as passed to it.
     ' Some features are only available on Windows, such as the file browser dialog.
-    Public Shared Function cleanExecKey(inputFile As String, Optional autoIgnoreMissingFilePathsAndUrls As Boolean = True) As String
+    Public Shared Function cleanExecKey(inputFile As String, Optional autoIgnoreMissingFilePathsAndUrls As Boolean = True,
+                                        Optional manuallyProvidedUrl As String = Nothing) As String
         ' Before doing anything, make sure this is a valid .desktop file
         ' with the proper Desktop Entry/KDE Desktop Entry header.
         If checkHeader(inputFile) = "Desktop Entry" OrElse checkHeader(inputFile) = "KDE Desktop Entry" Then
@@ -305,12 +306,15 @@ Public Class desktopEntryStuff
                        getInfo(inputFile, "URL") Is Nothing Then
                     ' If the URL key doesn't exist, allow for URL entry.
                     ' We can't exactly do this in the library, so it needs to be passed
-                    ' back to the calling application with it intact if requested.
-                    cleanedExecKey = InputBox("Please type or paste a URL:", "URL key missing")
+                    ' back to the calling application with it intact unless a URL is passed
+                    ' from the calling app.
+                    If autoIgnoreMissingFilePathsAndUrls = False AndAlso manuallyProvidedUrl IsNot Nothing Then
+                        cleanedExecKey = manuallyProvidedUrl
+                    End If
 
                 ElseIf getInfo(inputFile, "Type") = "Directory" Then
                     ' Directories aren't supported in this program.
-                    MessageBox.Show("Directory entries aren't supported by LaunchDotDesktop.", "Unsupported entry type")
+                    Console.WriteLine("Directory entries aren't supported by libdotdesktop-standard.", "Unsupported entry type")
                     Exit Try
                 Else
                     ' Otherwise, assume it's an application.
