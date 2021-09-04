@@ -273,8 +273,12 @@ Public Class desktopEntryStuff
                 End Select
 
         End Select
-#End Region
 
     End Function
+#End Region
+
+#Region "Cleaning keys."
+
+#End Region
 
 End Class
