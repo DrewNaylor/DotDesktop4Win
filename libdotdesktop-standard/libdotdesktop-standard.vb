@@ -282,7 +282,7 @@ Public Class desktopEntryStuff
 #Region "Cleaning keys."
     ' This function will clean keys as passed to it.
     ' Some features are only available on Windows, such as the file browser dialog.
-    Public Shared Function cleanExecKey(inputFile As String) As String
+    Public Shared Function cleanExecKey(inputFile As String, Optional autoIgnoreMissingFilePathsAndUrls As Boolean = True) As String
         ' Before doing anything, make sure this is a valid .desktop file
         ' with the proper Desktop Entry/KDE Desktop Entry header.
         If checkHeader(inputFile) = "Desktop Entry" OrElse checkHeader(inputFile) = "KDE Desktop Entry" Then
@@ -304,6 +304,8 @@ Public Class desktopEntryStuff
                 ElseIf getInfo(inputFile, "Type") = "Link" AndAlso
                        getInfo(inputFile, "URL") Is Nothing Then
                     ' If the URL key doesn't exist, allow for URL entry.
+                    ' We can't exactly do this in the library, so it needs to be passed
+                    ' back to the calling application with it intact if requested.
                     cleanedExecKey = InputBox("Please type or paste a URL:", "URL key missing")
 
                 ElseIf getInfo(inputFile, "Type") = "Directory" Then
