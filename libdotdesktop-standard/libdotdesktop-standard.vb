@@ -282,20 +282,12 @@ Public Class desktopEntryStuff
 #Region "Cleaning keys."
     ' This function will clean keys as passed to it.
     ' Some features are only available on Windows, such as the file browser dialog.
-    Public Shared Function cleanKey(inputFile As String) As String
+    Public Shared Function cleanExecKey(inputFile As String) As String
         ' Before doing anything, make sure this is a valid .desktop file
         ' with the proper Desktop Entry/KDE Desktop Entry header.
         If checkHeader(inputFile) = "Desktop Entry" OrElse checkHeader(inputFile) = "KDE Desktop Entry" Then
 
-            ' First, update titlebar and output the file path.
-            Console.WriteLine()
-            Console.WriteLine("Input file: " & My.Application.CommandLineArgs(0).ToString)
-            Console.Title = System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName
-
-            ' Second, update the console after replacing Lf with CrLf.
-            Console.WriteLine(System.IO.File.ReadAllText(My.Application.CommandLineArgs(0).ToString).Replace(vbLf, vbCrLf))
-
-            ' Now, pass along the file to the interpretation code in libdotdesktop.
+            ' Now, clean the exec key.
             ' Catch NullReferenceExceptions, just in case there are issues in the file.
             Try
                 ' Exec key.
@@ -549,7 +541,7 @@ Public Class desktopEntryStuff
             ' If it's not a valid Freedesktop.org .desktop file, tell the user.
             MessageBox.Show("This .desktop file doesn't have a valid Desktop Entry header/section, which is required by the Freedesktop.org Desktop Entry spec.",
                                 "Launch .desktop file")
-            End If
+        End If
     End Function
 #End Region
 

@@ -40,6 +40,7 @@ Module LaunchDotDesktop
                 desktopEntryStuff.checkHeader(My.Application.CommandLineArgs(0).ToString) = "KDE Desktop Entry" Then
 
                 ' First, update titlebar and output the file path.
+                ' Keep this output, as we need to have it in here.
                 Console.WriteLine()
                 Console.WriteLine("Input file: " & My.Application.CommandLineArgs(0).ToString)
                 Console.Title = System.IO.Path.GetFileName(My.Application.CommandLineArgs(0).ToString) & " - " & Application.ProductName
