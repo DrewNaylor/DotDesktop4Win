@@ -23,6 +23,7 @@
 
 
 Imports System.IO
+Imports System.Text.RegularExpressions
 Imports MadMilkman.Ini
 
 Public Class desktopEntryStuff
@@ -295,241 +296,241 @@ Public Class desktopEntryStuff
             'Try
             ' Exec key.
             Dim cleanedExecKey As String
-                ' URL list for apps that allow for URLs to be passed to them.
-                Dim urlList As String = ""
+            ' URL list for apps that allow for URLs to be passed to them.
+            Dim urlList As String = ""
 
-                ' Check to see if the desktop entry is a link or an application.
-                If getInfo(inputFile, "Type") = "Link" AndAlso
-                       getInfo(inputFile, "URL") IsNot Nothing Then
-                    ' If it's a link, grab the URL key if it exists.
-                    cleanedExecKey = getInfo(inputFile, "URL")
+            ' Check to see if the desktop entry is a link or an application.
+            If getInfo(inputFile, "Type") = "Link" AndAlso
+                   getInfo(inputFile, "URL") IsNot Nothing Then
+                ' If it's a link, grab the URL key if it exists.
+                cleanedExecKey = getInfo(inputFile, "URL")
 
-                ElseIf getInfo(inputFile, "Type") = "Link" AndAlso
-                       getInfo(inputFile, "URL") Is Nothing Then
-                    ' If the URL key doesn't exist, allow for URL entry.
-                    ' We can't exactly do this in the library, so it needs to be passed
-                    ' back to the calling application with it intact unless a URL is passed
-                    ' from the calling app.
-                    If autoCleanMissingFilePathsAndUrls = False AndAlso manuallyProvidedUrl IsNot Nothing Then
-                        cleanedExecKey = manuallyProvidedUrl
-                    End If
-
-                ElseIf getInfo(inputFile, "Type") = "Directory" Then
-                    ' Directories aren't supported in this program.
-                    Console.WriteLine("Directory entries aren't supported by libdotdesktop-standard.", "Unsupported entry type")
-                Exit Function
-            Else
-                    ' Otherwise, assume it's an application.
-                    cleanedExecKey = getInfo(inputFile, "Exec")
-#Region "Clean up Exec key if needed, and allow for choosing files and URLs."
-
-                    ' %d is deprecated.
-                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%d", "")
-                    ' %D is deprecated.
-                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%D", "")
-                    ' %n is deprecated.
-                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%n", "")
-                    ' %N is deprecated.
-                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%N", "")
-                    ' %v is deprecated.
-                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%v", "")
-                    ' %m is deprecated.
-                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%m", "")
-
-                    ' Determine if the application allows for entering a URL,
-                    ' and provide a space to type it in.
-                    If regexCheckFlags(cleanedExecKey, "%u") Then
-                        ' If there's a %u in the file, either remove or expand the flag
-                        ' based on the calling app.
-                        If autoCleanMissingFilePathsAndUrls = False AndAlso manuallyProvidedUrl IsNot Nothing Then
-                            urlList = manuallyProvidedUrl
-                            ' Expand %u to what the user entered.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", " " & urlList)
-                        Else
-                            ' Automatically clean the flag.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", String.Empty)
-                        End If
-                        ' Clean up unused flags.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
-
-
-                    ElseIf regexCheckFlags(cleanedExecKey, "%U") Then
-                        ' If there's a %U in the file, either remove or expand the flag
-                        ' based on the calling app.
-                        If autoCleanMissingFilePathsAndUrls = False AndAlso manuallyProvidedUrl IsNot Nothing Then
-                            urlList = manuallyProvidedUrl
-                            ' Expand %U to what the user entered.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", " " & urlList)
-                        Else
-                            ' Automatically clean the flag.
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", String.Empty)
-                        End If
-
-                        ' Clean up unused flags.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
-
-                    ElseIf regexCheckFlags(cleanedExecKey, "%f") Then
-                        ' If there's a %f, allow for choosing one file.
-                        ' For now this is commented out because there
-                        ' needs to be a way to get a file from the calling
-                        ' app, rather than in this library.
-                        If autoCleanMissingFilePathsAndUrls = False Then
-                            'Dim openFileDialog As New OpenFileDialog()
-                            'openFileDialog.Filter = "All files (*.*)|*.*"
-                            'openFileDialog.RestoreDirectory = True
-
-                            'If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                            '    ' If the user chooses a file, replace %f with the filename and path.
-                            '    Dim fileName As String = openFileDialog.FileName
-                            '    Dim quoteForFilePaths As String = (CChar(""""))
-                            '    ' If the .desktop file requests it, switch the paths to be Linux-style.
-                            '    If getInfo(inputFile, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
-
-                            '        ' Convert the filename/file path to what WSL distros expect.
-                            '        fileName = convertPathsStyleToWSL(fileName)
-                            '        ' Set quote used in file paths to a single quote.
-                            '        quoteForFilePaths = "'"
-
-                            '    Else
-                            '        ' Remove the double-quotes on the end of the filename.
-                            '        fileName = fileName.TrimEnd(CChar(""""))
-                            '    End If
-
-                            '    ' Update cleanedExecKey with the fileName, which may or may not have been modified
-                            '    ' to be Linux-style if the desktop entry file wanted it or not.
-                            '    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", " " & quoteForFilePaths & fileName & quoteForFilePaths)
-                        Else
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", String.Empty)
-                        End If
-                        ' Clean up unused flags.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
-
-                        ElseIf regexCheckFlags(cleanedExecKey, "%F") Then
-                        ' If there's a %F, allow for choosing multiple files.
-                        If autoCleanMissingFilePathsAndUrls = False Then
-                            ' This needs to be set up in a way that'll allow the calling app to send
-                            ' over the list of files. Not sure how to do this at the moment, so it's
-                            ' commented out for now.
-
-                            '    Dim openFileDialog As New OpenFileDialog()
-                            'openFileDialog.Filter = "All files (*.*)|*.*"
-                            'openFileDialog.RestoreDirectory = True
-                            'openFileDialog.Multiselect = True
-
-                            'If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                            '    ' If the user chooses files, replace %F with the filename and paths.
-                            '    ' Get a file name list array as a string from the open file dialog.
-                            '    Dim fileNameList As String() = openFileDialog.FileNames
-
-                            '    ' Define a path list to store the filenames into.
-                            '    Dim entirePathList As New List(Of String)
-                            '    ' Define a quote character for putting at the beginning
-                            '    ' and end of filenames. This can be changed if necessary,
-                            '    ' such as if a desktop entry file wants to use a Linux-style
-                            '    ' path instead of Windows-style.
-                            '    Dim quoteForFilePaths As String = Chr(34)
-                            '    For Each fileName As String In fileNameList
-                            '        ' If the .desktop file requests it, switch the paths to be Linux-style.
-                            '        If getInfo(inputFile, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
-
-                            '            ' Set quote used in file paths to a single quote.
-                            '            quoteForFilePaths = "'"
-                            '            ' Add the newly-modified filename to the path list.
-
-                            '            ' Put a question mark at the end of the filename
-                            '            ' for later use when joining the string.
-                            '            ' It may be a good idea to allow this to be a configurable option
-                            '            ' in case the user runs into issues on other filesystems that allow
-                            '            ' the question mark to be in a filename.
-
-                            '            ' Convert the filename/file path to what WSL distros expect.
-                            '            entirePathList.Add(quoteForFilePaths & convertPathsStyleToWSL(fileName) & quoteForFilePaths & " ?")
-
-                            '        Else
-                            '            ' Remove the double-quotes on the end of the filename.
-                            '            fileName = fileName.TrimEnd(Chr(34))
-                            '            ' Add the filename to the path list.
-
-                            '            ' Put a question mark at the end of the filename
-                            '            ' for later use when joining the string.
-                            '            ' It may be a good idea to allow this to be a configurable option
-                            '            ' in case the user runs into issues on other filesystems that allow
-                            '            ' the question mark to be in a filename.
-                            '            entirePathList.Add(quoteForFilePaths & fileName & quoteForFilePaths & " ?")
-                            '        End If
-
-                            '    Next
-                            '    ' Make a new string that joins the file name list into one string.
-                            '    Dim filesList As String = String.Join("?", entirePathList)
-                            '    ' Replace the joiner character with an empty string.
-                            '    filesList = filesList.Replace("?", "")
-
-                            ' Expand %F with the new file list, and add double-quotes on each side
-                            ' of the file list after putting in a space to separate it from the rest
-                            ' of the command.
-                            'cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", " " & filesList.TrimEnd)
-                        Else
-                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", String.Empty)
-                        End If
-                        ' Clean up unused flags.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
-                    End If
-
-                    ' Split Exec key's program from the arguments, if necessary.
-                    ' Check to see if it starts with double-quotes.
-                    ' Get rid of whitespace on the left side.
-                    ' This needs to be in a .NET 5 library, as .NET Standard 2.0
-                    ' doesn't support it.
-                    'cleanedExecKey = LTrim(cleanedExecKey)
-
-                    ' Check for Chr(34), which is the double-quote character.
-                    If cleanedExecKey.StartsWith(CChar("""")) Then
-                        ' Copy the original cleaned exec key for later use in the arg variable.
-                        Dim originalCleanedExecKey As String = cleanedExecKey
-                        ' Create a temp key to be used when splitting out the EXE filename.
-                        Dim tempExecKey As String() = cleanedExecKey.Split(CChar(""""))
-                        ' Trim the exec key out at the second double-quote.
-                        cleanedExecKey = tempExecKey(1).Trim
-                        ' Assign the arg variable to the copy of the exec key and remove
-                        ' the double-quotes before and after and the new exec key 
-                        ' from the beginning of the URL list/arg variable.
-                        urlList = originalCleanedExecKey.Remove(0, cleanedExecKey.Length + 2)
-                    Else
-                        ' If there's no double-quotes, assume it's something like
-                        ' firefox.exe or another string without spaces.
-                        ' We'll need to split this one at the first space character.
-
-                        ' Copy the original cleaned exec key for later use in the arg variable.
-                        Dim originalCleanedExecKey As String = cleanedExecKey
-                        ' Create a temp key to be used when splitting out the EXE filename.
-                        Dim tempExecKey As String() = cleanedExecKey.Split(" "c)
-                        ' Trim the exec key out at the first space.
-                        cleanedExecKey = tempExecKey(0).Trim
-                        ' Assign the arg variable to the copy of the exec key and trim
-                        ' out the exec key.
-                        urlList = originalCleanedExecKey.TrimStart(cleanedExecKey.ToCharArray)
-                    End If
-#End Region
-                    ' Done figuring out the desktop entry type.
+            ElseIf getInfo(inputFile, "Type") = "Link" AndAlso
+                   getInfo(inputFile, "URL") Is Nothing Then
+                ' If the URL key doesn't exist, allow for URL entry.
+                ' We can't exactly do this in the library, so it needs to be passed
+                ' back to the calling application with it intact unless a URL is passed
+                ' from the calling app.
+                If autoCleanMissingFilePathsAndUrls = False AndAlso manuallyProvidedUrl IsNot Nothing Then
+                    cleanedExecKey = manuallyProvidedUrl
                 End If
 
-                ' Expand environment variables.
-                cleanedExecKey = expandEnvVars(cleanedExecKey)
-                ' Comment out the stuff to determine whether the cleaned exec
-                ' key should be shown before launch as that'll be handled
-                ' by the calling app.
-                'If My.Settings.ShowExecKeyBeforeLaunch = True Then
-                '    MessageBox.Show(cleanedExecKey)
-                'End If
-                ' TODO: Switch the urlList to WSL paths if
-                ' the .desktop file wants it.
-                urlList = expandEnvVars(urlList)
+            ElseIf getInfo(inputFile, "Type") = "Directory" Then
+                ' Directories aren't supported in this program.
+                Console.WriteLine("Directory entries aren't supported by libdotdesktop-standard.", "Unsupported entry type")
+                Exit Function
+            Else
+                ' Otherwise, assume it's an application.
+                cleanedExecKey = getInfo(inputFile, "Exec")
+#Region "Clean up Exec key if needed, and allow for choosing files and URLs."
+
+                ' %d is deprecated.
+                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%d", "")
+                ' %D is deprecated.
+                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%D", "")
+                ' %n is deprecated.
+                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%n", "")
+                ' %N is deprecated.
+                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%N", "")
+                ' %v is deprecated.
+                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%v", "")
+                ' %m is deprecated.
+                cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%m", "")
+
+                ' Determine if the application allows for entering a URL,
+                ' and provide a space to type it in.
+                If regexCheckFlags(cleanedExecKey, "%u") Then
+                    ' If there's a %u in the file, either remove or expand the flag
+                    ' based on the calling app.
+                    If autoCleanMissingFilePathsAndUrls = False AndAlso manuallyProvidedUrl IsNot Nothing Then
+                        urlList = manuallyProvidedUrl
+                        ' Expand %u to what the user entered.
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", " " & urlList)
+                    Else
+                        ' Automatically clean the flag.
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", String.Empty)
+                    End If
+                    ' Clean up unused flags.
+                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
+                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
+
+
+                ElseIf regexCheckFlags(cleanedExecKey, "%U") Then
+                    ' If there's a %U in the file, either remove or expand the flag
+                    ' based on the calling app.
+                    If autoCleanMissingFilePathsAndUrls = False AndAlso manuallyProvidedUrl IsNot Nothing Then
+                        urlList = manuallyProvidedUrl
+                        ' Expand %U to what the user entered.
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", " " & urlList)
+                    Else
+                        ' Automatically clean the flag.
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", String.Empty)
+                    End If
+
+                    ' Clean up unused flags.
+                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+
+                ElseIf regexCheckFlags(cleanedExecKey, "%f") Then
+                    ' If there's a %f, allow for choosing one file.
+                    ' For now this is commented out because there
+                    ' needs to be a way to get a file from the calling
+                    ' app, rather than in this library.
+                    If autoCleanMissingFilePathsAndUrls = False Then
+                        'Dim openFileDialog As New OpenFileDialog()
+                        'openFileDialog.Filter = "All files (*.*)|*.*"
+                        'openFileDialog.RestoreDirectory = True
+
+                        'If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                        '    ' If the user chooses a file, replace %f with the filename and path.
+                        '    Dim fileName As String = openFileDialog.FileName
+                        '    Dim quoteForFilePaths As String = (CChar(""""))
+                        '    ' If the .desktop file requests it, switch the paths to be Linux-style.
+                        '    If getInfo(inputFile, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
+
+                        '        ' Convert the filename/file path to what WSL distros expect.
+                        '        fileName = convertPathsStyleToWSL(fileName)
+                        '        ' Set quote used in file paths to a single quote.
+                        '        quoteForFilePaths = "'"
+
+                        '    Else
+                        '        ' Remove the double-quotes on the end of the filename.
+                        '        fileName = fileName.TrimEnd(CChar(""""))
+                        '    End If
+
+                        '    ' Update cleanedExecKey with the fileName, which may or may not have been modified
+                        '    ' to be Linux-style if the desktop entry file wanted it or not.
+                        '    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", " " & quoteForFilePaths & fileName & quoteForFilePaths)
+                    Else
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", String.Empty)
+                    End If
+                    ' Clean up unused flags.
+                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
+
+                ElseIf regexCheckFlags(cleanedExecKey, "%F") Then
+                    ' If there's a %F, allow for choosing multiple files.
+                    If autoCleanMissingFilePathsAndUrls = False Then
+                        ' This needs to be set up in a way that'll allow the calling app to send
+                        ' over the list of files. Not sure how to do this at the moment, so it's
+                        ' commented out for now.
+
+                        '    Dim openFileDialog As New OpenFileDialog()
+                        'openFileDialog.Filter = "All files (*.*)|*.*"
+                        'openFileDialog.RestoreDirectory = True
+                        'openFileDialog.Multiselect = True
+
+                        'If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                        '    ' If the user chooses files, replace %F with the filename and paths.
+                        '    ' Get a file name list array as a string from the open file dialog.
+                        '    Dim fileNameList As String() = openFileDialog.FileNames
+
+                        '    ' Define a path list to store the filenames into.
+                        '    Dim entirePathList As New List(Of String)
+                        '    ' Define a quote character for putting at the beginning
+                        '    ' and end of filenames. This can be changed if necessary,
+                        '    ' such as if a desktop entry file wants to use a Linux-style
+                        '    ' path instead of Windows-style.
+                        '    Dim quoteForFilePaths As String = Chr(34)
+                        '    For Each fileName As String In fileNameList
+                        '        ' If the .desktop file requests it, switch the paths to be Linux-style.
+                        '        If getInfo(inputFile, "X-DotDesktop4Win-UseWSLFilePaths") = "true" Then
+
+                        '            ' Set quote used in file paths to a single quote.
+                        '            quoteForFilePaths = "'"
+                        '            ' Add the newly-modified filename to the path list.
+
+                        '            ' Put a question mark at the end of the filename
+                        '            ' for later use when joining the string.
+                        '            ' It may be a good idea to allow this to be a configurable option
+                        '            ' in case the user runs into issues on other filesystems that allow
+                        '            ' the question mark to be in a filename.
+
+                        '            ' Convert the filename/file path to what WSL distros expect.
+                        '            entirePathList.Add(quoteForFilePaths & convertPathsStyleToWSL(fileName) & quoteForFilePaths & " ?")
+
+                        '        Else
+                        '            ' Remove the double-quotes on the end of the filename.
+                        '            fileName = fileName.TrimEnd(Chr(34))
+                        '            ' Add the filename to the path list.
+
+                        '            ' Put a question mark at the end of the filename
+                        '            ' for later use when joining the string.
+                        '            ' It may be a good idea to allow this to be a configurable option
+                        '            ' in case the user runs into issues on other filesystems that allow
+                        '            ' the question mark to be in a filename.
+                        '            entirePathList.Add(quoteForFilePaths & fileName & quoteForFilePaths & " ?")
+                        '        End If
+
+                        '    Next
+                        '    ' Make a new string that joins the file name list into one string.
+                        '    Dim filesList As String = String.Join("?", entirePathList)
+                        '    ' Replace the joiner character with an empty string.
+                        '    filesList = filesList.Replace("?", "")
+
+                        ' Expand %F with the new file list, and add double-quotes on each side
+                        ' of the file list after putting in a space to separate it from the rest
+                        ' of the command.
+                        'cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", " " & filesList.TrimEnd)
+                    Else
+                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", String.Empty)
+                    End If
+                    ' Clean up unused flags.
+                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
+                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
+                    cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
+                End If
+
+                ' Split Exec key's program from the arguments, if necessary.
+                ' Check to see if it starts with double-quotes.
+                ' Get rid of whitespace on the left side.
+                ' This needs to be in a .NET 5 library, as .NET Standard 2.0
+                ' doesn't support it.
+                'cleanedExecKey = LTrim(cleanedExecKey)
+
+                ' Check for Chr(34), which is the double-quote character.
+                If cleanedExecKey.StartsWith(CChar("""")) Then
+                    ' Copy the original cleaned exec key for later use in the arg variable.
+                    Dim originalCleanedExecKey As String = cleanedExecKey
+                    ' Create a temp key to be used when splitting out the EXE filename.
+                    Dim tempExecKey As String() = cleanedExecKey.Split(CChar(""""))
+                    ' Trim the exec key out at the second double-quote.
+                    cleanedExecKey = tempExecKey(1).Trim
+                    ' Assign the arg variable to the copy of the exec key and remove
+                    ' the double-quotes before and after and the new exec key 
+                    ' from the beginning of the URL list/arg variable.
+                    urlList = originalCleanedExecKey.Remove(0, cleanedExecKey.Length + 2)
+                Else
+                    ' If there's no double-quotes, assume it's something like
+                    ' firefox.exe or another string without spaces.
+                    ' We'll need to split this one at the first space character.
+
+                    ' Copy the original cleaned exec key for later use in the arg variable.
+                    Dim originalCleanedExecKey As String = cleanedExecKey
+                    ' Create a temp key to be used when splitting out the EXE filename.
+                    Dim tempExecKey As String() = cleanedExecKey.Split(" "c)
+                    ' Trim the exec key out at the first space.
+                    cleanedExecKey = tempExecKey(0).Trim
+                    ' Assign the arg variable to the copy of the exec key and trim
+                    ' out the exec key.
+                    urlList = originalCleanedExecKey.TrimStart(cleanedExecKey.ToCharArray)
+                End If
+#End Region
+                ' Done figuring out the desktop entry type.
+            End If
+
+            ' Expand environment variables.
+            cleanedExecKey = expandEnvVars(cleanedExecKey)
+            ' Comment out the stuff to determine whether the cleaned exec
+            ' key should be shown before launch as that'll be handled
+            ' by the calling app.
+            'If My.Settings.ShowExecKeyBeforeLaunch = True Then
+            '    MessageBox.Show(cleanedExecKey)
+            'End If
+            ' TODO: Switch the urlList to WSL paths if
+            ' the .desktop file wants it.
+            urlList = expandEnvVars(urlList)
 
             ' Return the cleanedExecKey to the program that requested it.
             Return cleanedExecKey
@@ -670,21 +671,21 @@ Public Class desktopEntryStuff
 
 
     Private Shared Function expandEnvVars(execOrArg As String) As String
-        If My.Settings.ShowExecKeyBeforeLaunch = True Then
-            MessageBox.Show(execOrArg)
-        End If
+        'If My.Settings.ShowExecKeyBeforeLaunch = True Then
+        '    MessageBox.Show(execOrArg)
+        'End If
         ' First we expand %USERPROFILE%.
         Dim output As String = execOrArg
         If regexCheckFlags(execOrArg, "%USERPROFILE%", False) Then
             output = regexReplaceFlags(execOrArg, "%USERPROFILE%", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), False)
-            MessageBox.Show(output)
+            'MessageBox.Show(output)
         End If
 
         ' Now we can replace %WINDIR%.
         If regexCheckFlags(execOrArg, "%WINDIR%", False) Then
-            MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.Windows))
+            'MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.Windows))
             output = regexReplaceFlags(execOrArg, "%WINDIR%", Environment.GetFolderPath(Environment.SpecialFolder.Windows), False)
-            MessageBox.Show(output)
+            'MessageBox.Show(output)
         End If
 
         ' Replace %ProgramFiles%.
@@ -697,31 +698,31 @@ Public Class desktopEntryStuff
         ' There's also the "%programfiles(x86)%" variable, which
         ' would go to "C:\Program Files (x86)" without redirection.
         If regexCheckFlags(execOrArg, "%PROGRAMFILES%", False) Then
-            MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles))
+            'MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles))
             output = regexReplaceFlags(execOrArg, "%PROGRAMFILES%", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), False)
         End If
 
         ' Replace AppData.
         If regexCheckFlags(execOrArg, "%APPDATA%", False) Then
-            MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData))
+            'MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData))
             output = regexReplaceFlags(execOrArg, "%APPDATA%", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), False)
         End If
 
         ' Replace LocalAppData.
         If regexCheckFlags(execOrArg, "%LOCALAPPDATA%", False) Then
-            MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))
+            'MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))
             output = regexReplaceFlags(execOrArg, "%LOCALAPPDATA%", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), False)
         End If
 
         ' Replace LocalAppData.
         If regexCheckFlags(execOrArg, "%TEMP%", False) Then
-            MessageBox.Show(System.IO.Path.GetTempPath)
+            'MessageBox.Show(System.IO.Path.GetTempPath)
             output = regexReplaceFlags(execOrArg, "%TEMP%", IO.Path.GetTempPath, False)
         End If
 
         ' Replace LocalAppData.
         If regexCheckFlags(execOrArg, "%TMP%", False) Then
-            MessageBox.Show(System.IO.Path.GetTempPath)
+            'MessageBox.Show(System.IO.Path.GetTempPath)
             output = regexReplaceFlags(execOrArg, "%TMP%", IO.Path.GetTempPath, False)
         End If
 
