@@ -487,11 +487,11 @@ Public Class desktopEntryStuff
                     'cleanedExecKey = LTrim(cleanedExecKey)
 
                     ' Check for Chr(34), which is the double-quote character.
-                    If cleanedExecKey.StartsWith(Chr(34)) Then
+                    If cleanedExecKey.StartsWith(CChar("""")) Then
                         ' Copy the original cleaned exec key for later use in the arg variable.
                         Dim originalCleanedExecKey As String = cleanedExecKey
                         ' Create a temp key to be used when splitting out the EXE filename.
-                        Dim tempExecKey As String() = cleanedExecKey.Split(Chr(34))
+                        Dim tempExecKey As String() = cleanedExecKey.Split(CChar(""""))
                         ' Trim the exec key out at the second double-quote.
                         cleanedExecKey = tempExecKey(1).Trim
                         ' Assign the arg variable to the copy of the exec key and remove
