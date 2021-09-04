@@ -282,7 +282,7 @@ Public Class desktopEntryStuff
 #Region "Cleaning keys."
     ' This function will clean keys as passed to it.
     ' Some features are only available on Windows, such as the file browser dialog.
-    Public Shared Function cleanExecKey(inputFile As String, Optional autoIgnoreMissingFilePathsAndUrls As Boolean = True,
+    Public Shared Function cleanExecKey(inputFile As String, Optional autoCleanMissingFilePathsAndUrls As Boolean = True,
                                         Optional manuallyProvidedUrl As String = Nothing) As String
         ' Before doing anything, make sure this is a valid .desktop file
         ' with the proper Desktop Entry/KDE Desktop Entry header.
@@ -308,7 +308,7 @@ Public Class desktopEntryStuff
                     ' We can't exactly do this in the library, so it needs to be passed
                     ' back to the calling application with it intact unless a URL is passed
                     ' from the calling app.
-                    If autoIgnoreMissingFilePathsAndUrls = False AndAlso manuallyProvidedUrl IsNot Nothing Then
+                    If autoCleanMissingFilePathsAndUrls = False AndAlso manuallyProvidedUrl IsNot Nothing Then
                         cleanedExecKey = manuallyProvidedUrl
                     End If
 
@@ -349,9 +349,15 @@ Public Class desktopEntryStuff
 
                     ElseIf regexCheckFlags(cleanedExecKey, "%U") Then
                         ' If there's a %U in the file, open a window to allow for entering URLs.
-                        urlList = InputBox("Please type or paste a list of URLs separated by a space:", "Multiple URL input")
-                        ' Expand %U to what the user entered.
-                        cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", " " & urlList)
+                        If autoCleanMissingFilePathsAndUrls = False AndAlso manuallyProvidedUrl IsNot Nothing Then
+                            urlList = manuallyProvidedUrl
+                            ' Expand %U to what the user entered.
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", " " & urlList)
+                        Else
+                            ' Automatically clean the flag.
+                            cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", String.Empty)
+                        End If
+
                         ' Clean up unused flags.
                         cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%u", "")
 
