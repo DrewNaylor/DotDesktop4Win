@@ -290,9 +290,11 @@ Public Class desktopEntryStuff
 
             ' Now, clean the exec key.
             ' Catch NullReferenceExceptions, just in case there are issues in the file.
-            Try
-                ' Exec key.
-                Dim cleanedExecKey As String
+            ' The Try/Catch code is commented out for now as I don't know if Win32Exceptions would work
+            ' on Linux.
+            'Try
+            ' Exec key.
+            Dim cleanedExecKey As String
                 ' URL list for apps that allow for URLs to be passed to them.
                 Dim urlList As String = ""
 
@@ -529,7 +531,7 @@ Public Class desktopEntryStuff
                 ' the .desktop file wants it.
                 urlList = expandEnvVars(urlList)
 
-            ' Return the cleanedExecKey to the program that requested it.
+                ' Return the cleanedExecKey to the program that requested it.
             ' The launcher code is commented out because it may be useful.
 
 
@@ -548,22 +550,22 @@ Public Class desktopEntryStuff
 
             '        Process.Start(execProgram)
 
-            '    Catch ex As System.ComponentModel.Win32Exception
-            '        ' Show a messagebox for explanation.
-            '        ' If it's a Link, show the URL key.
-            '        If getInfo(inputFile, "Type") = "Link" Then
-            '            Console.WriteLine("We couldn't find the address that was listed in the URL key or passed manually. You can check the console output if you want to see what it could be." & vbCrLf &
-            '                    vbCrLf &
-            '                    "URL key value: " & getInfo(inputFile, "URL"), System.IO.Path.GetFileName(inputFile) & " - libdotdesktop-standard")
-            '        Else
-            '            ' If it's an application, show the Exec key.
-            '            Console.WriteLine("Either there are characters where they shouldn't be, or we couldn't find the program specified in the Exec key. You can check the console output if you want to see what it could be." & vbCrLf &
-            '                                            vbCrLf &
-            '                                            "Exec key value: " & getInfo(inputFile, "Exec"), System.IO.Path.GetFileName(inputFile) & " - libdotdesktop-standard")
-            '        End If
+            'Catch ex As System.ComponentModel.Win32Exception
+            '    ' Show a messagebox for explanation.
+            '    ' If it's a Link, show the URL key.
+            '    If getInfo(inputFile, "Type") = "Link" Then
+            '        Console.WriteLine("We couldn't find the address that was listed in the URL key or passed manually. You can check the console output if you want to see what it could be." & vbCrLf &
+            '                vbCrLf &
+            '                "URL key value: " & getInfo(inputFile, "URL"), System.IO.Path.GetFileName(inputFile) & " - libdotdesktop-standard")
+            '    Else
+            '        ' If it's an application, show the Exec key.
+            '        Console.WriteLine("Either there are characters where they shouldn't be, or we couldn't find the program specified in the Exec key. You can check the console output if you want to see what it could be." & vbCrLf &
+            '                                        vbCrLf &
+            '                                        "Exec key value: " & getInfo(inputFile, "Exec"), System.IO.Path.GetFileName(inputFile) & " - libdotdesktop-standard")
+            '    End If
 
 
-            '    End Try
+            'End Try
 
             'Else
             '    ' If it's not a valid Freedesktop.org .desktop file, tell the user.
