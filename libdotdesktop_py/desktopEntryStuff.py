@@ -24,7 +24,7 @@
 
 import configparser
 
-def getInfo(self, inputFile, keyToGet, fileName = "", IsCustomKey = False):
+def getInfo(inputFile, keyToGet, fileName = "", IsCustomKey = False):
 	# fileName and IsCustomKey are both optional.
 	
 	# Create a configparser to read the .desktop files.

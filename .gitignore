@@ -248,3 +248,4 @@ ModelManifest.xml
 
 CommonBuild/bin/Debug/libdotdesktop.dll
 CommonBuild/bin/Debug/libdotdesktop.dll
+*.pyc
