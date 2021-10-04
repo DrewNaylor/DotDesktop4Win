@@ -32,7 +32,7 @@ def getInfo(self, inputFile, keyToGet, fileName = "", IsCustomKey = False):
 	# only valid .desktop files by using options described
 	# in the Python docs here:
 	# https://docs.python.org/3/library/configparser.html#customizing-parser-behaviour
-	dotDesktopFileReader = configparser.ConfigParser(delimiters=('='), comment_prefixes=('#'))
+	dotDesktopFileReader = configparser.ConfigParser(delimiters=('='), comment_prefixes=('#'), empty_lines_in_values=False)
 	
 	# Python 3.10 has its own version of Select Case,
 	# but it's not stable yet, though it will be on October 4, 2021,
