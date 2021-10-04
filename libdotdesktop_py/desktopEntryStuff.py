@@ -47,7 +47,7 @@ def getInfo(inputFile, keyToGet, fileName = "", IsCustomKey = False):
 	dotDesktopFile.close()
 	
 	# Now print the sections for debugging.
-	print(dotDesktopFileReader.sections())
+	#print(dotDesktopFileReader.sections())
 	
 	# We need to specify that we'll use the Desktop Entry section.
 	# Currently I don't know how to check if it exists or not.
@@ -62,5 +62,7 @@ def getInfo(inputFile, keyToGet, fileName = "", IsCustomKey = False):
 	# https://stackoverflow.com/a/66886730
 	if IsCustomKey == True:
 		# Return the value of the key specified in keyToGet.
-		print(dotDesktopFileReader.get('Desktop Entry', keyToGet))
+		# This works, I just have to remember to set IsCustomKey = True
+		# for anything I haven't implemented yet.
+		return dotDesktopFileReader.get('Desktop Entry', keyToGet)
 		
