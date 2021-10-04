@@ -42,9 +42,12 @@ def getInfo(self, inputFile, keyToGet, fileName = "", IsCustomKey = False):
 	# Actually, configparser has a read_file function:
 	# https://docs.python.org/3/library/configparser.html#configparser.ConfigParser.read_file
 	dotDesktopFile = open(inputFile, "r")
-	dotDesktopFileReader.read(dotDesktopFile)
+	dotDesktopFileReader.read_file(dotDesktopFile)
 	# We can now close the file since it's in the configparser.
 	dotDesktopFile.close()
+	
+	# Now print the sections for debugging.
+	print(dotDesktopFileReader.sections())
 	
 	# Python 3.10 has its own version of Select Case,
 	# but it's not stable yet, though it will be on October 4, 2021,
