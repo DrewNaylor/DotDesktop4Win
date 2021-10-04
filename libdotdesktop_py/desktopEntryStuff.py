@@ -49,6 +49,10 @@ def getInfo(inputFile, keyToGet, fileName = "", IsCustomKey = False):
 	# Now print the sections for debugging.
 	print(dotDesktopFileReader.sections())
 	
+	# We need to specify that we'll use the Desktop Entry section.
+	# Currently I don't know how to check if it exists or not.
+	# Actually, this'll be done in the return part.
+	
 	# Python 3.10 has its own version of Select Case,
 	# but it's not stable yet, though it will be on October 4, 2021,
 	# which is the day after I'm writing this so I'll just
@@ -56,6 +60,7 @@ def getInfo(inputFile, keyToGet, fileName = "", IsCustomKey = False):
 	# https://stackoverflow.com/a/66877137
 	# For now I'm just using an if statement as detailed here:
 	# https://stackoverflow.com/a/66886730
-	if IsCustomKey == True
+	if IsCustomKey == True:
 		# Return the value of the key specified in keyToGet.
-		return 
+		print(dotDesktopFileReader.get('Desktop Entry', keyToGet))
+		
