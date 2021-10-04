@@ -37,6 +37,8 @@ def getInfo(self, inputFile, keyToGet, fileName = "", IsCustomKey = False):
 	# Now read the file into the dotDesktopFileReader.
 	# Basing this off this page here:
 	# https://www.tutorialspoint.com/how-to-read-a-text-file-in-python
+	# TODO: Ensure backslashes become two backslashes for
+	# debugging on Windows.
 	dotDesktopFile = open(inputFile, "r")
 	dotDesktopFileReader.read(dotDesktopFile)
 	# We can now close the file since it's in the configparser.
