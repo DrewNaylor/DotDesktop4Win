@@ -26,3 +26,8 @@ import configparser
 
 def getInfo(self, inputFile, keyToGet, fileName = "", IsCustomKey = False):
 	# fileName and IsCustomKey are both optional.
+	# Python 3.10 has its own version of Select Case,
+	# but it's not stable yet, though it will be on October 4, 2021,
+	# which is the day after I'm writing this so I'll just
+	# use if statements for now. More info here:
+	# https://stackoverflow.com/a/66877137
