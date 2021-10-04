@@ -23,3 +23,6 @@
 
 
 import configparser
+
+def getInfo(self, inputFile, keyToGet, fileName = "", IsCustomKey = False):
+	# fileName and IsCustomKey are both optional.
