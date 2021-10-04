@@ -37,6 +37,7 @@ def getInfo(self, inputFile, keyToGet, fileName = "", IsCustomKey = False):
 	# Now read the file into the dotDesktopFileReader.
 	# Basing this off this page here:
 	# https://www.tutorialspoint.com/how-to-read-a-text-file-in-python
+	dotDesktopFileReader.read(open(inputFile, "r"))
 	
 	# Python 3.10 has its own version of Select Case,
 	# but it's not stable yet, though it will be on October 4, 2021,
