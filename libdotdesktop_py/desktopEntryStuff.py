@@ -31,3 +31,8 @@ def getInfo(self, inputFile, keyToGet, fileName = "", IsCustomKey = False):
 	# which is the day after I'm writing this so I'll just
 	# use if statements for now. More info here:
 	# https://stackoverflow.com/a/66877137
+	# For now I'm just using an if statement as detailed here:
+	# https://stackoverflow.com/a/66886730
+	if IsCustomKey == True
+		# Return the value of the key specified in keyToGet.
+		return 
