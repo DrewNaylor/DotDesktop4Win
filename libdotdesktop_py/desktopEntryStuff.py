@@ -70,4 +70,3 @@ def getInfo(inputFile, keyToGet, fileName = "", IsCustomKey = False):
 		# This works, I just have to remember to set IsCustomKey = True
 		# for anything I haven't implemented yet.
 		return dotDesktopFileReader.get('Desktop Entry', keyToGet)
-		
