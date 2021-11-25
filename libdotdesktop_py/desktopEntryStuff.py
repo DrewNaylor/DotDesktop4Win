@@ -114,6 +114,11 @@ def cleanExecKey(inputFile)
 	cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%U", "")
 	cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%f", "")
 	cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
+	
+	# TODO: Expand environment variables.
+	
+	# Return the cleaned key.
+	return cleanedExecKey
 
 
 
