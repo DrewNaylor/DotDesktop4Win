@@ -84,6 +84,8 @@ def getInfo(inputFile, keyToGet, defaultValue, fileName = "", IsCustomKey = Fals
 			
 def regexReplaceFlags(input, flag, desiredReplacement, caseSensitive = True):
 	# Code for replacing flags using regex.
+	# Python docs page:
+	# https://docs.python.org/3/howto/regex.html
 	# This is used when launching apps to clean their Exec keys.
 	# Ported from the VB.NET version.
 	# Original comment:
@@ -97,7 +99,7 @@ def regexReplaceFlags(input, flag, desiredReplacement, caseSensitive = True):
 		# The case-sensitive if statement may need to be cleaned up a bit.
 			
 	# Hold the regex in a string for now:
-	
+	tempRegex = "\s+" + flag + "\b"
 			
 			
 			
