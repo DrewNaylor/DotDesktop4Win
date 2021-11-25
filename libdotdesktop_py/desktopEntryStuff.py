@@ -93,7 +93,7 @@ def cleanExecKey(inputFile):
 	# .desktop file.
 	
 	# Load exec key.
-	cleanedExecKey = getInfo(inputFile, "Exec", inputFile, "", True)
+	cleanedExecKey = getInfo(inputFile, "Exec", "", "", True)
 	
 	# Begin cleaning the key.
 	# %d is deprecated.
@@ -118,7 +118,7 @@ def cleanExecKey(inputFile):
 	# TODO: Expand environment variables.
 	
 	# Return the cleaned key.
-	return cleanedExecKey
+	return list(cleanedExecKey)
 
 
 
