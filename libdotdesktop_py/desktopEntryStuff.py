@@ -22,7 +22,10 @@
 
 
 
+# configparser is used as the .desktop file reader.
 import configparser
+# Regex.
+import re
 
 def getInfo(inputFile, keyToGet, defaultValue, fileName = "", IsCustomKey = False):
 	# fileName and IsCustomKey are both optional.
