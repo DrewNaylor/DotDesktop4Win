@@ -85,6 +85,15 @@ def getInfo(inputFile, keyToGet, defaultValue, fileName = "", IsCustomKey = Fals
 			
 			
 			
+def cleanExecKey(inputFile)
+	# Clean up the exec key by removing flags.
+	# Currently assuming everything is an app,
+	# but support for links and urls will be added,
+	# as will checking to ensure the file is a valid
+	# .desktop file.
+
+
+
 def regexReplaceFlags(input, flag, desiredReplacement, caseSensitive = True):
 	# Code for replacing flags using regex.
 	# Python docs page:
