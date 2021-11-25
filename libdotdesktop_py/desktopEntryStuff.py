@@ -101,10 +101,16 @@ def regexReplaceFlags(input, flag, desiredReplacement, caseSensitive = True):
 	# Hold the regex in a string for now:
 	tempRegex = "\s+" + flag + "\b"
 	
-	# Check if the flag ends with a percent sign and change
-	# the regex if necessary so it matches the flag later.
 	if flag.endswith("%"):
+		# Check if the flag ends with a percent sign and change
+		# the regex if necessary so it matches the flag later.
+		# Maybe I should keep the "\s+" part in there.
+		# Noticed that it wasn't in the original code.
 		tempRegex = flag.rstrip("%") + "\b%"
+	
+	if caseSensitive == False:
+		# If case-insensitivity is fine for this
+        # flag, have the regex thing ignore case.
 			
 			
 			
