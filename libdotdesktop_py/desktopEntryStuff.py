@@ -91,6 +91,9 @@ def cleanExecKey(inputFile)
 	# but support for links and urls will be added,
 	# as will checking to ensure the file is a valid
 	# .desktop file.
+	
+	# Load exec key.
+	cleanedExecKey = getInfo(inputFile, "Exec", inputFile, "", True)
 
 
 
