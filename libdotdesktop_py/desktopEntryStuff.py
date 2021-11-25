@@ -79,3 +79,16 @@ def getInfo(inputFile, keyToGet, defaultValue, fileName = "", IsCustomKey = Fals
 			return dotDesktopFileReader.get('Desktop Entry', keyToGet)
 		else:
 			return defaultValue
+			
+			
+			
+def regexReplaceFlags(input, flag, desiredReplacement, caseSensitive = True):
+	# Code for replacing flags using regex.
+	# This is used when launching apps to clean their Exec keys.
+	# Ported from the VB.NET version.
+			
+			
+			
+			
+			
+			
