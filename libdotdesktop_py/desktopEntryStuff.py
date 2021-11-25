@@ -95,6 +95,9 @@ def cleanExecKey(inputFile):
 	# Load exec key.
 	cleanedExecKey = getInfo(inputFile, "Exec", "", "", True)
 	
+	print(cleanedExecKey)
+	print(list(cleanedExecKey))
+	
 	# Begin cleaning the key.
 	# %d is deprecated.
 	cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%d", "")
@@ -116,9 +119,9 @@ def cleanExecKey(inputFile):
 	cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%F", "")
 	
 	# TODO: Expand environment variables.
-	print(list(cleanedExecKey))
+	print(cleanedExecKey)
 	# Return the cleaned key.
-	return list(cleanedExecKey)
+	return cleanedExecKey
 
 
 
@@ -153,11 +156,11 @@ def regexReplaceFlags(input, flag, desiredReplacement, caseSensitive = True):
 		# flag, have the regex thing ignore case.
 		regexThing = re.compile(tempRegex, re.IGNORECASE)
 		# Replace the flag.
-		return list(regexThing.sub(input, desiredReplacement))
+		return regexThing.sub(input, desiredReplacement)
 	else:
 		# Otherwise, don't ignore case.
 		regexThing = re.compile(tempRegex)
 		# Now for the replacement.
-		return list(regexThing.sub(input, desiredReplacement))
+		return regexThing.sub(input, desiredReplacement)
 			
 			
