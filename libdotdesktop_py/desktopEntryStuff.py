@@ -94,6 +94,20 @@ def cleanExecKey(inputFile)
 	
 	# Load exec key.
 	cleanedExecKey = getInfo(inputFile, "Exec", inputFile, "", True)
+	
+	# Begin cleaning the key.
+	# %d is deprecated.
+	cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%d", "")
+	# %D is deprecated.
+	cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%D", "")
+	# %n is deprecated.
+	cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%n", "")
+	# %N is deprecated.
+	cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%N", "")
+	# %v is deprecated.
+	cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%v", "")
+	# %m is deprecated.
+	cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%m", "")
 
 
 
@@ -125,7 +139,7 @@ def regexReplaceFlags(input, flag, desiredReplacement, caseSensitive = True):
 	
 	if caseSensitive == False:
 		# If case-insensitivity is fine for this
-        # flag, have the regex thing ignore case.
+		# flag, have the regex thing ignore case.
 		regexThing = re.compile(tempRegex, re.IGNORECASE)
 		# Replace the flag.
 		return regexThing.sub(input, desiredReplacement)
