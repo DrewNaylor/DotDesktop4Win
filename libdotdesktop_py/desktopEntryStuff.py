@@ -86,8 +86,18 @@ def regexReplaceFlags(input, flag, desiredReplacement, caseSensitive = True):
 	# Code for replacing flags using regex.
 	# This is used when launching apps to clean their Exec keys.
 	# Ported from the VB.NET version.
+	# Original comment:
+		# Replaces flags in the style of %u with a string using regex.
+		# First we need to create a regular expression to match what'll
+		# be replaced.
+		# \s+ is for whitespace before the flag.
+		# \b is for the word border at the end.
+		# This can be used with flags/environment variables
+		# that end with a percent sign.
+		# The case-sensitive if statement may need to be cleaned up a bit.
 			
-			
+	# Hold the regex in a string for now:
+	
 			
 			
 			
