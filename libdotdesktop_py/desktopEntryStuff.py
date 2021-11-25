@@ -111,7 +111,9 @@ def regexReplaceFlags(input, flag, desiredReplacement, caseSensitive = True):
 	if caseSensitive == False:
 		# If case-insensitivity is fine for this
         # flag, have the regex thing ignore case.
-			
+		regexThing = re.compile(tempRegex, re.IGNORECASE)
+		# Replace the flag.
+		return regexThing.sub(input, desiredReplacement)
 			
 			
 			
