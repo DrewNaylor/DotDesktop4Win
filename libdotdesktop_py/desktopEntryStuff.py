@@ -95,9 +95,6 @@ def cleanExecKey(inputFile):
 	# Load exec key.
 	cleanedExecKey = getInfo(inputFile, "Exec", "", "", True)
 	
-	print(cleanedExecKey)
-	print(list(cleanedExecKey))
-	
 	# Begin cleaning the key.
 	# %d is deprecated.
 	cleanedExecKey = regexReplaceFlags(cleanedExecKey, "%d", "")
