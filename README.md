@@ -1,4 +1,10 @@
 # DotDesktop4Win
+
+## Moving to Codeberg
+**Note:** I'm migrating to Codeberg. The canonical repo for DotDesktop4Win is now here, please update your remotes: https://codeberg.org/DrewNaylor/DotDesktop4Win
+
+## Rest of the readme
+
 Partial Windows implementation of the Freedesktop.org Desktop Entry specification. This is mainly going to allow launching applications by double-clicking on .desktop files.
 
 There's another project called [WinYourDesktop](https://github.com/dd86k/WinYourDesktop) that does more than this project will probably ever do, as this project is only a partial implementation and doesn't include everything to make itself fully compliant with the [Freedesktop.org Desktop Entry spec](https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html). Some things that would make this fully compliant don't make sense on Windows as-is, such as menu entries, icons, and actions. Locale strings probably won't be supported, either, so they'll just be regular strings instead.
